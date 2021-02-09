@@ -13,11 +13,11 @@ The issue with the data is the structure, it is spread across multiple files. We
 
 ## Tech TODO: 
 ### 1. The first part:
-create a nodeJS app that can serve the data, you can use any nodeJS framework for that. one note here, the data in `json-data` folder should not be changed.
+Create a simple nodeJS app that can serve the data. You can use any nodeJS framework for that. The data in `json-data` folder should not be changed.
 
 
 ### 2. The second part:
-create a Front-end app which uses a frontend js framework for ex: *(Vue, React, etc...)*. the frontend app should have these routes
+Create an app which uses a modern JS frontend framework *(e.g. Vue, React, etc...)*. The frontend app should have these routes:
 
   - `/` a home page to show an aggregated table for the calls, for ex:
 
@@ -30,7 +30,8 @@ create a Front-end app which uses a frontend js framework for ex: *(Vue, React, 
     by clicking on the agent name it would go to the agent log
 
     by clicking on the **Phone number** it would go to that number log
-  - `/agent/${ID}` to show an agent specific calls logs, for ex:
+
+  - `/agent/${ID}` to show an agent specific call log, for ex:
 
     | Phone number | Call date and time  |     Resolution     |
     |--------------|---------------------|--------------------|
@@ -54,7 +55,8 @@ create a Front-end app which uses a frontend js framework for ex: *(Vue, React, 
 * representing the data using charts is a plus. 
 * unit testing of the code is a plus. 
 
-
+## Submission:
+Fork this repo and submit your application either via PR or email. Add build, test and run scripts to package.json (if applicable).
 
 
 ## Happy coding !
