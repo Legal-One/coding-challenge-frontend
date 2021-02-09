@@ -6,7 +6,7 @@ recommended: a good cup of coffee ☕  and lo-fi coding music 🎵.
 ___
 
 ## The challenge: 
-we have a call center which makes tons of calls daily through our call center agents, these calls are dumped in JSON files, we need you to handle these large amount of data, and present them in a nice way for the supervisors. 
+A call center makes tons of calls daily through call center agents and these calls are dumped in JSON files. We need you to handle this large amount of data, and present it in a nice way for the supervisors. 
 
 the issue with the data is the structure, it is spread across multiple files. we need your mind to solve this issue.
 
