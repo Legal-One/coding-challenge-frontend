@@ -8,7 +8,7 @@ ___
 ## The challenge: 
 A call center makes tons of calls daily through call center agents and these calls are dumped in JSON files. We need you to handle this large amount of data, and present it in a nice way for the supervisors. 
 
-the issue with the data is the structure, it is spread across multiple files. we need your mind to solve this issue.
+The issue with the data is the structure, it is spread across multiple files. We need your mind to solve this issue and present the data in a useful way.
 
 
 ## Tech TODO: 
