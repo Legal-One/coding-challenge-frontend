@@ -1,0 +1,16 @@
+{
+  "name": "legalOne",
+  "version": "1.0.0",
+  "description": "legal one demo project",
+  "main": "index.js",
+  "author": "godofjs",
+  "license": "MIT",
+  "scripts": {
+    "watch": "nodemon src"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.7"
+  }
+}
