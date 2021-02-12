@@ -17,3 +17,8 @@ export type Agent = {
   email: string;
   photo: string;
 };
+
+export type Resolution = {
+  identifier: string;
+  resolution: string;
+};

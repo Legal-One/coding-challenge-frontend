@@ -2,8 +2,9 @@ import { Request, Response } from 'express';
 
 import callLogs from '../json-data/logs.json';
 import agents from '../json-data/agents.json';
+import resolutions from '../json-data/resolution.json';
 
-import { Call, CallLog, Agent } from './types';
+import { Call, CallLog, Agent, Resolution } from './types';
 
 export const getAllCalls = (_request: Request, response: Response) => {
   const allCalls: Call<CallLog> = {};
@@ -54,5 +55,39 @@ export const getAllCalls = (_request: Request, response: Response) => {
   return response.status(200).json({
     status: 'success',
     data: transformedData,
+  });
+};
+
+export const getAgentCalls = (request: Request, response: Response) => {
+  const { ID: agentId } = request.params;
+
+  const callAgent = agents.find((agent: Agent) => agent.identifier === agentId);
+
+  if (!callAgent) {
+    return response.status(404).json({
+      status: 'error',
+      message: `Agent with ID ${agentId} does not exist`,
+    });
+  }
+
+  const agentCalls = callLogs
+    .filter((callLog: CallLog) => callLog.agentIdentifier === agentId)
+    .map((callLog: CallLog) => {
+      const resolution = resolutions.find(
+        (resolution: Resolution) => resolution.identifier === callLog.identifier
+      );
+
+      return {
+        ...callLog,
+        resolution: resolution?.resolution,
+      };
+    });
+
+  return response.status(200).json({
+    status: 'success',
+    data: {
+      agent: callAgent,
+      calls: agentCalls,
+    },
   });
 };
