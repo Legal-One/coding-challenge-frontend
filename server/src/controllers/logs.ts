@@ -1,30 +1,30 @@
 import { Request, Response, NextFunction } from 'express'
 
-import AgentService from '../services/agents'
+import LogService from '../services/logs'
 import { NotFoundError } from '../helpers/apiError'
 
-// GET /agents/:agentId
+// GET /logs/:logId
 export const findById = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    res.json(await AgentService.findById(req.params.agentId))
+    res.json(await LogService.findById(req.params.logId))
   } catch (error) {
-    next(new NotFoundError('Agent not found', error))
+    next(new NotFoundError('Logs not found', error))
   }
 }
 
-// GET /agents
+// GET /logs
 export const findAll = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    res.json(await AgentService.findAll())
+    res.json(await LogService.findAll())
   } catch (error) {
-    next(new NotFoundError('Agents not found', error))
+    next(new NotFoundError('Logs not found', error))
   }
 }

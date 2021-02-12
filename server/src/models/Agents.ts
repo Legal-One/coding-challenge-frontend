@@ -3,9 +3,9 @@ import mongoose, { Document } from 'mongoose'
 export type AgentDocument = Document & {
   identifier: string;
   firstName: string;
-  lastName: number;
+  lastName: string;
   email: string;
-  photo: number;
+  photo: string;
 }
 
 const agentSchema = new mongoose.Schema({

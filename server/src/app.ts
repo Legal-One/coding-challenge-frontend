@@ -7,8 +7,9 @@ import bluebird from 'bluebird'
 
 import { MONGODB_URI } from './util/secrets'
 
-import movieRouter from './routers/movie'
 import agentRouter from './routers/agents'
+import logsRouter from './routers/logs'
+
 import apiErrorHandler from './middlewares/apiErrorHandler'
 
 const app = express()
@@ -40,11 +41,11 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(lusca.xframe('SAMEORIGIN'))
 app.use(lusca.xssProtection(true))
 
-//movie router
-app.use('/api/v1/movies', movieRouter)
-
 //agent router
 app.use('/api/v1/agent', agentRouter)
+
+//logs router
+app.use('/api/v1/logs', logsRouter)
 
 // Custom API error handler
 app.use(apiErrorHandler)
