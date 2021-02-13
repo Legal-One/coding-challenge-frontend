@@ -36,6 +36,7 @@ export const fetchAgents = () => {
       .get('http://localhost:8000/api/v1/agent')
       .then((response) => {
         const agents = response.data
+        console.log('agents response', agents)
         dispatch(fetchAgentSuccess(agents))
       })
       .catch((error) => {

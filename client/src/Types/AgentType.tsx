@@ -3,6 +3,7 @@ export const FETCH_AGENT_SUCCESS = 'FETCH_AGENT_SUCCESS'
 export const FETCH_AGENT_FAILURE = 'FETCH_AGENT_FAILURE'
 
 export type Agent = {
+  _id: string
   identifier: string
   firstName: string
   lastName: string
@@ -40,4 +41,12 @@ export type AgentState = {
   agents: Agent[]
   loading: boolean
   error: string
+}
+
+export type AgentProps = {
+  agents: Agent[]
+}
+
+export type AgentTableProps = {
+  agent: Agent
 }
