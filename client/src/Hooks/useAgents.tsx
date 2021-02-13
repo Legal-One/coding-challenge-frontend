@@ -17,6 +17,5 @@ export const useAgents = () => {
   useEffect(() => {
     setAgentData(agents)
   }, [agents])
-  console.log('agents hooks', agentData)
   return [agentData]
 }

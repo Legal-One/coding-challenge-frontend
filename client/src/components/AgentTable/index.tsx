@@ -12,7 +12,7 @@ function AgentTable({ agent }: AgentTableProps) {
         <li>lastName: {lastName}</li>
         <li>email: {email}</li>
         <li>
-          <img src={photo} alt="agent" width="120px" />
+          <img src={photo} alt="agent" width="100px" />
         </li>
       </ul>
     </div>
