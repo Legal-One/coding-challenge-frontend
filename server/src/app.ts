@@ -4,6 +4,7 @@ import bodyParser from 'body-parser'
 import lusca from 'lusca'
 import mongoose from 'mongoose'
 import bluebird from 'bluebird'
+import cors from 'cors'
 
 import { MONGODB_URI } from './util/secrets'
 
@@ -41,6 +42,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(lusca.xframe('SAMEORIGIN'))
 app.use(lusca.xssProtection(true))
+app.use(cors())
 
 //routers
 app.use('/api/v1/resolution', resolutionRouter)
