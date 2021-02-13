@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require('cors');
 const logs = require("./json-data/logs.json");
 const agents = require("./json-data/agents.json");
 const resolutions = require("./json-data/resolution.json");
@@ -7,6 +8,7 @@ const app = express();
 const port = process.env.PORT || 3500;
 
 app.use(express.json());
+app.use(cors())
 
 app.get("/", (request, response) => {
   response.send("Welcome to our challenge");
