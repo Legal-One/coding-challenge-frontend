@@ -4,7 +4,7 @@ import { findById, findAll } from '../controllers/logs'
 
 const router = express.Router()
 
-// Every path we define here will get /api/v1/agent prefix
+// Every path we define here will get /api/v1/log prefix
 router.get('/', findAll)
 router.get('/:logId', findById)
 

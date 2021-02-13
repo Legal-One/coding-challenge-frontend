@@ -1,4 +1,4 @@
-import Logs, { LogsDocument } from '../models/logs'
+import Logs, { LogsDocument } from '../models/Logs'
 
 function findById(logId: string): Promise<LogsDocument> {
   return Logs.findById(logId)

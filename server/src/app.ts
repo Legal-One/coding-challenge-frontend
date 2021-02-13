@@ -9,6 +9,7 @@ import { MONGODB_URI } from './util/secrets'
 
 import agentRouter from './routers/agents'
 import logsRouter from './routers/logs'
+import resolutionRouter from './routers/resolution'
 
 import apiErrorHandler from './middlewares/apiErrorHandler'
 
@@ -41,10 +42,9 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(lusca.xframe('SAMEORIGIN'))
 app.use(lusca.xssProtection(true))
 
-//agent router
+//routers
+app.use('/api/v1/resolution', resolutionRouter)
 app.use('/api/v1/agent', agentRouter)
-
-//logs router
 app.use('/api/v1/logs', logsRouter)
 
 // Custom API error handler
