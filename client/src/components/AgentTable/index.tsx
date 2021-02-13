@@ -7,7 +7,8 @@ function AgentTable({ agent }: AgentTableProps) {
 
   return (
     <div>
-      <ul key={identifier}>
+      <ul>
+        <li>identifier: {identifier}</li>
         <li>firstName: {firstName}</li>
         <li>lastName: {lastName}</li>
         <li>email: {email}</li>

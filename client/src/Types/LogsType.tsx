@@ -8,6 +8,7 @@ export type Logs = {
   number: string
   dateTime: string
   duration: number
+  agentIdentifier: string
 }
 
 export type fetchLogsFailure = {
@@ -37,4 +38,8 @@ export type LogsState = {
   logs: Logs[]
   loading: boolean
   error: string
+}
+
+export type LogsProps = {
+  logs: Logs
 }
