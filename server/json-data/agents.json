@@ -1,0 +1,72 @@
+[
+  {
+    "identifier": "28c6acec-9ee0-11e7-b66c-3cb9f33ef190",
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "Johndoe@callcenter.xyz",
+    "photo": "https://via.placeholder.com/300/3366FF/FFFFFF?text=John.Doe"
+  },
+  {
+    "identifier": "beb04834-9f8b-11e7-9469-8a39b455b609",
+    "firstName": "John",
+    "lastName": "Bob",
+    "email": "JohnBob@callcenter.xyz",
+    "photo": "https://via.placeholder.com/300/7EE833/333333?text=John.Bob"
+  },
+  {
+    "identifier": "8273f480-a28b-11e7-b106-e7aa9bbee08e",
+    "firstName": "Rose",
+    "lastName": "Patterson",
+    "email": "RosePatterson@callcenter.xyz",
+    "photo": "https://via.placeholder.com/300/FF805D/333333?text=Rose.Patterson"
+  },
+  {
+    "identifier": "356b03dc-9ec5-11e7-97a6-d501104f897e",
+    "firstName": "Abraham",
+    "lastName": "Ellis",
+    "email": "Abraham.Ellis@callcenter.xyz",
+    "photo": "https://via.placeholder.com/300/E241BC/FFFFFF?text=Rose.Patterson"
+  },
+  {
+    "identifier": "e512594e-a34c-11e7-a6cb-0609e42722e2",
+    "firstName": "Joel",
+    "lastName": "Wagner",
+    "email": "Joel.Wagner@callcenter.xyz",
+    "photo": "https://via.placeholder.com/300/E241BC/FFFFFF?text=Joel.Wagner"
+  },
+  {
+    "identifier": "9644e296-a8f1-11e7-b7d2-36bd3f24901a",
+    "firstName": "Wilfred",
+    "lastName": "Anderson",
+    "email": "Wilfred.Anderson@callcenter.xyz",
+    "photo": "https://via.placeholder.com/300/E241BC/FFFFFF?text=Wilfred.Anderson"
+  },
+  {
+    "identifier": "2900c694-a8f3-11e7-b119-b7844b927e5c",
+    "firstName": "Delbert",
+    "lastName": "Pena",
+    "email": "Delbert.Pena@callcenter.xyz",
+    "photo": "https://via.placeholder.com/300/E241BC/FFFFFF?text=Delbert.Pena"
+  },
+  {
+    "identifier": "6fe55f02-a8f3-11e7-b037-c33c31bca71f",
+    "firstName": "Madeline",
+    "lastName": "Lee",
+    "email": "Madeline.Lee@callcenter.xyz",
+    "photo": "https://via.placeholder.com/300/E241BC/FFFFFF?text=Madeline.Lee"
+  },
+  {
+    "identifier": "e86b789e-a8f3-11e7-b549-b60535cbd9d7",
+    "firstName": "Morris",
+    "lastName": "Chambers",
+    "email": "Morris.Chambers@callcenter.xyz",
+    "photo": "https://via.placeholder.com/300/E241BC/FFFFFF?text=Morris.Chambers"
+  },
+  {
+    "identifier": "2d28a260-a8f7-11e7-953a-4894ae2813ba",
+    "firstName": "Albert",
+    "lastName": "Roy",
+    "email": "Albert.Roy@callcenter.xyz",
+    "photo": "https://via.placeholder.com/300/E241BC/FFFFFF?text=Albert.Roy"
+  }
+]
