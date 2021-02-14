@@ -43,10 +43,6 @@ export type AgentState = {
   error: string
 }
 
-export type AgentProps = {
-  agents: Agent[]
-}
 
-export type AgentTableProps = {
-  agent: Agent
-}
+
+

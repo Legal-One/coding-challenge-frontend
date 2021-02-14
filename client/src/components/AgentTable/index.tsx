@@ -1,8 +1,8 @@
 import React from 'react'
 
-import { AgentTableProps } from '../../Types/AgentType'
+import { AgentProps } from '../../Types/ui'
 
-function AgentTable({ agent }: AgentTableProps) {
+function AgentTable({ agent }: AgentProps) {
   const { identifier, firstName, lastName, email, photo } = agent
 
   return (
@@ -12,6 +12,7 @@ function AgentTable({ agent }: AgentTableProps) {
         <li>firstName: {firstName}</li>
         <li>lastName: {lastName}</li>
         <li>email: {email}</li>
+
         <li>
           <img src={photo} alt="agent" width="100px" />
         </li>

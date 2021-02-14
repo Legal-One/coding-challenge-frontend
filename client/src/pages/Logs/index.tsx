@@ -2,7 +2,6 @@ import React from 'react'
 
 import LogsTable from '../../components/LogsTable'
 import { useLogs } from '../../Hooks/useLogs'
-
 const Logs = () => {
   const [logsData] = useLogs()
   return (

@@ -1,13 +1,14 @@
 import React from 'react'
 
-import Agents from '../../components/Agents'
 import { useAgents } from '../../Hooks/useAgents'
-
+import MainTable from '../../components/MainTable'
 const Home = () => {
   const [agentData] = useAgents()
+
   return (
     <div>
-      <Agents agents={agentData} />
+      {agentData &&
+        agentData.map((agents) => <MainTable key={agents._id} agent={agents} />)}
     </div>
   )
 }
