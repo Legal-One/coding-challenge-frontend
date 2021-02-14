@@ -41,5 +41,5 @@ export type ResolutionState = {
 }
 
 export type ResolutionProps = {
-  resolution: Resolution
+  res: Resolution
 }
