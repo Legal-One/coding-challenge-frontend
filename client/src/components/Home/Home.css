@@ -1,14 +1,24 @@
 table {
-  font-family: arial, sans-serif;
+  font-family: "Poppins";
+  color: #454545;
   border-collapse: collapse;
   width: 100%;
+  margin-bottom: 5em;
+}
+
+.table-holder {
+  overflow-x: auto;
 }
 
 td,
 th {
   border: 1px solid #dddddd;
   text-align: left;
-  padding: 8px;
+  padding: 8px 14px;
+}
+
+tr {
+  height: 60px;
 }
 
 tr:nth-child(even) {
@@ -17,4 +27,22 @@ tr:nth-child(even) {
 
 .agent-name {
   cursor: pointer;
+}
+
+.home .icons {
+  display: flex;
+  margin-bottom: 1em;
+  justify-content: flex-end;
+}
+
+.icons img {
+  height: 20px;
+  margin-left: 2em;
+  cursor: pointer;
+}
+
+@media (max-width: 655px) {
+  table {
+    width: 45em;
+  }
 }
