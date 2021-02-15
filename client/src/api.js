@@ -19,7 +19,6 @@ export const getAgentLogs = async (id) => {
 };
 
 export const getCallLogs = async (number) => {
-  console.log("====", number);
   try {
     const { data } = await axios.get(`http://localhost:3500/calls/${number}`);
     return data;

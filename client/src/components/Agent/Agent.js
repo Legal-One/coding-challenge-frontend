@@ -10,7 +10,6 @@ const Agent = () => {
   useEffect(() => {
     const fetchLogs = async () => {
       const logs = await getAgentLogs(id);
-      console.log(logs);
       if (logs.length) {
         return setLogs(logs);
       }
