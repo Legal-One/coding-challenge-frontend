@@ -27,9 +27,9 @@ describe('Get Calls endpoint GET /calls', () => {
 
     expect(result.status).toBe(200);
     expect(result.body.status).toBe('success');
-    expect(result.body.data).toBeInstanceOf(Array);
+    expect(result.body.data).toBeInstanceOf(Object);
 
-    const firstItem = result.body.data[0];
+    const firstItem = result.body.data.calls[0];
 
     expect(firstItem).toHaveProperty('phoneNumber');
     expect(firstItem).toHaveProperty('numberOfCalls');

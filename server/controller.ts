@@ -54,7 +54,11 @@ export const getAllCalls = (_request: Request, response: Response) => {
 
   return response.status(200).json({
     status: 'success',
-    data: transformedData,
+    data: {
+      calls: transformedData,
+      totalAgents: agents.length,
+      totalCalls: callLogs.length,
+    },
   });
 };
 
