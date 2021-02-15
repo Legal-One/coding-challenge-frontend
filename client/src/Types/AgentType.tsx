@@ -38,7 +38,7 @@ export type AgentActions =
   | fetchAgentSuccess
 
 export type AgentState = {
-  agents: Agent[]
+  agents: Agent[] | any
   loading: boolean
   error: string
 }

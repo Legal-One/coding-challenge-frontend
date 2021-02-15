@@ -1,7 +1,6 @@
 import React from 'react'
 
 import { LogsProps } from '../../Types/LogsType'
-
 function LogsTable({ logs }: LogsProps) {
   const { identifier, agentIdentifier, number, dateTime, duration } = logs
 

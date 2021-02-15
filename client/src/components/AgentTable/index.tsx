@@ -1,7 +1,6 @@
 import React from 'react'
 
 import { AgentProps } from '../../Types/ui'
-
 function AgentTable({ agent }: AgentProps) {
   const { identifier, firstName, lastName, email, photo } = agent
 

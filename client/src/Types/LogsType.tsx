@@ -35,7 +35,7 @@ export type fetchLogsSuccess = {
 export type LogsActions = fetchLogsRequest | fetchLogsFailure | fetchLogsSuccess
 
 export type LogsState = {
-  logs: Logs[]
+  logs: Logs[] | any
   loading: boolean
   error: string
 }

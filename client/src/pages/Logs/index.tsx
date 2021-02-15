@@ -1,13 +1,11 @@
 import React from 'react'
 
 import LogsTable from '../../components/LogsTable'
-import { useLogs } from '../../Hooks/useLogs'
-const Logs = () => {
-  const [logsData] = useLogs()
+const Logs = ({ logs }: any) => {
   return (
     <div>
-      {logsData &&
-        logsData.map((logs) => <LogsTable key={logs._id} logs={logs} />)}
+      {logs &&
+        logs.map((logs: any) => <LogsTable key={logs._id} logs={logs} />)}
     </div>
   )
 }

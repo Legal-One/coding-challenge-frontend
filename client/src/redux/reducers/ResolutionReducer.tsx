@@ -23,7 +23,6 @@ const ResolutionReducers = (
       loading: true,
     }
   case FETCH_RESOLUTION_SUCCESS:
-    console.log(state, action.payload)
     return {
       ...state,
       loading: false,

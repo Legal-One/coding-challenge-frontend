@@ -1,18 +1,14 @@
 import React from 'react'
 
-
-import { useAgents } from '../../Hooks/useAgents'
 import AgentTable from '../../components/AgentTable'
 
-function Agents() {
-  const [agentData] = useAgents()
-
-
-
+function Agents({ agents }: any) {
   return (
     <div>
-      {agentData &&
-        agentData.map((agent) => <AgentTable key={agent._id} agent={agent} />)}
+      {agents &&
+        agents.map((agent: any) => (
+          <AgentTable key={agent._id} agent={agent} />
+        ))}
     </div>
   )
 }

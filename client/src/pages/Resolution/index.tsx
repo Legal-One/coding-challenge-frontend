@@ -1,14 +1,12 @@
 import React from 'react'
 
 import ResolutionTable from '../../components/ResolutionTable'
-import { useResolution } from '../../Hooks/useResolution'
 
-const Resolution = () => {
-  const [resData] = useResolution()
+const Resolution = ({ resolution }: any) => {
   return (
     <div>
-      {resData &&
-        resData.map((res) => <ResolutionTable key={res._id} res={res} />)}
+      {resolution &&
+        resolution.map((res: any) => <ResolutionTable key={res._id} res={res} />)}
     </div>
   )
 }

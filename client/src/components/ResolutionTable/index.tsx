@@ -2,7 +2,7 @@ import React from 'react'
 
 import { ResolutionProps } from '../../Types/ResolutionType'
 
-function ResolutionTable({ res }: ResolutionProps) {
+function ResolutionTable({ res }: any) {
   const { identifier, resolution } = res
 
   return (

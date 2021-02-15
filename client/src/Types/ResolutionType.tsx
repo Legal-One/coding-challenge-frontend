@@ -35,7 +35,7 @@ export type ResolutionActions =
   | fetchResSuccess
 
 export type ResolutionState = {
-  resolution: Resolution[]
+  resolution: Resolution[] | any
   loading: boolean
   error: string
 }
