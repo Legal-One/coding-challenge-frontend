@@ -4,7 +4,7 @@ import callLogs from '../json-data/logs.json';
 import agents from '../json-data/agents.json';
 import resolutions from '../json-data/resolution.json';
 
-import { Call, CallLog, Agent, Resolution } from './types';
+import { Call, CallLog, Agent, Resolution, CallDetails } from './types';
 
 export const getAllCalls = (_request: Request, response: Response) => {
   const allCalls: Call<CallLog> = {};
@@ -89,5 +89,47 @@ export const getAgentCalls = (request: Request, response: Response) => {
       agent: callAgent,
       calls: agentCalls,
     },
+  });
+};
+
+export const getCallDetails = (request: Request, response: Response) => {
+  const { number } = request.params;
+
+  if (!number) {
+    return response.status(400).json({
+      status: 'error',
+      message: 'The number field is required',
+    });
+  }
+
+  const calls = callLogs
+    .filter((callLog: CallLog) => callLog.number === number)
+    .map((callLog: CallLog) => {
+      const resolution = resolutions.find(
+        (resolution: Resolution) => resolution.identifier === callLog.identifier
+      );
+
+      const callAgent = agents.find(
+        (agent: Agent) => agent.identifier === callLog.agentIdentifier
+      );
+
+      return {
+        dateTime: callLog.dateTime,
+        duration: callLog.duration,
+        resolution: resolution?.resolution,
+        agent: callAgent,
+      };
+    });
+
+  if (!calls.length) {
+    return response.status(404).json({
+      status: 'error',
+      message: `No call log exists for ${number}`,
+    });
+  }
+
+  return response.status(200).json({
+    status: 'success',
+    data: calls,
   });
 };

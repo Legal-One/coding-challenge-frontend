@@ -22,3 +22,24 @@ export type Resolution = {
   identifier: string;
   resolution: string;
 };
+
+export interface AllCalls {
+  phoneNumber: string;
+  numberOfCalls: number;
+  lastCall: {
+    agent: Agent;
+    duration: number;
+    dateTime: string;
+  };
+}
+
+export interface AgentCalls extends CallLog {
+  resolution: string;
+}
+
+export interface CallDetails {
+  dateTime: string;
+  duration: string;
+  resolution: string;
+  agent: Agent;
+}
