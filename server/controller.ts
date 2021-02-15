@@ -4,7 +4,7 @@ import callLogs from '../json-data/logs.json';
 import agents from '../json-data/agents.json';
 import resolutions from '../json-data/resolution.json';
 
-import { Call, CallLog, Agent, Resolution, CallDetails } from './types';
+import { Call, CallLog, Agent, Resolution } from './types';
 
 export const getAllCalls = (_request: Request, response: Response) => {
   const allCalls: Call<CallLog> = {};

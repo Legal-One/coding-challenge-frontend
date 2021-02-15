@@ -1,16 +1,21 @@
-import express, { Request, Response } from 'express';
+import express, { Request, Response, Application } from 'express';
 
 import router from './routes';
 
 // Create a new express app instance
-const app: express.Application = express();
+const app: Application = express();
 
-app.get('/', function (_request: Request, response: Response) {
-  response.send(`Hello World!`);
-});
+app.get('/', (_request: Request, response: Response) =>
+  response.status(200).json({
+    status: 'success',
+    message: 'App is running',
+  })
+);
+
+const port = 3000;
 
 app.use('/', router);
 
-app.listen(3000, function () {
-  console.log('App is listening on port 3000!');
-});
+app.listen(port, () => console.log(`App running on http://localhost:${port}`));
+
+export default app;
