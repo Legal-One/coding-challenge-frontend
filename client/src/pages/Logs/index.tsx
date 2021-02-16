@@ -1,11 +1,12 @@
 import React from 'react'
 
+import { LogProps } from '../../Types/ui'
+
 import LogsTable from '../../components/LogsTable'
-const Logs = ({ logs }: any) => {
+const Logs = ({ logs }: LogProps) => {
   return (
     <div>
-      {logs &&
-        logs.map((logs: any) => <LogsTable key={logs._id} logs={logs} />)}
+      {logs && logs.map((logs) => <LogsTable key={logs._id} logs={logs} />)}
     </div>
   )
 }

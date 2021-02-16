@@ -1,6 +1,8 @@
 import React from 'react'
 
-function LogsTableData({ handleGetCallsByAgentId, log }: any) {
+import { LogsTableDataProps } from '../../Types/ui'
+
+function LogsTableData({ handleGetCallsByAgentId, log }: LogsTableDataProps) {
   return <div>{handleGetCallsByAgentId(log.agentIdentifier, log.number)}</div>
 }
 

@@ -6,10 +6,16 @@ export type AgentProps = {
   agent: Agent
 }
 
-export type TableRowProps = {
-  agents: Agent[]
+export type AgentTableDataProps = {
+  handleFindAgent: Function
+  log: Logs
 }
 
-export type MainTableProps = {
-  agent: Agent
+export type LogsTableDataProps = {
+  handleGetCallsByAgentId: Function
+  log: Logs
+}
+
+export type LogProps = {
+  logs: Logs[] | any
 }

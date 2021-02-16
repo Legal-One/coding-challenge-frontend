@@ -41,6 +41,4 @@ export type LogsState = {
   error: string
 }
 
-export type LogsProps = {
-  logs: Logs
-}
+

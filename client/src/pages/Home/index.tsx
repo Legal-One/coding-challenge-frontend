@@ -1,17 +1,20 @@
 import React from 'react'
 
+import { LogProps } from '../../Types/ui'
 import MainTable from '../../components/MainTable'
 
-const Home = ({ res, logs, agents }: any) => {
+const Home = ({ logs }: LogProps) => {
   return (
     <table>
-      <tr>
-        <th>Phone number</th>
-        <th>Number of calls</th>
-        <th>Last call details </th>
-      </tr>
       <tbody>
-        <MainTable agents={agents} res={res} logs={logs} />
+        <tr>
+          <th>Phone number</th>
+          <th>Number of calls</th>
+          <th>Last call details </th>
+        </tr>
+      </tbody>
+      <tbody>
+        <MainTable logs={logs} />
       </tbody>
     </table>
   )

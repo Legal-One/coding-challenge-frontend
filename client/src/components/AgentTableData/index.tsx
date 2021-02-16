@@ -1,6 +1,8 @@
 import React from 'react'
 
-function AgentTableData({ handleFindAgent, log }: any) {
+import { AgentTableDataProps } from '../../Types/ui'
+
+function AgentTableData({ handleFindAgent, log }: AgentTableDataProps) {
   return (
     <div>
       {handleFindAgent(log.agentIdentifier)?.firstName} {log.dateTime}

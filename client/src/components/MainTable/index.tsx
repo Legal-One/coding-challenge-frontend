@@ -1,27 +1,20 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 
-import { Logs } from '../../Types/LogsType'
+import { LogProps } from '../../Types/ui'
 import { AppState } from '../../Types'
 import LogsTableData from '../LogsTableData'
 import AgentTableData from '../AgentTableData'
 import NumberTableData from '../NumberTableData'
 import './MainTable.css'
 
-const styles = {
-  listStyleType: 'none',
-  borderBottom: '1px solid black',
-}
-
-function MainTable({ agents, logs, res }: any) {
+function MainTable({ logs }: LogProps) {
   const currentAgent = useSelector((state: AppState) => state.agents.agents)
-  const currentLog: Logs[] = useSelector((state: AppState) => state.logs.logs)
+  const currentLog = useSelector((state: AppState) => state.logs.logs)
   const logsGrouped = useSelector((state: AppState) => state.logs.logsGrouped)
 
   const handleGetNumberOfCalls = (logs, number) => {
     const numberOfCalls = logs.filter((log) => log.number === number).length
-    console.log('numberOfCalls:', number, numberOfCalls)
-
     return numberOfCalls
   }
   const handleFindAgent = (agentId: string) => {
@@ -47,7 +40,7 @@ function MainTable({ agents, logs, res }: any) {
   return (
     <>
       {uniqueItems.map((log) => (
-        <tr key={log._id} style={styles}>
+        <tr key={log._id}>
           <td>
             <NumberTableData log={log} />
           </td>
