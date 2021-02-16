@@ -1,0 +1,11 @@
+.nav {
+    height: 80px;
+    display: flex;
+    align-items: center;
+    /* border-bottom: 1px solid #000000; */
+    margin-bottom: 2em;
+}
+
+.nav img {
+    height: 25px;
+}
