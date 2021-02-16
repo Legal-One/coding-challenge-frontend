@@ -1,7 +1,7 @@
 import React from 'react'
 
-function LogsTableData({ logs }: any) {
-  return <div>LogsTableData</div>
+function LogsTableData({ handleGetCallsByAgentId, log }: any) {
+  return <div>{handleGetCallsByAgentId(log.agentIdentifier, log.number)}</div>
 }
 
 export default LogsTableData

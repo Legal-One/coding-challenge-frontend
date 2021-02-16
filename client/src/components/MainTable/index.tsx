@@ -1,71 +1,68 @@
-// import React from 'react'
-// import { useSelector } from 'react-redux'
-// import { MainTableProps } from '../../Types/ui'
-// import './MainTable.css'
-// import { AppState } from '../../Types'
-// function MainTable({ agents, resolution, logs }: any) {
-//   const agent = useSelector((state: AppState) => state.agents.agents)
-//   const log = useSelector((state: AppState) => state.logs.logs)
-//   const res = useSelector((state: AppState) => state.resolution.resolution)
-//   console.log(logs)
-//   return (
-//     <table>
-//       <tbody>
-//         <tr>
-//           <th>Phone number</th>
-//           {/*  <th>Number of calls</th> */}
-//           <th>Last call details </th>
-//         </tr>
-//         {log && res.identifier && agent.identifier && (
-//           <tr>
-//             {log.identifier === res.identifier &&
-//             log.agentIdentifier === agent.identifier ? (
-//               <td>{log.number}</td>
-//             ) : null}
-//             {/*  <td>3 calls</td> */}
-//             {log.identifier === res.identifier &&
-//             log.agentIdentifier === agent.identifier ? (
-//               <td>{agent.firstName}</td>
-//             ) : null}
-//           </tr>
-//         )}
-//       </tbody>
-//     </table>
-//   )
-// }
-
-// export default MainTable
-
 import React from 'react'
 import { useSelector } from 'react-redux'
 
-import AgentTableData from '../AgentTableData'
+import { Logs } from '../../Types/LogsType'
+import { AppState } from '../../Types'
 import LogsTableData from '../LogsTableData'
-import ResTableData from '../ResTableData'
+import AgentTableData from '../AgentTableData'
+import NumberTableData from '../NumberTableData'
 import './MainTable.css'
 
+const styles = {
+  listStyleType: 'none',
+  borderBottom: '1px solid black',
+}
+
 function MainTable({ agents, logs, res }: any) {
+  const currentAgent = useSelector((state: AppState) => state.agents.agents)
+  const currentLog: Logs[] = useSelector((state: AppState) => state.logs.logs)
+  const logsGrouped = useSelector((state: AppState) => state.logs.logsGrouped)
+
+  const handleGetNumberOfCalls = (logs, number) => {
+    const numberOfCalls = logs.filter((log) => log.number === number).length
+    console.log('numberOfCalls:', number, numberOfCalls)
+
+    return numberOfCalls
+  }
+  const handleFindAgent = (agentId: string) => {
+    // check for undefined
+    const agent = currentAgent.find((agent) => agent.identifier === agentId)
+    return agent
+  }
+
+  const handleGetCallsByAgentId = (agentIdentifier: string, number: string) => {
+    const [numberOfCalls] = logsGrouped[
+      agentIdentifier
+    ].map((agent, i, array) => handleGetNumberOfCalls(array, number))
+    return numberOfCalls
+  }
+  const uniqueItems = currentLog?.filter((a, position, arr) => {
+    return (
+      arr.findIndex(
+        (b) => b.agentIdentifier === a.agentIdentifier && b.number === a.number
+      ) === position
+    )
+  })
+
   return (
-    <table>
-      <tbody>
-        <tr>
-          <th>Phone number</th>
-          <th>Number of calls</th>
-          <th>Last call details </th>
-        </tr>
-        <tr>
+    <>
+      {uniqueItems.map((log) => (
+        <tr key={log._id} style={styles}>
           <td>
-            <LogsTableData logs={logs} />
+            <NumberTableData log={log} />
           </td>
           <td>
-            <ResTableData resolution={res} />
+            <LogsTableData
+              handleGetCallsByAgentId={handleGetCallsByAgentId}
+              log={log}
+            />
           </td>
           <td>
-            <AgentTableData agent={agents} />
+            <AgentTableData handleFindAgent={handleFindAgent} log={log} />
           </td>
         </tr>
-      </tbody>
-    </table>
+      ))}
+    </>
   )
 }
 

@@ -27,16 +27,17 @@ export type fetchLogsRequest = {
 
 export type fetchLogsSuccess = {
   type: typeof FETCH_LOGS_SUCCESS
-  payload: {
-    logs: Logs
-  }
+  payload: Logs[]
 }
 
 export type LogsActions = fetchLogsRequest | fetchLogsFailure | fetchLogsSuccess
 
 export type LogsState = {
-  logs: Logs[] | any
+  logs: Logs[]
   loading: boolean
+  logsGrouped: {
+    [id: string]: Logs[]
+  }
   error: string
 }
 

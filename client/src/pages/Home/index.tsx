@@ -4,9 +4,16 @@ import MainTable from '../../components/MainTable'
 
 const Home = ({ res, logs, agents }: any) => {
   return (
-    <div>
-      <MainTable agents={agents} res={res} logs={logs} />
-    </div>
+    <table>
+      <tr>
+        <th>Phone number</th>
+        <th>Number of calls</th>
+        <th>Last call details </th>
+      </tr>
+      <tbody>
+        <MainTable agents={agents} res={res} logs={logs} />
+      </tbody>
+    </table>
   )
 }
 

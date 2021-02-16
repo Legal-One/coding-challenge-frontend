@@ -5,10 +5,12 @@ import {
   LogsActions,
   LogsState,
 } from '../../Types/LogsType'
+import { groupBy } from '../../utils'
 
 const initialState: LogsState = {
   loading: false,
   logs: [],
+  logsGrouped: {},
   error: '',
 }
 
@@ -20,10 +22,12 @@ const LogsReducers = (state = initialState, action: LogsActions) => {
       loading: true,
     }
   case FETCH_LOGS_SUCCESS:
+    const logsByAgent = groupBy(action.payload, 'agentIdentifier')
     return {
       ...state,
       loading: false,
       logs: action.payload,
+      logsGrouped: logsByAgent,
       error: '',
     }
   case FETCH_LOGS_FAILURE:
