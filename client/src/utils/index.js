@@ -3,3 +3,14 @@ export const hourAndMinute = originalDate => {
 
     return `${date.getHours()}:${date.getMinutes()}`;
 };
+
+export const dateAndTime = originalDate => {
+    const date = new Date(originalDate);
+
+    const dateOnly = date.toLocaleDateString();
+    const timeOnly = date.toTimeString().split(' ')[0];
+
+    return `${dateOnly} ${timeOnly}`;
+};
+
+export const getAgentName = ({ firstName, lastName }) => `${firstName} ${lastName}`;
