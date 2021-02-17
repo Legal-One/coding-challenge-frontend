@@ -1,56 +1,56 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import "./App.css";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
-      greeting: ''
+      name: "",
+      greeting: "",
+      logs: []
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleCall = this.handleCall.bind(this);
+    this.handleAgent = this.handleAgent.bind(this);
+  }
+
+  componentDidMount() {
+    fetch("/api")
+      .then(res => res.json())
+      .then(res => {
+        this.setState({ logs: res });
+      });
   }
 
   handleChange(event) {
     this.setState({ name: event.target.value });
   }
 
-  handleSubmit(event) {
+  handleAgent(event) {
     event.preventDefault();
-    fetch(`/api/greeting?name=${encodeURIComponent(this.state.name)}`)
-      .then(response => response.json())
-      .then(state => this.setState(state));
+    const ID = "356b03dc-9ec5-11e7-97a6-d501104f897e";
+    fetch(`/agent?id=${encodeURIComponent(ID)}`)
+      .then(res => res.json())
+      .then(res => {
+        console.log("agent->", res);
+      });
+  }
+
+  handleCall(event) {
+    event.preventDefault();
+    const number = "+49158544147";
+    fetch(`/call?number=${encodeURIComponent(number)}`)
+      .then(res => res.json())
+      .then(res => {
+        console.log("number->", res);
+      });
   }
 
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <form onSubmit={this.handleSubmit}>
-            <label htmlFor="name">Enter your name: </label>
-            <input
-              id="name"
-              type="text"
-              value={this.state.name}
-              onChange={this.handleChange}
-            />
-            <button type="submit">Submit</button>
-          </form>
-          <p>{this.state.greeting}</p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
+          <h3>Front-end Test</h3>
+          <button onClick={this.handleCall}>Test</button>
         </header>
       </div>
     );
