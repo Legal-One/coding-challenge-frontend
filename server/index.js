@@ -2,25 +2,54 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const pino = require("express-pino-logger")();
 const fs = require("fs");
-
+const d3 = require("d3-array");
+const {
+  json
+} = require("body-parser");
 const app = express();
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
 app.use(pino);
 
 app.get("/api", (req, res) => {
-  let rawData = fs.readFileSync("./json-data/logs.json");
-  const logs = JSON.parse(rawData);
-  res.send(JSON.stringify({ data: logs }));
+  const jsonLogs = JSON.parse(fs.readFileSync("./json-data/logs.json"));
+  const jsonAgents = JSON.parse(fs.readFileSync("./json-data/agents.json"));
+  const groupData = Array.from(d3.group(jsonLogs, d => d.number), ([key, value]) => ({
+    key,
+    value
+  }))
+  const result = groupData.map((item) => {
+    const lastLog = item.value[d3.maxIndex(item.value, d => d.dateTime)];
+    const lastCallAgent = jsonAgents.find((i) => i.identifier == lastLog.agentIdentifier)
+    return {
+      phone: item.key,
+      cnt: item.value.length,
+      agent: lastCallAgent.firstName + " " + lastCallAgent.lastName,
+      dateTime: lastLog.dateTime
+    }
+  })
+  res.send(JSON.stringify({
+    data: result
+  }));
 });
 
 app.get("/agent", (req, res) => {
-  const ID = req.query.id;
-  let rawData = JSON.parse(fs.readFileSync("./json-data/agents.json"));
-  const results = rawData.filter(x => {
-    return x.identifier === ID;
-  });
+  const agentId = req.query.id;
+  const jsonLogs = JSON.parse(fs.readFileSync("./json-data/logs.json"));
+  const jsonResolution = JSON.parse(fs.readFileSync("./json-data/resolution.json"));
+  const agentLogs = jsonLogs.filter((item) => item.agentIdentifier == agentId);
+  const result = agentLogs.map((item) => {
+    return {
+      phone: item.number,
+      dateTime: item.dateTime,
+      resolution: (jsonResolution.find((i) => i.identifier == item.identifier)).resolution
+    }
+  })
   res.setHeader("Content-Type", "application/json");
-  res.send(JSON.stringify({ data: results }));
+  res.send(JSON.stringify({
+    data: result
+  }));
 });
 
 function mergeArrayObjects(arr1, arr2) {
@@ -33,33 +62,24 @@ function mergeArrayObjects(arr1, arr2) {
 }
 
 app.get("/call", (req, res) => {
-  const number = req.query.number;
-  let rawLogs = JSON.parse(fs.readFileSync("./json-data/logs.json"));
-  let rawAgents = JSON.parse(fs.readFileSync("./json-data/agents.json"));
-  let rawResolution = JSON.parse(
-    fs.readFileSync("./json-data/resolution.json")
-  );
-
-  const logs = rawLogs.filter(x => {
-    return x.number == number;
-  });
-
-  const results_resolution = logs.map(ele => {
-    return rawResolution.filter(x => {
-      return x.identifier === ele.identifier;
-    });
-  });
-
-  const results_agent = logs.map(ele => {
-    return rawAgents.filter(x => {
-      return x.identifier === ele.agentIdentifier;
-    });
-  });
+  const phoneNumber = req.query.number;
+  const jsonLogs = JSON.parse(fs.readFileSync("./json-data/logs.json"));
+  const jsonResolution = JSON.parse(fs.readFileSync("./json-data/resolution.json"));
+  const jsonAgents = JSON.parse(fs.readFileSync("./json-data/agents.json"));
+  const agentLogs = jsonLogs.filter((item) => item.number.includes(phoneNumber));
+  const result = agentLogs.map((item) => {
+    const agent = jsonAgents.find((i) => i.identifier == item.agentIdentifier)
+    return {
+      agent: agent.firstName + " " + agent.lastName,
+      dateTime: item.dateTime,
+      resolution: (jsonResolution.find((i) => i.identifier == item.identifier)).resolution
+    }
+  })
 
   res.setHeader("Content-Type", "application/json");
   res.send(
     JSON.stringify({
-      data: mergeArrayObjects(results_resolution, results_agent)
+      data: result
     })
   );
 });
@@ -67,7 +87,9 @@ app.get("/call", (req, res) => {
 app.get("/api/greeting", (req, res) => {
   const name = req.query.name || "World";
   res.setHeader("Content-Type", "application/json");
-  res.send(JSON.stringify({ greeting: `Hello ${name}!` }));
+  res.send(JSON.stringify({
+    greeting: `Hello ${name}!`
+  }));
 });
 
 app.listen(3001, () =>
