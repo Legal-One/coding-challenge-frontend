@@ -47,7 +47,10 @@ export default {
 
     font-weight: 600;
 
-    margin-bottom: 20px;
+    margin: 0 -20px 20px;
+    padding: 0 20px 1rem;
+
+    border-bottom: 2px solid var(--color-grey);
 }
 
 .table-header {
@@ -66,8 +69,10 @@ export default {
 
     text-align: left;
 
-    margin: 10px -15px;
+    margin: 10px -20px;
     padding: 10px 20px;
+
+    box-shadow: var(--box-shadow);
 }
 
 .table-row:last-of-type {
@@ -75,9 +80,9 @@ export default {
 }
 
 .table-row:nth-of-type(2n) {
-    background: var(--color-grey);
+    /* background: var(--color-grey); */
 
-    margin: 10px -20px;
-    padding: 15px 25px;
+    /* margin: 10px -20px;
+    padding: 15px 25px; */
 }
 </style>

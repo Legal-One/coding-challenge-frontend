@@ -1,7 +1,6 @@
 <template>
     <div id="nav">
-        <router-link to="/">Home</router-link> |
-        <router-link to="/about">About</router-link>
+        <router-link to="/">All Calls</router-link>
     </div>
     <router-view />
 </template>
@@ -19,6 +18,7 @@ export default {
 <style>
 :root {
     --color-red: #fa4344;
+    --color-yellow: #faf743;
     --color-light-blue: #3d59fa;
     --color-purple: #a920cb;
     --color-green: #00a079;
@@ -62,9 +62,6 @@ html {
 body {
     height: 100vh;
     width: 100%;
-
-    font-family: Roboto;
-    --webkit-font-smoothing: antialiased;
 }
 
 #app {
@@ -76,17 +73,61 @@ body {
 }
 
 #nav {
+    display: flex;
+    justify-content: center;
+
     padding: 30px;
+    margin-bottom: 3rem;
+    width: 100%;
+
+    box-shadow: var(--box-shadow);
+}
+
+@media screen and (min-width: 768px) {
+    #nav {
+        justify-content: flex-end;
+    }
 }
 
 #nav a {
     font-weight: bold;
     color: #2c3e50;
+
+    font-size: var(--font-sub-title);
 }
 
 #nav a.router-link-exact-active {
     color: #42b983;
 }
 
+.bg-purple {
+    background: var(--color-purple);
+    color: var(--color-white);
+}
 
+.bg-red {
+    background: var(--color-red);
+    color: var(--color-white);
+}
+
+.bg-green {
+    background: var(--color-green);
+    color: var(--color-white);
+}
+
+.bg-blue {
+    background: var(--color-blue);
+    color: var(--color-white);
+}
+
+.bg-yellow {
+    background: var(--color-yellow);
+    color: var(--color-black);
+}
+
+.resolution {
+    padding: 0.3rem 1rem;
+
+    border-radius: 6px;
+}
 </style>

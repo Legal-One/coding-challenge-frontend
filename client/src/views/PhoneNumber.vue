@@ -11,7 +11,9 @@
                         {{ getAgentName(row.agent) }}
                     </div>
                     <div class="call last-call">{{ dateAndTime(row.dateTime) }}</div>
-                    <div class="call calls-count">{{ row.resolution }}</div>
+                    <div class="call resolution" :class="getCallResolutionClass(row.resolution)">
+                        {{ row.resolution }}
+                    </div>
                 </template>
             </base-table>
         </div>
@@ -54,6 +56,25 @@ export default {
                 },
             });
 
+        const getCallResolutionClass = callResolution => {
+            switch (callResolution) {
+                case 'need reschedule':
+                    return 'bg-purple';
+
+                case 'interested':
+                    return 'bg-green';
+
+                case 'no answer':
+                    return 'bg-red';
+
+                case 'needs follow up':
+                    return 'bg-yellow';
+
+                default:
+                    return 'bg-blue';
+            }
+        };
+
         const phoneNumber = route.params.number;
 
         onMounted(getCallHistory);
@@ -65,6 +86,7 @@ export default {
             dateAndTime,
             viewAgentHistory,
             phoneNumber,
+            getCallResolutionClass,
         };
     },
 };
