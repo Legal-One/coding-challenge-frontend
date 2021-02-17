@@ -1,14 +1,15 @@
 <template>
-    <div class="agent-profile">
-        <div class="agent">
-            <h2 class="agent-name">{{ agentProfile.firstName }} {{ agentProfile.lastName }}</h2>
-            <p class="agent-email">{{ agentProfile.email }}</p>
+    <div class="phone-number">
+        <div class="number">
+            <h2 class="agent-name">{{ phoneNumber }}</h2>
         </div>
 
         <div class="table">
             <base-table :headings="tableHeadings" :rowData="rowData">
                 <template #table-row="{ row }">
-                    <div class="call phonenumber link" @click="viewNumberHistory(row.number)">{{ row.number }}</div>
+                    <div class="call agent-name link" @click="viewAgentHistory(row.agent.identifier)">
+                        {{ getAgentName(row.agent) }}
+                    </div>
                     <div class="call last-call">{{ dateAndTime(row.dateTime) }}</div>
                     <div class="call calls-count">{{ row.resolution }}</div>
                 </template>
@@ -23,71 +24,60 @@
 import { onMounted, ref } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 
-import { fetchAgentHistory } from '../services';
+import { fetchCallHistory } from '../services';
 import { dateAndTime, getAgentName } from '../utils';
 
 export default {
-    name: 'Agent',
+    name: 'PhoneNumber',
     inject: ['route'],
 
     setup() {
         const router = useRouter();
         const route = useRoute();
 
-        const tableHeadings = ref(['Phone Number', 'Call date and Time', 'Resolution']);
+        const tableHeadings = ref(['Agent Name', 'Call date and Time', 'Resolution']);
         const rowData = ref([]);
-        const agentProfile = ref({
-            identifier: '',
-            firstName: '',
-            lastName: '',
-            email: '',
-            photo: '',
-        });
 
-        const getAllCalls = async () => {
-            const agentId = route.params.agentId;
+        const getCallHistory = async () => {
+            const number = route.params.number;
 
-            const {
-                data: { calls, agent },
-            } = await fetchAgentHistory(agentId);
+            const { data } = await fetchCallHistory(number);
 
-            rowData.value = calls;
-            agentProfile.value = agent;
+            rowData.value = data;
         };
 
-        const viewAgentHistory = () => router.push({ name: 'About' });
-
-        const viewNumberHistory = number =>
+        const viewAgentHistory = agentId =>
             router.push({
-                name: 'Number',
+                name: 'Agent',
                 params: {
-                    number,
+                    agentId,
                 },
             });
 
-        onMounted(getAllCalls);
+        const phoneNumber = route.params.number;
+
+        onMounted(getCallHistory);
 
         return {
             tableHeadings,
             rowData,
-            agentProfile,
             getAgentName,
             dateAndTime,
             viewAgentHistory,
-            viewNumberHistory,
+            phoneNumber,
         };
     },
 };
 </script>
 
 <style scoped>
-.agent-profile {
+.phone-number {
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-.agent {
+.number {
     margin-bottom: 1rem;
     margin-left: auto;
 
@@ -112,14 +102,8 @@ export default {
     text-decoration: underline;
 }
 
-.agent-email {
-    font-size: var(--font-sub-title);
-
-    margin: 1rem 0;
-}
-
 @media screen and (min-width: 768px) {
-    .agent-profile {
+    .phone-number {
         padding: 0 20px;
     }
 

@@ -3,7 +3,9 @@
         <div class="table">
             <base-table :headings="tableHeadings" :rowData="rowData">
                 <template #table-row="{ row }">
-                    <div class="call phonenumber link">{{ row.phoneNumber }}</div>
+                    <div class="call phonenumber link" @click="viewNumberHistory(row.phoneNumber)">
+                        {{ row.phoneNumber }}
+                    </div>
                     <div class="call calls-count">{{ row.numberOfCalls }}</div>
                     <div class="call last-call">
                         <span @click="viewAgentHistory(row.lastCall.agent.identifier)" class="link agent-link">{{
@@ -23,7 +25,7 @@
 import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 
-import { fetchAllCalls } from '../services';
+import { fetchAllCallHistory } from '../services';
 import { hourAndMinute, getAgentName } from '../utils';
 
 export default {
@@ -39,7 +41,7 @@ export default {
         const getAllCalls = async () => {
             const {
                 data: { calls, totalAgents, totalCalls },
-            } = await fetchAllCalls();
+            } = await fetchAllCallHistory();
 
             rowData.value = calls;
 
@@ -55,6 +57,14 @@ export default {
                 },
             });
 
+        const viewNumberHistory = number =>
+            router.push({
+                name: 'Number',
+                params: {
+                    number,
+                },
+            });
+
         onMounted(getAllCalls);
 
         return {
@@ -64,6 +74,7 @@ export default {
             getAgentName,
             hourAndMinute,
             viewAgentHistory,
+            viewNumberHistory,
         };
     },
 };

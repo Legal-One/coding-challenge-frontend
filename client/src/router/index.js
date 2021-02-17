@@ -16,6 +16,11 @@ const routes = [
         name: 'Agent',
         component: () => import('../views/Agent.vue'),
     },
+    {
+        path: '/call/:number',
+        name: 'Number',
+        component: () => import('../views/PhoneNumber.vue'),
+    },
 ];
 
 const router = createRouter({

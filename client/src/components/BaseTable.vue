@@ -62,16 +62,22 @@ export default {
 .table-row {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 
     text-align: left;
 
     margin: 10px -15px;
     padding: 10px 20px;
-
-    border-bottom: 1px solid var(--color-grey);
 }
 
 .table-row:last-of-type {
     border: none;
+}
+
+.table-row:nth-of-type(2n) {
+    background: var(--color-grey);
+
+    margin: 10px -20px;
+    padding: 15px 25px;
 }
 </style>
