@@ -12,42 +12,72 @@ class App extends Component {
     this.state = {
       name: "",
       greeting: "",
-      logs: [],
       dataSource: {
         chart: {
-          caption: "Top 5 countries with Global Oil Reserves",
-          subcaption: "MMbbl= One Million barrels",
+          caption: "Calling Management System",
+          subcaption: "",
           enablesmartlabels: "0",
-          startingAngle: "0",
+          startingAngle: "90",
           showPercentValues: "1",
+          showlegend: "1",
+          legendposition: "top",
+          usedataplotcolorforlabels: "1",
           decimals: "1",
           seriesNameInToolTip: "0",
           useDataPlotColorForLabels: "1",
+          theme: "fusion",
+          toolTipBgColor: "#FFFFFF",
+          legendBgColor: "#FFFFFF",
+          toolTipBgAlpha: "80",
+          baseFont: "Verdana",
+          baseFontSize: "13",
+          baseFontColor: "#00000090",
+          captionPadding: "40",
+          toolTipPadding: 10
+        },
+        data: []
+      },
+      barDataSource: {
+        chart: {
+          caption: "Countries With Most Oil Reserves [2017-18]",
+          subCaption: "In MMbbl = One Million barrels",
+          xAxisName: "Country",
+          yAxisName: "Reserves (MMbbl)",
+          numberSuffix: "K",
           theme: "fusion"
         },
         data: [
           {
-            label: "+49151484522",
-            value: "3",
-            displayValue: "Lowest sale.{br}$920K",
-            //Using custom tooltip
-            tooltext: "Lowest sale for last week. Indiana $dataValue"
+            label: "Venezuela",
+            value: "290"
           },
           {
-            label: "+49158544147",
-            value: "2"
+            label: "Saudi",
+            value: "260"
           },
           {
-            label: "+49151783331",
-            value: "1"
+            label: "Canada",
+            value: "180"
           },
           {
-            label: "+49151514231",
-            value: "1"
+            label: "Iran",
+            value: "140"
           },
           {
-            label: "+49221514231",
-            value: "2"
+            label: "Russia",
+            value: "115"
+          },
+          {
+            label: "UAE",
+            value: "100"
+          },
+          {
+            label: "US",
+            value: "30"
+          },
+          {
+            label: "China",
+            value: "30"
           }
         ]
       }
@@ -57,11 +87,13 @@ class App extends Component {
   }
 
   componentDidMount() {
-    // fetch("/api")
-    //   .then(res => res.json())
-    //   .then(res => {
-    //     this.setState({ logs: res });
-    //   });
+    fetch("/api")
+      .then(res => res.json())
+      .then(res => {
+        let temp = { ...this.state.dataSource };
+        temp.data = res.data;
+        this.setState({ dataSource: temp });
+      });
   }
 
   handleChange(event) {
@@ -88,8 +120,14 @@ class App extends Component {
       });
   }
 
+  chartEventCallback(eventObj, dataObj) {
+    let ID = dataObj.id;
+    let value = dataObj.value;
+    console.log(value);
+  }
+
   render() {
-    const { dataSource } = this.state;
+    const { dataSource, barDataSource } = this.state;
     return (
       <div className="App">
         <ReactFusioncharts
@@ -98,7 +136,17 @@ class App extends Component {
           height={600}
           dataFormat="JSON"
           dataSource={dataSource}
+          fcEvent-dataplotClick={this.chartEventCallback.bind(this)}
+          fcEvent-legenditemClick={this.chartEventCallback.bind(this)}
         />
+        <ReactFusioncharts
+          type="column2d"
+          width="100%"
+          height="100%"
+          dataFormat="JSON"
+          dataSource={barDataSource}
+        />
+        ,
       </div>
     );
   }
