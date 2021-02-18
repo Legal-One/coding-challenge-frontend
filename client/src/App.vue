@@ -2,11 +2,26 @@
     <div id="nav">
         <router-link to="/">All Calls</router-link>
     </div>
-    <router-view />
+
+    <router-view #default="{ Component }">
+        <transition name="slide-left-fade" mode="out-in">
+            <component :is="Component" />
+        </transition>
+    </router-view>
 </template>
 
 <script>
+import { useRoute } from 'vue-router';
+
 export default {
+    setup() {
+        const route = useRoute();
+
+        return {
+            route,
+        };
+    },
+
     provide() {
         return {
             route: 'hjhjh',
@@ -62,6 +77,19 @@ html {
 body {
     height: 100vh;
     width: 100%;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+}
+
+.chart {
+    box-shadow: var(--box-shadow);
+    flex: 1;
+
+    padding: 1rem;
+    margin-left: 3rem;
 }
 
 #app {
@@ -125,9 +153,45 @@ body {
     color: var(--color-black);
 }
 
-.resolution {
-    padding: 0.3rem 1rem;
+.color-green {
+    color: var(--color-green);
+}
 
-    border-radius: 6px;
+.stats {
+    display: flex;
+    justify-content: center;
+}
+
+.stat {
+    font-size: var(--font-title);
+
+    margin: 2rem;
+    padding: 2rem 4rem;
+    box-shadow: var(--box-shadow);
+
+    border-radius: 1rem;
+}
+
+.stat-heading {
+    font-size: var(--font-sub-title);
+    font-weight: 600;
+    color: var(--color-purple);
+
+    margin-bottom: 1rem;
+}
+
+.slide-left-fade-enter {
+    opacity: 0;
+    transform: translateX(30px);
+}
+
+.slide-left-fade-enter-active,
+.slide-left-fade-leave-active {
+    transition: all 0.3s ease;
+}
+
+.slide-left-fade-leave-to {
+    opacity: 0;
+    transform: translateX(30px);
 }
 </style>

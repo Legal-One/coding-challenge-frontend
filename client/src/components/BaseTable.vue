@@ -32,11 +32,12 @@ export default {
 <style>
 .base-table {
     font-size: var(--font-sub-title);
-    margin: 20px 0;
-    padding: 20px;
+    padding: 20px 20px 0;
 
     background: var(--primary-white);
     box-shadow: var(--box-shadow);
+
+    border-radius: 1rem;
 
     min-width: 100%;
 }
@@ -53,13 +54,18 @@ export default {
     border-bottom: 2px solid var(--color-grey);
 }
 
+.table-row > *,
+.table-heading > * {
+    width: 33.33%;
+}
+
 .table-header {
     display: flex;
     justify-content: flex-start;
 }
 
 .table-body {
-    margin: 15px 0;
+    margin: 15px 0 0;
 }
 
 .table-row {
@@ -69,20 +75,13 @@ export default {
 
     text-align: left;
 
-    margin: 10px -20px;
-    padding: 10px 20px;
+    margin: 0 -20px;
+    padding: 13px 20px;
 
     box-shadow: var(--box-shadow);
 }
 
 .table-row:last-of-type {
     border: none;
-}
-
-.table-row:nth-of-type(2n) {
-    /* background: var(--color-grey); */
-
-    /* margin: 10px -20px;
-    padding: 15px 25px; */
 }
 </style>

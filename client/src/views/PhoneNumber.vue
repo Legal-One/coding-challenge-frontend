@@ -4,26 +4,46 @@
             <h2 class="agent-name">{{ phoneNumber }}</h2>
         </div>
 
-        <div class="table">
-            <base-table :headings="tableHeadings" :rowData="rowData">
-                <template #table-row="{ row }">
-                    <div class="call agent-name link" @click="viewAgentHistory(row.agent.identifier)">
-                        {{ getAgentName(row.agent) }}
-                    </div>
-                    <div class="call last-call">{{ dateAndTime(row.dateTime) }}</div>
-                    <div class="call resolution" :class="getCallResolutionClass(row.resolution)">
-                        {{ row.resolution }}
-                    </div>
-                </template>
-            </base-table>
+        <div class="stats">
+            <div class="stat">
+                <header class="stat-heading">Total Calls</header>
+                <p class="stat-count">{{ totalNumberOfCalls }}</p>
+            </div>
+
+            <div class="stat">
+                <header class="stat-heading">Interested</header>
+                <p class="stat-count">{{ totalNumberOfCompletedCalls }}</p>
+            </div>
+            <div class="stat">
+                <header class="stat-heading">Follow up</header>
+                <p class="stat-count">{{ totalNumberOfFollowupCalls }}</p>
+            </div>
         </div>
 
-        <div class="chart"></div>
+        <div class="page-container">
+            <div class="table">
+                <base-table :headings="tableHeadings" :rowData="rowData">
+                    <template #table-row="{ row }">
+                        <div class="call agent-name link" @click="viewAgentHistory(row.agent.identifier)">
+                            {{ getAgentName(row.agent) }}
+                        </div>
+                        <div class="call last-call">{{ dateAndTime(row.dateTime) }}</div>
+                        <div class="call resolution">
+                            {{ row.resolution }}
+                        </div>
+                    </template>
+                </base-table>
+            </div>
+
+            <div class="chart">
+                <apexchart type="donut" height="90%" :series="series" :options="chartOptions" />
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 
 import { fetchCallHistory } from '../services';
@@ -56,24 +76,63 @@ export default {
                 },
             });
 
-        const getCallResolutionClass = callResolution => {
-            switch (callResolution) {
-                case 'need reschedule':
-                    return 'bg-purple';
+        const totalNumberOfCalls = computed(() => rowData.value.length);
 
-                case 'interested':
-                    return 'bg-green';
+        const totalNumberOfCompletedCalls = computed(
+            () => rowData.value.filter(call => call.resolution === 'interested').length,
+        );
+        const totalNumberOfFollowupCalls = computed(
+            () => rowData.value.filter(call => call.resolution === 'needs follow up').length,
+        );
 
-                case 'no answer':
-                    return 'bg-red';
+        const totalNumberOfReschedules = computed(
+            () => rowData.value.filter(call => call.resolution === 'need reschedule').length,
+        );
 
-                case 'needs follow up':
-                    return 'bg-yellow';
+        const totalNumberOfNoAnswers = computed(
+            () => rowData.value.filter(call => call.resolution === 'no answer').length,
+        );
 
-                default:
-                    return 'bg-blue';
-            }
+        const chartOptions = {
+            chart: {
+                type: 'donut',
+            },
+            title: {
+                text: 'Calls Resolution',
+                align: 'center',
+                floating: false,
+                style: {
+                    fontSize: '16px',
+                },
+            },
+            fontSize: '14px',
+            fontWeight: 'bold',
+            colors: ['#00a079', '#faf743', '#a920cb', '#fa4344'],
+            legend: {
+                fontSize: '14px',
+            },
+            responsive: [
+                {
+                    options: {
+                        chart: {
+                            width: 200,
+                            height: 100,
+                        },
+                        legend: {
+                            position: 'bottom',
+                        },
+                    },
+                },
+            ],
+            labels: ['Interested', 'Needs follow up', 'Needs Reschedule', 'No Answer'],
         };
+
+        const series = computed(() => [
+            totalNumberOfCompletedCalls.value,
+            totalNumberOfFollowupCalls.value,
+            totalNumberOfReschedules.value,
+            totalNumberOfNoAnswers.value,
+        ]);
 
         const phoneNumber = route.params.number;
 
@@ -86,7 +145,11 @@ export default {
             dateAndTime,
             viewAgentHistory,
             phoneNumber,
-            getCallResolutionClass,
+            totalNumberOfCalls,
+            totalNumberOfCompletedCalls,
+            totalNumberOfFollowupCalls,
+            series,
+            chartOptions,
         };
     },
 };
@@ -106,14 +169,23 @@ export default {
     text-align: left;
 }
 
-.table {
+.table,
+.page-container {
     width: 100%;
 }
 
-.chart {
-    background: var(--color-purple);
+.page-container {
+    margin-top: 4rem;
 
+    display: flex;
+}
+
+.chart {
     flex: 1;
+
+    height: 50rem;
+
+    margin-bottom: 3rem;
 }
 
 .link {
@@ -124,7 +196,7 @@ export default {
     text-decoration: underline;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 992px) {
     .phone-number {
         padding: 0 20px;
     }

@@ -1,28 +1,52 @@
 <template>
     <div class="agent-profile">
         <div class="agent">
-            <h2 class="agent-name">{{ agentProfile.firstName }} {{ agentProfile.lastName }}</h2>
-            <p class="agent-email">{{ agentProfile.email }}</p>
+            <div class="agent-photo">
+                <img :src="agentProfile.photo" loading="lazy" :alt="agentProfile.firstName" />
+            </div>
+            <div class="agent-details">
+                <h2 class="agent-name">{{ agentProfile.firstName }} {{ agentProfile.lastName }}</h2>
+                <p class="agent-email">{{ agentProfile.email }}</p>
+            </div>
         </div>
 
-        <div class="table">
-            <base-table :headings="tableHeadings" :rowData="rowData">
-                <template #table-row="{ row }">
-                    <div class="call phonenumber link" @click="viewNumberHistory(row.number)">{{ row.number }}</div>
-                    <div class="call last-call">{{ dateAndTime(row.dateTime) }}</div>
-                    <div class="call resolution" :class="getCallResolutionClass(row.resolution)">
-                        {{ row.resolution }}
-                    </div>
-                </template>
-            </base-table>
+        <div class="stats">
+            <div class="stat">
+                <header class="stat-heading">Calls Taken</header>
+                <p class="stat-count">{{ totalNumberOfCalls }}</p>
+            </div>
+            <div class="stat">
+                <header class="stat-heading">Interested</header>
+                <p class="stat-count">{{ totalNumberOfCompletedCalls }}</p>
+            </div>
+            <div class="stat">
+                <header class="stat-heading">Follow up</header>
+                <p class="stat-count">{{ totalNumberOfFollowupCalls }}</p>
+            </div>
         </div>
 
-        <div class="chart"></div>
+        <div class="page-container">
+            <div class="table">
+                <base-table :headings="tableHeadings" :rowData="rowData">
+                    <template #table-row="{ row }">
+                        <div class="call phonenumber link" @click="viewNumberHistory(row.number)">{{ row.number }}</div>
+                        <div class="call last-call">{{ dateAndTime(row.dateTime) }}</div>
+                        <div class="call resolution">
+                            {{ row.resolution }}
+                        </div>
+                    </template>
+                </base-table>
+            </div>
+
+            <div class="chart">
+                <apexchart type="donut" :series="series" :options="chartOptions" />
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 
 import { fetchAgentHistory } from '../services';
@@ -67,24 +91,63 @@ export default {
                 },
             });
 
-        const getCallResolutionClass = callResolution => {
-            switch (callResolution) {
-                case 'need reschedule':
-                    return 'bg-purple';
+        const totalNumberOfCalls = computed(() => rowData.value.length);
 
-                case 'interested':
-                    return 'bg-green';
+        const totalNumberOfCompletedCalls = computed(
+            () => rowData.value.filter(call => call.resolution === 'interested').length,
+        );
+        const totalNumberOfFollowupCalls = computed(
+            () => rowData.value.filter(call => call.resolution === 'needs follow up').length,
+        );
 
-                case 'no answer':
-                    return 'bg-red';
+        const totalNumberOfReschedules = computed(
+            () => rowData.value.filter(call => call.resolution === 'need reschedule').length,
+        );
 
-                case 'needs follow up':
-                    return 'bg-yellow';
+        const totalNumberOfNoAnswers = computed(
+            () => rowData.value.filter(call => call.resolution === 'no answer').length,
+        );
 
-                default:
-                    return 'bg-blue';
-            }
+        const chartOptions = {
+            chart: {
+                type: 'donut',
+            },
+            title: {
+                text: 'Calls Resolution',
+                align: 'center',
+                floating: false,
+                style: {
+                    fontSize: '16px',
+                },
+            },
+            fontSize: '14px',
+            fontWeight: 'bold',
+            colors: ['#00a079', '#faf743', '#a920cb', '#fa4344'],
+            legend: {
+                fontSize: '14px',
+            },
+            responsive: [
+                {
+                    options: {
+                        chart: {
+                            width: 200,
+                            height: 150,
+                        },
+                        legend: {
+                            position: 'bottom',
+                        },
+                    },
+                },
+            ],
+            labels: ['Interested', 'Needs follow up', 'Needs Reschedule', 'No Answer'],
         };
+
+        const series = computed(() => [
+            totalNumberOfCompletedCalls.value,
+            totalNumberOfFollowupCalls.value,
+            totalNumberOfReschedules.value,
+            totalNumberOfNoAnswers.value,
+        ]);
 
         onMounted(getAllCalls);
 
@@ -96,7 +159,11 @@ export default {
             dateAndTime,
             viewAgentHistory,
             viewNumberHistory,
-            getCallResolutionClass,
+            totalNumberOfCalls,
+            totalNumberOfCompletedCalls,
+            totalNumberOfFollowupCalls,
+            chartOptions,
+            series,
         };
     },
 };
@@ -110,20 +177,45 @@ export default {
 }
 
 .agent {
-    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+
+    margin-bottom: 3rem;
     margin-left: auto;
+    padding: 2rem;
 
     text-align: left;
+
+    box-shadow: var(--box-shadow);
+    border-radius: 1rem;
 }
 
-.table {
+.agent-photo {
+    width: 7rem;
+    height: 7rem;
+
+    margin-right: 1rem;
+
+    border-radius: 3rem;
+}
+
+.table,
+.page-container {
     width: 100%;
 }
 
-.chart {
-    background: var(--color-purple);
+.page-container {
+    display: flex;
 
+    margin-top: 6rem;
+}
+
+.chart {
     flex: 1;
+
+    height: 50rem;
+
+    margin-bottom: 3rem;
 }
 
 .link {
@@ -134,19 +226,23 @@ export default {
     text-decoration: underline;
 }
 
+.agent-name {
+    font-size: var(--font-title);
+}
+
 .agent-email {
     font-size: var(--font-sub-title);
 
     margin: 1rem 0;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 992px) {
     .agent-profile {
         padding: 0 20px;
     }
 
     .table {
-        width: 50%;
+        width: 60%;
     }
 }
 </style>
