@@ -13,4 +13,10 @@ export const dateAndTime = originalDate => {
     return `${dateOnly} ${timeOnly}`;
 };
 
-export const getAgentName = ({ firstName, lastName }) => `${firstName} ${lastName}`;
+export const firstAndLastName = ({ firstName, lastName }) => {
+    if (!firstName) return '';
+
+    if (!lastName) return firstName;
+
+    return `${firstName} ${lastName}`;
+};

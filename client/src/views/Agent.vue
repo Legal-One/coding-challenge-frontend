@@ -50,7 +50,7 @@ import { computed, onMounted, ref } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 
 import { fetchAgentHistory } from '../services';
-import { dateAndTime, getAgentName } from '../utils';
+import { dateAndTime, firstAndLastName } from '../utils';
 
 export default {
     name: 'Agent',
@@ -155,7 +155,7 @@ export default {
             tableHeadings,
             rowData,
             agentProfile,
-            getAgentName,
+            firstAndLastName,
             dateAndTime,
             viewAgentHistory,
             viewNumberHistory,

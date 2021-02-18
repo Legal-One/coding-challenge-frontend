@@ -25,7 +25,7 @@
                 <base-table :headings="tableHeadings" :rowData="rowData">
                     <template #table-row="{ row }">
                         <div class="call agent-name link" @click="viewAgentHistory(row.agent.identifier)">
-                            {{ getAgentName(row.agent) }}
+                            {{ firstAndLastName(row.agent) }}
                         </div>
                         <div class="call last-call">{{ dateAndTime(row.dateTime) }}</div>
                         <div class="call resolution">
@@ -47,7 +47,7 @@ import { computed, onMounted, ref } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 
 import { fetchCallHistory } from '../services';
-import { dateAndTime, getAgentName } from '../utils';
+import { dateAndTime, firstAndLastName } from '../utils';
 
 export default {
     name: 'PhoneNumber',
@@ -141,7 +141,7 @@ export default {
         return {
             tableHeadings,
             rowData,
-            getAgentName,
+            firstAndLastName,
             dateAndTime,
             viewAgentHistory,
             phoneNumber,

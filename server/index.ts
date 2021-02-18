@@ -1,10 +1,13 @@
-import express, { Request, Response, Application } from 'express';
+import express, { Request, Response } from 'express';
 import cors from 'cors';
+import dotenv from 'dotenv';
 
 import router from './routes';
 
+dotenv.config();
+
 // Create a new express app instance
-const app: Application = express();
+const app: express.Application = express();
 
 app.use(cors());
 
@@ -15,10 +18,12 @@ app.get('/', (_request: Request, response: Response) =>
     }),
 );
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.use('/', router);
 
-app.listen(port, () => console.log(`App running on http://localhost:${port}`));
-
+if (process.env.NODE_ENV !== 'test') {
+    console.log('I entered here');
+    app.listen(port, () => console.log(`App running on http://localhost:${port}`));
+}
 export default app;

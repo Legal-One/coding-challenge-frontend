@@ -21,7 +21,7 @@
                         <div class="call calls-count">{{ row.numberOfCalls }}</div>
                         <div class="call last-call">
                             <span @click="viewAgentHistory(row.lastCall.agent.identifier)" class="link agent-link">{{
-                                getAgentName(row.lastCall.agent)
+                                firstAndLastName(row.lastCall.agent)
                             }}</span>
                             <span> / {{ hourAndMinute(row.lastCall.dateTime) }}</span>
                         </div>
@@ -41,11 +41,10 @@ import { computed, onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 import { fetchAllCallHistory } from '../services';
-import { hourAndMinute, getAgentName } from '../utils';
+import { hourAndMinute, firstAndLastName } from '../utils';
 
 export default {
     name: 'Home',
-    inject: ['route'],
 
     setup() {
         const tableHeadings = ref(['Phone Number', 'Number of Calls', 'Last Call Details']);
@@ -120,7 +119,7 @@ export default {
             tableHeadings,
             rowData,
             callData,
-            getAgentName,
+            firstAndLastName,
             hourAndMinute,
             viewAgentHistory,
             viewNumberHistory,
