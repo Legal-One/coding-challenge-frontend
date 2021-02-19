@@ -1,7 +1,7 @@
 <template>
   <div class="agent">
     <backBtn :path="`/`" name="home" class="back" />
-    <div>
+    <div v-if="agent.length > 0">
       <table id="table">
         <thead>
           <tr>
@@ -19,19 +19,19 @@
         </tbody>
       </table>
     </div>
-    <!-- <Loader v-else-if="isFetching" /> -->
-    <!-- <div class="posts-container" v-else>No Data found</div> -->
+    <Loader v-else-if="isFetching" />
+    <div class="centered" v-else>No Data found</div>
   </div>
 </template>
 
 <script>
 import { mapActions } from 'vuex'
 import BackBtn from '@/components/BackBtn.vue'
-// import Loader from '@/components/Loader.vue'
+import Loader from '@/components/Loader.vue'
 
 export default {
   name: 'Agent',
-  components: { BackBtn },
+  components: { BackBtn, Loader },
   data () {
     return {
       isFetching: true,
@@ -47,11 +47,10 @@ export default {
     async getAgent () {
       this.isFetching = true
       await this.fetchAgent(this.$route.params.id).then(response => {
-        console.log(response)
+        // console.log(response)
         this.agent = response
       })
       this.isFetching = false
-      console.log(this.agent)
     },
 
     formatDate (date) {

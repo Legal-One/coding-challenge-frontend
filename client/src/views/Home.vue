@@ -1,70 +1,62 @@
 <template>
   <div class="home">
-    <div>
- <table id="table">
-      <thead>
-        <tr>
-          <th>Phone number</th>
-          <th>Number of calls</th>
-          <th>Last call details</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(agent, index) in allAgents" :key="index">
-          <td>
-            <router-link
-              :to="{ name: 'Call', params: { number: agent.last.number } }"
-              >{{ agent.last.number }}</router-link
-            >
-          </td>
-          <td>
-            {{ agent.callCount }} {{ agent.callCount > 1 ? "calls" : "call" }}
-          </td>
-          <td>
-            <router-link
-              :to="{
-                name: 'Agent',
-                params: { id: agent.last.agentIdentifier }
-              }"
-              >{{ agent.last.agentName }}</router-link
-            >
-            / {{ formatDuration(agent.last.duration) }}
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    </div>
 
-    <!-- <div class="loader" v-else-if="isFetching">
-      <Loader />
-    </div> -->
+      <table id="table">
+        <thead>
+          <tr>
+            <th>Phone number</th>
+            <th>Number of calls</th>
+            <th>Last call details</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(agent, index) in agents" :key="index">
+            <td>
+              <router-link
+                :to="{ name: 'Call', params: { number: agent.last.number } }"
+                >{{ agent.last.number }}</router-link
+              >
+            </td>
+            <td>
+              {{ agent.callCount }} {{ agent.callCount > 1 ? "calls" : "call" }}
+            </td>
+            <td>
+              <router-link
+                :to="{
+                  name: 'Agent',
+                  params: { id: agent.last.agentIdentifier }
+                }"
+                >{{ agent.last.agentName }}</router-link
+              >
+              / {{ formatDuration(agent.last.duration) }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
-// import Loader from '@/components/Loader.vue'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'Home',
-  // component: {
-  //   Loader
-  // },
   data () {
     return {
-      isFetching: true
+      agents: []
     }
   },
   mounted () {
     this.getAgents()
   },
-  computed: {
-    ...mapGetters(['allAgents'])
-  },
+
   methods: {
     ...mapActions(['fetchAgents']),
     async getAgents () {
-      await this.fetchAgents()
+      await this.fetchAgents().then(response => {
+        // console.log(response)
+        this.agents = response
+      })
     },
 
     formatDuration (secs) {
@@ -115,5 +107,14 @@ table td:last-child {
 }
 table tbody tr:nth-child(2n) td {
   background: #d4d8f9;
+}
+
+.centered {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  max-width: 800px;
+  width: 100%;
+  margin-top: 20px;
 }
 </style>
