@@ -7,7 +7,6 @@ import { IgrGridColumnOptionsModule } from "igniteui-react-grids";
 import { IgrDataGridToolbarModule } from "igniteui-react-grids";
 import { IgrDataGrid } from "igniteui-react-grids";
 import { IgrTextColumn } from "igniteui-react-grids";
-import { IgrDateTimeColumn } from "igniteui-react-grids";
 
 IgrGridColumnOptionsModule.register();
 IgrDataGridToolbarModule.register();
@@ -96,7 +95,6 @@ class App extends Component {
       flag,
       namesList
     } = this.state;
-
     return (
       <div className="App">
         <h2>Calling Management System</h2>
@@ -151,7 +149,7 @@ class App extends Component {
               ) : (
                 <IgrTextColumn field="phone" headerText="Phone Number" />
               )}
-              <IgrDateTimeColumn field="dateTime" headerText="Date/Time" />
+              <IgrTextColumn field="dateTime" headerText="Date/Time" />
               <IgrTextColumn field="resolution" headerText="Resolution" />
             </IgrDataGrid>
           </div>

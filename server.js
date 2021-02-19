@@ -47,7 +47,7 @@ app.get("/api", (req, res) => {
         "</b><br /><br />" +
         "Last Date: " +
         "<b>" +
-        new Date(lastLog.dateTime) +
+        new Date(lastLog.dateTime).toUTCString() +
         "</b>"
     };
   });
@@ -68,7 +68,7 @@ app.get("/agent", (req, res) => {
   const result = agentLogs.map(item => {
     return {
       phone: item.number,
-      dateTime: item.dateTime,
+      dateTime: new Date(item.dateTime).toUTCString(),
       resolution: jsonResolution.find(i => i.identifier == item.identifier)
         .resolution
     };
@@ -80,15 +80,6 @@ app.get("/agent", (req, res) => {
     })
   );
 });
-
-function mergeArrayObjects(arr1, arr2) {
-  return arr1.map((item, i) => {
-    if (item.identifier === arr2[i].identifier) {
-      //merging two objects
-      return Object.assign({}, item, arr2[i]);
-    }
-  });
-}
 
 app.get("/call", (req, res) => {
   const phoneNumber = req.query.number;
@@ -102,7 +93,7 @@ app.get("/call", (req, res) => {
     const agent = jsonAgents.find(i => i.identifier == item.agentIdentifier);
     return {
       value: agent.firstName + " " + agent.lastName,
-      dateTime: item.dateTime,
+      dateTime: new Date(item.dateTime).toUTCString(),
       resolution: jsonResolution.find(i => i.identifier == item.identifier)
         .resolution
     };
