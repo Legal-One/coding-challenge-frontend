@@ -1,23 +1,38 @@
 const agents = require("./json-data/agents.json");
 const logs = require("./json-data/logs.json");
-const resolutions = require("./json-data/resolution.json");
+const resolution = require("./json-data/resolution.json");
 
-function getAgentLogs(id) {
-  return logs.find((log) => log.agentIdentifier === id);
+function arrToObject(arr) {
+  return arr.reduce((acc, curr) => {
+    acc[curr.identifier] = curr;
+    return acc;
+  }, {});
 }
 
-function getResolution(id) {
-  return resolutions.find((resolution) => resolution.identifier === id);
-}
+const agentsObj = arrToObject(agents);
+const resolutionsObj = arrToObject(resolution);
+const mappedLogs = logs.map((log) => {
+  const resolution = resolutionsObj[log.identifier].resolution;
+  const agent = agentsObj[log.agentIdentifier];
+  const agentName = `${agent.firstName} ${agent.lastName}`;
+  return { ...log, resolution, agentName };
+});
 
 module.exports.getAgents = (req, res) => {
   try {
-    agents.map((agent) => {
-      return (agent.logs = getAgentLogs(agent.identifier));
-    });
+     const agentsData = mappedLogs.reduce((acc, curr) => {
+    const last = curr;
+    if (!acc[curr.number]) {
+      acc[curr.number] = { callCount: 1, last };
+    } else {
+      acc[curr.number].callCount++;
+      acc[curr.number].last;
+    }
+    return acc;
+  }, {})
     res.status(200).send({
       message: "Agents fetched successfully.",
-      data: agents,
+      data: agentsData,
       error: false,
     });
   } catch (err) {
@@ -31,12 +46,7 @@ module.exports.getAgents = (req, res) => {
 module.exports.getAgent = (req, res) => {
   try {
     const { id } = req.params;
-    const agent = agents.find((agent) => agent.identifier === id);
-    agent.logs = getAgentLogs(agent.identifier);
-    agent.logs.map((log) => {
-      log.resolutions = getResolution(log.identifier);
-      return log;
-    });
+    const agent = mappedLogs.filter(log => log.agentIdentifier === id);
     res.status(200).send({
       message: "Agent fetched successfully.",
       data: agent,
@@ -53,18 +63,10 @@ module.exports.getAgent = (req, res) => {
 module.exports.getAgentByNumber = (req, res) => {
   try {
     const { number } = req.params;
-    const agentsLogs = logs.filter((log) => log.number === number);
-    const agent = agents.find(
-      (agent) => agent.identifier === agentsLogs[0].agentIdentifier
-    );
-    agent.logs = agentsLogs;
-    agent.logs.map((log) => {
-      log.resolutions = getResolution(log.identifier);
-      return log;
-    });
+    const data = mappedLogs.filter(log => log.number === number);
     res.status(200).send({
-      message: "Agent fetched successfully.",
-      data: agent,
+      message: "Data fetched successfully.",
+      data: data,
       error: false,
     });
   } catch (err) {
