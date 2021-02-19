@@ -1,0 +1,17 @@
+.App {
+  width: 100vw;
+  height: auto;
+}
+.App, .main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.main {
+  flex-direction: column;
+  width: 75%;
+  height: auto;
+  background-color: #eb5867;
+  border-radius: 25px;
+  border: solid gray 2px;
+}
