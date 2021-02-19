@@ -2,13 +2,15 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 
+const BASE_URL = 'http://localhost:3000'
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
     agents: [],
-    call: null,
-    agent: null
+    call: [],
+    agent: []
   },
 
   getters: {
@@ -31,23 +33,23 @@ export default new Vuex.Store({
 
   actions: {
     fetchAgents ({ commit }) {
-      axios.get('http://localhost:3000/agents').then(response => {
-        console.log(response)
-        commit('SET_AGENTS', response.data)
+      axios.get(`${BASE_URL}/agents`).then(response => {
+        // console.log(response)
+        commit('SET_AGENTS', response.data.data)
       })
     },
 
     fetchAgent ({ commit }, id) {
-      axios.get(`http://localhost:3000/agent/${id}`).then(response => {
-        console.log(response)
-        commit('SET_AGENT', response.data)
+      axios.get(`${BASE_URL}/agent/${id}`).then(response => {
+        // console.log(response.data.data)
+        commit('SET_AGENT', response.data.data)
       })
     },
 
     fetchCallDetails ({ commit }, number) {
-      axios.get(`http://localhost:3000/call/${number}`).then(response => {
-        console.log(response)
-        commit('SET_CALL_DETAILS', response.data)
+      axios.get(`${BASE_URL}/call/${number}`).then(response => {
+        // console.log(response.data.data)
+        commit('SET_CALL_DETAILS', response.data.data)
       })
     }
   },
