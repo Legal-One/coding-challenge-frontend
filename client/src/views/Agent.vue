@@ -80,8 +80,6 @@ export default {
             agentProfile.value = agent;
         };
 
-        const viewAgentHistory = () => router.push({ name: 'About' });
-
         const viewNumberHistory = number =>
             router.push({
                 name: 'Number',
@@ -156,7 +154,6 @@ export default {
             agentProfile,
             firstAndLastName,
             dateAndTime,
-            viewAgentHistory,
             viewNumberHistory,
             totalNumberOfCalls,
             totalNumberOfCompletedCalls,

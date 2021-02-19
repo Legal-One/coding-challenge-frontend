@@ -1,9 +1,17 @@
 <template>
     <div id="nav">
-        <router-link to="/">All Calls</router-link>
+        <p @click="goHome">Call Center Manager</p>
+
+        <div class="nav-items">
+            <router-link to="/">All Calls</router-link>
+            <router-link to="/">All Agents</router-link>
+            <router-link to="/">All Numbers</router-link>
+        </div>
     </div>
 
     <router-view />
+
+    <!-- //TODO The scoped slot here is making the test break -->
     <!-- <router-view #default="{ Component }">
         <transition name="slide-left-fade" mode="out-in">
             <component :is="Component" />
@@ -12,7 +20,19 @@
 </template>
 
 <script>
-export default {};
+import { useRouter } from 'vue-router';
+
+export default {
+    setup() {
+        const router = useRouter();
+
+        const goHome = () => router.push('/');
+
+        return {
+            goHome,
+        };
+    },
+};
 </script>
 
 <style lang="css">
@@ -87,30 +107,34 @@ img {
 
 #nav {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
 
-    padding: 30px;
+    padding: 20px;
     margin-bottom: 3rem;
     width: 100%;
 
     box-shadow: var(--box-shadow);
 }
 
-@media screen and (min-width: 768px) {
-    #nav {
-        justify-content: flex-end;
-    }
-}
-
 #nav a {
     font-weight: bold;
-    color: #2c3e50;
+    color: var(--color-purple);
+    text-decoration: none;
 
     font-size: var(--font-sub-title);
+
+    margin-left: 1rem;
 }
 
-#nav a.router-link-exact-active {
-    color: #42b983;
+#nav a:hover {
+    text-decoration: underline;
+}
+
+#nav p {
+    font-weight: 600;
+    font-size: var(--font-title);
+    cursor: pointer;
 }
 
 .bg-purple {

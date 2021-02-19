@@ -7,11 +7,6 @@ export const routes = [
         component: () => import('../views/Home.vue'),
     },
     {
-        path: '/about',
-        name: 'About',
-        component: () => import('../views/About.vue'),
-    },
-    {
         path: '/agent/:agentId',
         name: 'Agent',
         component: () => import('../views/Agent.vue'),
