@@ -22,8 +22,6 @@ const port = process.env.PORT || 3000;
 
 app.use('/', router);
 
-if (process.env.NODE_ENV !== 'test') {
-    console.log('I entered here');
-    app.listen(port, () => console.log(`App running on http://localhost:${port}`));
-}
+if (process.env.NODE_ENV !== 'test') app.listen(port, () => console.log(`App running on http://localhost:${port}`));
+
 export default app;
