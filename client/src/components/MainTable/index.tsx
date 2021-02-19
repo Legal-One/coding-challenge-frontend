@@ -12,13 +12,11 @@ function MainTable({ logs }: LogProps) {
   const currentAgent = useSelector((state: AppState) => state.agents.agents)
   const currentLog = useSelector((state: AppState) => state.logs.logs)
   const logsGrouped = useSelector((state: AppState) => state.logs.logsGrouped)
-
   const handleGetNumberOfCalls = (logs, number) => {
     const numberOfCalls = logs.filter((log) => log.number === number).length
     return numberOfCalls
   }
   const handleFindAgent = (agentId: string) => {
-    // check for undefined
     const agent = currentAgent.find((agent) => agent.identifier === agentId)
     return agent
   }
