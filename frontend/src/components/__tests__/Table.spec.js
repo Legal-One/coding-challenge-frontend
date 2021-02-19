@@ -131,4 +131,12 @@ describe("Table.vue", () => {
       "/agent/6fe55f02-a8f3-11e7-b037-c33c31bca71f"
     );
   });
+
+  test("renders no RouterLinks for table cells that are neither numbers nor last call details nor agent names", () => {
+    const wrapper = createWrapper();
+    const tableCells = wrapper.findAll("td");
+    expect(tableCells[1].html()).not.toContain("router-link")
+    expect(tableCells[5].html()).not.toContain("router-link")
+    expect(tableCells[9].html()).not.toContain("router-link")
+  })
 });
