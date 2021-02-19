@@ -5,6 +5,9 @@ const pino = require("express-pino-logger")();
 const fs = require("fs");
 const d3 = require("d3-array");
 const app = express();
+
+const port = process.env.PORT || 3000;
+
 app.use(
   bodyParser.urlencoded({
     extended: false
@@ -124,6 +127,4 @@ app.get("/*", function (req, res) {
   res.sendFile(path.join(__dirname + "/build/index.html"));
 });
 
-app.listen(3001, () =>
-  console.log("Express server is running on localhost:3001")
-);
+app.listen(port, () => console.log(`Express server is running on  :${port}`));

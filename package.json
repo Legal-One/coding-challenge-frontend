@@ -18,14 +18,16 @@
     "react-scripts": "^3.4.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "node server.js",
     "build": "react-scripts build --watch",
+    "build:prod": "react-scripts build --watch --prod",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "server": "node-env-run server --exec nodemon | pino-colada",
     "dev": "run-p server start",
     "start-api": "nodemon server.js",
-    "local:dev": "npm-run-all -p build start-api"
+    "local:dev": "npm-run-all -p build start-api",
+    "local:prod": "npm-run-all -p build:prod start-api"
   },
   "proxy": "http://localhost:3001",
   "eslintConfig": {
