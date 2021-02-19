@@ -1,10 +1,22 @@
 import { mount } from '@vue/test-utils';
+import { createRouter, createWebHistory } from 'vue-router';
+
+import { routes } from '@/router';
 
 import Agent from '@/Views/Agent.vue';
 
 describe('Agent.vue', () => {
     it('renders the component with default values', done => {
-        const wrapper = mount(Agent);
+        const router = createRouter({
+            history: createWebHistory(),
+            routes,
+        });
+
+        const wrapper = mount(Agent, {
+            global: {
+                plugins: [router],
+            },
+        });
 
         const stats = wrapper.find('.stats');
 

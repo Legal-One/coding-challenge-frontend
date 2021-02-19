@@ -54,7 +54,6 @@ import { dateAndTime, firstAndLastName } from '../utils';
 
 export default {
     name: 'Agent',
-    inject: ['route'],
 
     setup() {
         const router = useRouter();
