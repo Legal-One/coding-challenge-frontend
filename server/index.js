@@ -30,6 +30,8 @@ app.get("/api", (req, res) => {
     return {
       label: item.key,
       value: item.value.length,
+      name: lastCallAgent.firstName + " " + lastCallAgent.lastName,
+      agentID: lastLog.agentIdentifier,
       displayvalue:
         "Phone: <b>" +
         item.key +
