@@ -1,6 +1,7 @@
 <template>
   <div class="home">
-    <table id="table">
+    <div>
+ <table id="table">
       <thead>
         <tr>
           <th>Phone number</th>
@@ -32,17 +33,26 @@
         </tr>
       </tbody>
     </table>
+    </div>
+
+    <!-- <div class="loader" v-else-if="isFetching">
+      <Loader />
+    </div> -->
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+// import Loader from '@/components/Loader.vue'
 
 export default {
   name: 'Home',
+  // component: {
+  //   Loader
+  // },
   data () {
     return {
-      is_fetching: true
+      isFetching: true
     }
   },
   mounted () {
@@ -74,9 +84,10 @@ export default {
 <style lang="scss">
 .home {
   margin: 0 auto;
+  max-width: 810px;
 }
 table {
-  width: 750px;
+  width: 45rem;
   border-collapse: collapse;
   border: 3px solid #44475c;
   margin: 10px 10px 0 10px;

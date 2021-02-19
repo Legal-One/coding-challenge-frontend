@@ -1,5 +1,7 @@
 <template>
   <div class="call">
+    <backBtn :path="`/`" name="home" class="back" />
+
     <table id="table">
       <thead>
         <tr>
@@ -20,24 +22,31 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapActions } from 'vuex'
+import BackBtn from '@/components/BackBtn.vue'
 
 export default {
   name: 'Call',
+  components: { BackBtn },
   data () {
-    return {}
+    return {
+      isFetching: false,
+      callHistory: []
+    }
   },
   mounted () {
     this.getCallHistory()
     // console.log(this.$route.params.number)
   },
-  computed: {
-    ...mapGetters(['callHistory'])
-  },
+
   methods: {
     ...mapActions(['fetchCallDetails']),
     async getCallHistory () {
-      await this.fetchCallDetails(this.$route.params.number)
+      await this.fetchCallDetails(this.$route.params.number).then(response => {
+        console.log(response)
+        this.callHistory = response
+        // console.log(this.callHistory)
+      })
     },
 
     formatDate (date) {
@@ -48,4 +57,9 @@ export default {
 }
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.call {
+  margin: 0 auto;
+  max-width: 810px;
+}
+</style>
