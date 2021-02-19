@@ -1,0 +1,39 @@
+table {
+    border-collapse: collapse;
+    width: 80%;
+    margin: 10% 0 10% 0;
+    color: #f3f3f3;
+  }
+
+  td, th {
+    border: 1px solid #ff6f82;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #5b6d5b;
+  }
+  tr:nth-child(odd) {
+    background-color: #484018;
+  }
+  .modal {
+    position: absolute;
+    top: 75px;
+    right: 50;
+    border-radius: 25px;
+    border: #ff6f82 solid 2px;
+    width: 50%;
+    height: auto;
+    background-color: whitesmoke;
+    z-index: 1;
+    text-align: center;
+  }
+  .modalButton {
+    background-color: #ff6f82;
+    border-radius: 5px;
+    color: #f3f3f3;
+    margin-bottom: 20px;
+    font-size: medium;
+  }
+  
