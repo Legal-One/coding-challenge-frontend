@@ -3,18 +3,19 @@
         <router-link to="/">All Calls</router-link>
     </div>
 
-    <router-view #default="{ Component }">
+    <router-view />
+    <!-- <router-view #default="{ Component }">
         <transition name="slide-left-fade" mode="out-in">
             <component :is="Component" />
         </transition>
-    </router-view>
+    </router-view> -->
 </template>
 
 <script>
 export default {};
 </script>
 
-<style>
+<style lang="css">
 :root {
     --color-red: #fa4344;
     --color-yellow: #faf743;

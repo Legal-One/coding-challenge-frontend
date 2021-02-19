@@ -7,11 +7,7 @@
         "test": "jest --forceExit",
         "tsc": "tsc",
         "dev-api": "nodemon server/index.ts",
-        "prod-api": "npm run tsc && node server/index.js",
-        "serve-client": "vue-cli-service serve",
-        "build-client": "vue-cli-service build",
-        "lint-client": "vue-cli-service lint",
-        "test-client": "vue-cli-service test:unit"
+        "prod-api": "npm run tsc && node server/index.js"
     },
     "repository": {
         "type": "git",
