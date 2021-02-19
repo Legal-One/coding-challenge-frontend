@@ -1,6 +1,7 @@
 {
   "name": "coding-challenge-frontend",
   "version": "1.0.0",
+  "homepage": ".",
   "description": "coding challenge ",
   "main": "index.js",
   "private": true,
@@ -22,7 +23,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "server": "node-env-run server --exec nodemon | pino-colada",
-    "dev": "run-p server start"
+    "dev": "run-p server start",
+    "start-api": "nodemon server.js",
+    "local:dev": "npm-run-all -p build start-api"
   },
   "proxy": "http://localhost:3001",
   "eslintConfig": {

@@ -1,9 +1,9 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const path = require("path");
 const pino = require("express-pino-logger")();
 const fs = require("fs");
 const d3 = require("d3-array");
-const { json } = require("body-parser");
 const app = express();
 app.use(
   bodyParser.urlencoded({
@@ -11,6 +11,9 @@ app.use(
   })
 );
 app.use(pino);
+app.use(express.static(__dirname + "/build"));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/api", (req, res) => {
   const jsonLogs = JSON.parse(fs.readFileSync("./json-data/logs.json"));
@@ -115,6 +118,10 @@ app.get("/api/greeting", (req, res) => {
       greeting: `Hello ${name}!`
     })
   );
+});
+
+app.get("/*", function (req, res) {
+  res.sendFile(path.join(__dirname + "/build/index.html"));
 });
 
 app.listen(3001, () =>
