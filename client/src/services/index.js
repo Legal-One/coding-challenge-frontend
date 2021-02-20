@@ -1,4 +1,4 @@
-const baseURL = 'http://localhost:3000';
+const baseURL = process.env.VUE_APP_API_URL;
 
 export const fetchAllCallHistory = () =>
     fetch(`${baseURL}/calls`)
