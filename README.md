@@ -15,8 +15,10 @@
 - Redux
 - Redux-thunk
 - TypeScript
+- Node.js
 - Express.js
 - MongoDB
+- Mongoose
 
 
 ## Installation
@@ -25,11 +27,13 @@
 This boilerplate is based on the [TypeScript Node Starter](https://github.com/microsoft/TypeScript-Node-Starter), which already comes with all needed packages,check the dependencies in `package.json` file.
 
 # Getting started
+## To run the server
 
-- Install dependencies
+- import **Json files** into **MongoDB**
+- In **server** folder add mongoDB URI with your username and password to **.env** file
 
 ```
-cd server
+cd server 
 npm install
 ```
 

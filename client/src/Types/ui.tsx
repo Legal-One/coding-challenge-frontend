@@ -1,5 +1,4 @@
 import { Logs } from './LogsType'
-import { Resolution } from './ResolutionType'
 import { Agent } from './AgentType'
 
 export type AgentProps = {
@@ -21,5 +20,5 @@ export type LogProps = {
 }
 
 export type ParamsProps = {
-  identifier : string
+  identifier: string
 }

@@ -5,37 +5,33 @@ import { useParams } from 'react-router-dom'
 import { AppState } from '../../Types'
 import { ParamsProps } from '../../Types/ui'
 
-function AgentLog() {
+function NumberLog() {
   const { identifier } = useParams<ParamsProps>()
 
-  const logsGrouped = useSelector(
-    (state: AppState) => state.logs.logsGrouped[identifier]
+  const CurrentLog = useSelector((state: any) =>
+    state.logs.logs.find((log) => log.identifier === identifier)
   )
+
   const resolution = useSelector((state: AppState) =>
     state.resolution.resolution.find(
-      (res) => res?.identifier === logsGrouped[0]?.identifier
+      (res) => res?.identifier === CurrentLog?.identifier
     )
   )
 
-  const currentAgent = useSelector((state: AppState) =>
-    state.agents.agents.find((agent) => agent?.identifier === identifier)
-  )
-
-  const date = new Date(logsGrouped[0].dateTime)
+  const date = new Date(CurrentLog?.dateTime)
     .toLocaleString('en-GB')
     .replace(',', '')
+
   return (
     <table>
       <tbody>
         <tr>
-          <th>Agent Name</th>
+          <th>Phone number</th>
           <th>Call date and time</th>
           <th>Resolution</th>
         </tr>
         <tr>
-          <td>
-            {currentAgent.firstName}&nbsp; {currentAgent.lastName}
-          </td>
+          <td>{CurrentLog.number}</td>
           <td>{date}</td>
           <td>{resolution.resolution}</td>
         </tr>
@@ -44,4 +40,4 @@ function AgentLog() {
   )
 }
 
-export default AgentLog
+export default NumberLog

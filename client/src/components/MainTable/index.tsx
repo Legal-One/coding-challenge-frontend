@@ -21,11 +21,6 @@ function MainTable({ logs }: LogProps) {
     return agent
   }
 
-  const resolution = useSelector(
-    (state: AppState) => state.resolution.resolution
-  )
-  console.log(resolution)
-
   const handleGetCallsByAgentId = (agentIdentifier: string, number: string) => {
     const [numberOfCalls] = logsGrouped[
       agentIdentifier
@@ -45,7 +40,7 @@ function MainTable({ logs }: LogProps) {
       {uniqueItems.map((log) => (
         <tr key={log._id}>
           <td>
-            <NumberTableData log={log} />
+            <NumberTableData logs={log} />
           </td>
           <td>
             <LogsTableData
