@@ -21,6 +21,11 @@ function MainTable({ logs }: LogProps) {
     return agent
   }
 
+  const resolution = useSelector(
+    (state: AppState) => state.resolution.resolution
+  )
+  console.log(resolution)
+
   const handleGetCallsByAgentId = (agentIdentifier: string, number: string) => {
     const [numberOfCalls] = logsGrouped[
       agentIdentifier

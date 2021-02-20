@@ -8,9 +8,13 @@ import { useLogs } from './Hooks/useLogs'
 import { useAgents } from './Hooks/useAgents'
 import AgentLog from './components/AgentLog'
 
+import { useResolution } from './Hooks/useResolution'
+
 const Routes = () => {
   const [logsData] = useLogs()
   const [agentData] = useAgents()
+  const [resData] = useResolution()
+  console.log(resData)
 
   return (
     <Switch>

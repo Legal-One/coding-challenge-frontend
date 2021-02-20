@@ -12,7 +12,7 @@ function AgentTableData({ handleFindAgent, log }: AgentTableDataProps) {
         to={`/agentlog/${agentIdentifier}`}
         style={{ color: 'inherit', textDecoration: 'inherit' }}
       >
-        {handleFindAgent(agentIdentifier)?.firstName}
+        {handleFindAgent(agentIdentifier)?.firstName}&nbsp;
         {handleFindAgent(agentIdentifier)?.lastName} /&nbsp;
         {dateTime?.slice(11, 16)}
       </Link>
