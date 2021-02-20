@@ -7,7 +7,7 @@
         "test": "jest --forceExit",
         "tsc": "tsc",
         "dev-api": "nodemon server/index.ts",
-        "prod-api": "npm run tsc && node server/index.js"
+        "start": "npm run tsc && node server/index.js"
     },
     "repository": {
         "type": "git",
