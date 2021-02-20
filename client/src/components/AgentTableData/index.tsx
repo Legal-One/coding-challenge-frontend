@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { AgentTableDataProps } from '../../Types/ui'
 
 function AgentTableData({ handleFindAgent, log }: AgentTableDataProps) {
-  const { agentIdentifier } = log
+  const { agentIdentifier, dateTime } = log
 
   return (
     <div>
@@ -13,8 +13,8 @@ function AgentTableData({ handleFindAgent, log }: AgentTableDataProps) {
         style={{ color: 'inherit', textDecoration: 'inherit' }}
       >
         {handleFindAgent(agentIdentifier)?.firstName}
-        {handleFindAgent(agentIdentifier)?.lastName} /
-        {log.dateTime.slice(0, 10)}
+        {handleFindAgent(agentIdentifier)?.lastName} /&nbsp;
+        {dateTime?.slice(11, 16)}
       </Link>
     </div>
   )

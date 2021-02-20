@@ -19,3 +19,7 @@ export type LogsTableDataProps = {
 export type LogProps = {
   logs: Logs[] | any
 }
+
+export type ParamsProps = {
+  identifier : string
+}
