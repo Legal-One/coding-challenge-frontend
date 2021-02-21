@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Table from "./LogTable";
 
 const Calls = props => {
-  const { data, phone } = props.location.state;
+  const [data, setData] = useState([]);
+  const { phone } = props.location.state;
+
+  useEffect(() => {
+    fetch(`/call?number=${encodeURIComponent(phone)}`)
+      .then(res => res.json())
+      .then(res => {
+        setData(res.data);
+      });
+  }, [phone]);
 
   const backTxt = "< BACK";
   return (

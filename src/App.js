@@ -59,24 +59,14 @@ class App extends Component {
   }
 
   handleAgent = (id, name) => {
-    fetch(`/agent?id=${encodeURIComponent(id)}`)
-      .then(res => res.json())
-      .then(res => {
-        this.props.history.push(`/agent/${id}`, { data: res.data, name: name });
-      });
+    this.props.history.push(`/agent/${id}`, { id: id, name: name });
   };
 
   chartEventCallback(eventObj, dataObj) {
     let value = dataObj.id;
-
-    fetch(`/call?number=${encodeURIComponent(value)}`)
-      .then(res => res.json())
-      .then(res => {
-        this.props.history.push(`/call/${value}`, {
-          data: res.data,
-          phone: value
-        });
-      });
+    this.props.history.push(`/call/${value}`, {
+      phone: value
+    });
   }
 
   render() {
