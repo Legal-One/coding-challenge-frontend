@@ -1,14 +1,13 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 
-import { LogProps } from '../../Types/ui'
 import { AppState } from '../../Types'
 import LogsTableData from '../LogsTableData'
 import AgentTableData from '../AgentTableData'
 import NumberTableData from '../NumberTableData'
 import './MainTable.css'
 
-function MainTable({ logs }: LogProps) {
+function MainTable() {
   const currentAgent = useSelector((state: AppState) => state.agents.agents)
   const currentLog = useSelector((state: AppState) => state.logs.logs)
   const logsGrouped = useSelector((state: AppState) => state.logs.logsGrouped)

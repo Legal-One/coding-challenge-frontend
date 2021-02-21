@@ -31,9 +31,9 @@ function NumberLog() {
           <th>Resolution</th>
         </tr>
         <tr>
-          <td>{CurrentLog.number}</td>
+          <td>{CurrentLog?.number}</td>
           <td>{date}</td>
-          <td>{resolution.resolution}</td>
+          <td>{resolution?.resolution}</td>
         </tr>
       </tbody>
     </table>

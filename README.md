@@ -26,7 +26,6 @@
 
 This boilerplate is based on the [TypeScript Node Starter](https://github.com/microsoft/TypeScript-Node-Starter), which already comes with all needed packages,check the dependencies in `package.json` file.
 
-# Getting started
 ## To run the server
 
 - import **Json files** into **MongoDB**

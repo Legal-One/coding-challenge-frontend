@@ -1,7 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 
-import { LogProps } from '../../Types/ui'
 import MainTable from '../../components/MainTable'
 import { AppState } from '../../Types'
 
@@ -10,7 +9,7 @@ const loadStyle = {
   width: '50%',
 }
 
-const Home = ({ logs }: LogProps) => {
+const Home = () => {
   const loading = useSelector((state: AppState) => state.logs.loading)
 
   return (
@@ -27,7 +26,7 @@ const Home = ({ logs }: LogProps) => {
             </tr>
           </tbody>
           <tbody>
-            <MainTable logs={logs} />
+            <MainTable />
           </tbody>
         </table>
       )}
