@@ -22,3 +22,19 @@
   cursor: pointer;
   padding-bottom: 5px;
 }
+
+.hand-cursor {
+  cursor: pointer;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.table.table-bordered {
+  margin: auto;
+}
+
+.mt-2 {
+  margin-top: 2rem;
+}

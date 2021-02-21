@@ -3,13 +3,7 @@ import "./App.css";
 import FusionCharts from "fusioncharts";
 import charts from "fusioncharts/fusioncharts.charts";
 import ReactFusioncharts from "react-fusioncharts";
-import { IgrGridColumnOptionsModule } from "igniteui-react-grids";
-import { IgrDataGridToolbarModule } from "igniteui-react-grids";
-import { IgrDataGrid } from "igniteui-react-grids";
-import { IgrTextColumn } from "igniteui-react-grids";
-
-IgrGridColumnOptionsModule.register();
-IgrDataGridToolbarModule.register();
+import { withRouter } from "react-router-dom";
 
 charts(FusionCharts);
 
@@ -65,51 +59,43 @@ class App extends Component {
   }
 
   handleAgent = (id, name) => {
-    this.setState({ agentID: id, agentName: name, flag: 1, phoneNum: "" });
-
     fetch(`/agent?id=${encodeURIComponent(id)}`)
       .then(res => res.json())
       .then(res => {
-        this.setState({ barDataSource: res.data });
+        this.props.history.push(`/agent/${id}`, { data: res.data, name: name });
       });
   };
 
   chartEventCallback(eventObj, dataObj) {
     let value = dataObj.id;
-    this.setState({ phoneNum: value, flag: 0, agentID: "" });
 
     fetch(`/call?number=${encodeURIComponent(value)}`)
       .then(res => res.json())
       .then(res => {
-        this.setState({ barDataSource: res.data });
+        this.props.history.push(`/call/${value}`, {
+          data: res.data,
+          phone: value
+        });
       });
   }
 
   render() {
-    const {
-      dataSource,
-      barDataSource,
-      phoneNum,
-      agentName,
-      agentID,
-      flag,
-      namesList
-    } = this.state;
+    const { dataSource, agentID, namesList } = this.state;
     return (
       <div className="App">
         <h2>Calling Management System</h2>
         <div className="chartContainer">
           <ReactFusioncharts
             type="pie3d"
-            width={800}
-            height={600}
+            width={1000}
+            height={700}
             dataFormat="JSON"
             dataSource={dataSource}
             fcEvent-dataplotClick={this.chartEventCallback.bind(this)}
           />
 
           <ul>
-            <h3>Agents</h3>
+            <h3>Agents List</h3>
             {namesList &&
               namesList.map((item, index) => (
                 <li
@@ -121,42 +107,18 @@ class App extends Component {
                     fontWeight: agentID === item.agentID ? "700" : "400"
                   }}
                 >
-                  {item.name}
+                  <p>
+                    <span>
+                      {index + 1}. {item.name}{" "}
+                    </span>
+                  </p>
                 </li>
               ))}
           </ul>
         </div>
-        {(phoneNum || agentName) && (
-          <div className="gridContainer">
-            {flag === 0 && (
-              <p>
-                <span>Phone Number: </span> <b>{phoneNum}</b>{" "}
-              </p>
-            )}
-            {flag === 1 && (
-              <p>
-                <span>Agent Name: </span> <b>{agentName}</b>
-              </p>
-            )}
-            <IgrDataGrid
-              height="100%"
-              width="100%"
-              dataSource={barDataSource}
-              autoGenerateColumns="false"
-            >
-              {flag === 0 ? (
-                <IgrTextColumn field="value" headerText="Agent Name" />
-              ) : (
-                <IgrTextColumn field="phone" headerText="Phone Number" />
-              )}
-              <IgrTextColumn field="dateTime" headerText="Date/Time" />
-              <IgrTextColumn field="resolution" headerText="Resolution" />
-            </IgrDataGrid>
-          </div>
-        )}
       </div>
     );
   }
 }
 
-export default App;
+export default withRouter(App);

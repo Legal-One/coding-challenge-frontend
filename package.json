@@ -6,19 +6,18 @@
   "main": "index.js",
   "private": true,
   "dependencies": {
+    "bootstrap": "^4.6.0",
     "d3-array": "^2.11.0",
     "fusioncharts": "^3.16.0",
-    "igniteui-react-core": "^16.13.0",
-    "igniteui-react-grids": "^16.13.0",
-    "igniteui-react-inputs": "^16.13.0",
-    "igniteui-react-layouts": "^16.13.0",
     "react": "^16.13.0",
+    "react-bootstrap-table-next": "^4.0.3",
     "react-dom": "^16.13.0",
     "react-fusioncharts": "^3.1.2",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.0"
   },
   "scripts": {
-    "start": "node server.js",
+    "start": "react-scripts start",
     "build": "react-scripts build --watch",
     "build:prod": "react-scripts build --watch --prod",
     "test": "react-scripts test",
