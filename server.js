@@ -6,7 +6,7 @@ const fs = require("fs");
 const d3 = require("d3-array");
 const app = express();
 
-const port = 3001;
+const port = process.env.PORT || 3001;
 
 app.use(
   bodyParser.urlencoded({
