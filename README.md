@@ -28,7 +28,22 @@ This boilerplate is based on the [TypeScript Node Starter](https://github.com/mi
 ## To run the server
 
 - import `Json files` into `MongoDB`
-- In `server` folder, in root directory create `.env` file and add mongoDB URI with your username and password
+- In `server` folder, in root directory create `.env` file and add these secret keys there
+
+
+```
+1. MONGODB_URI_LOCAL with your username and password like this: MONGODB_URI_LOCAL=mongodb+srv://<yourusername>:<password>@codingchallenge.btm9c.mongodb.net/<databaseName>?retryWrites=true&w=majority
+
+2. SESSION_SECRET, which can be random, for example:  SESSION_SECRET=abcdef. 
+3. JWT_SECRET, which can be random for example: JWT_SECRET=abcdef
+```
+
+> **Note!** `URI` is for connecting with `mongoDB` and the `SESSION_SECRET`  and `JWT_SECRET` are required from this boilerplate `dist` configuration
+
+
+
+
+
 - In CLI  run 
 
 ```

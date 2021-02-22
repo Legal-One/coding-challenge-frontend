@@ -29,6 +29,7 @@ function AgentLog() {
   const date = new Date(logsGrouped[0]?.dateTime)
     .toLocaleString('en-GB')
     .replace(',', '')
+
   return (
     <>
       {loading ? (
