@@ -1,0 +1,40 @@
+.App {
+  text-align: center;
+  margin-bottom: 100px;
+}
+
+.gridContainer {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.chartContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.chartContainer ul {
+  list-style: none;
+}
+
+.chartContainer ul li {
+  cursor: pointer;
+  padding-bottom: 5px;
+}
+
+.hand-cursor {
+  cursor: pointer;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.table.table-bordered {
+  margin: auto;
+}
+
+.mt-2 {
+  margin-top: 2rem;
+}
