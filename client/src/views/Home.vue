@@ -47,6 +47,8 @@ export default {
     name: 'Home',
 
     setup() {
+        const router = useRouter();
+
         const tableHeadings = ref(['Phone Number', 'Number of Calls', 'Last Call Details']);
         const rowData = ref([]);
         const callData = ref({ totalAgents: 0, totalCalls: 0 });
@@ -84,7 +86,6 @@ export default {
                 },
             ];
         });
-        const router = useRouter();
 
         const getAllCalls = async () => {
             const {

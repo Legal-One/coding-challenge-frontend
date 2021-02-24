@@ -1,10 +1,10 @@
 import { createApp } from 'vue';
+import VueApexCharts from 'vue3-apexcharts';
 
 import App from './App.vue';
 import router from './router';
 
 import BaseTable from './components/BaseTable';
-import VueApexCharts from 'vue3-apexcharts';
 
 const app = createApp(App);
 
