@@ -1,15 +1,19 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import Chart from '../../components/Chart/Chart';
 import Table from '../../components/Table/Table';
 import Loader from '../../components/Loader/Loader';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAggregate } from '../../redux/actions';
+import { FaChartBar, FaTable } from "react-icons/fa";
+import { IconContext } from "react-icons";
 import './dashboard.scss';
 
 
 function Dashboard() {
     const history = useHistory();
     const dispatch = useDispatch();
+    const [toggleChart, setToggleChart] = useState(false);
     const data = useSelector((state) => state.aggregateData);
     const { loading, aggregateData } = data;
 
@@ -17,13 +21,21 @@ function Dashboard() {
         history.push(path);
     }
 
+    const chartData = aggregateData.map((data) => {
+        return {
+            name: data.number,
+            pv: data.count,
+            amt: 100,
+        }
+    });
+
     const columns = [
         {
             field: 'number', headerName: 'Phone number', cellClassName: 'bookin-id', width: 250, renderCell: (params) => {
                 return <span
                     onClick={() => handleLink(`/call/${params.value}`)}
                     style={{ cursor: 'pointer' }}
-                    data-testid="number" 
+                    data-testid="number"
                 >
                     {params.value}
                 </span>
@@ -45,7 +57,7 @@ function Dashboard() {
 
                 return <span
                     onClick={() => handleLink(`/agent/${params.row.agent.identifier}`)}
-                    style={{ cursor: 'pointer'}}
+                    style={{ cursor: 'pointer' }}
                 >
                     {params.row.agent.firstName}  {params.row.agent.lastName}  / {minutes}:{seconds}
                 </span>
@@ -57,15 +69,37 @@ function Dashboard() {
         if (aggregateData && aggregateData.length === 0) {
             dispatch(getAggregate());
         }
-       
-    }, [dispatch]);
+
+    }, [dispatch, aggregateData]);
 
     return (
-        <div className='dashboardContainer'>
-            <div className='dashboard' data-testid="dashboard" >
-                {loading ? <Loader /> : <Table rows={aggregateData} columns={columns} />}
-            </div>
-        </div>
+        <React.Fragment>
+            {loading ? <Loader /> :
+                <div className='dashboardContainer'>
+                    {
+                        toggleChart ? <div className='dashboardContainer'>
+                            <IconContext.Provider value={{ color: "black", size: "40" }}>
+                                <div className='icon iconRight'>
+                                    <FaTable onClick={() => setToggleChart(false)} />
+                                </div>
+                            </IconContext.Provider>
+                            <Chart chartData={chartData} />
+                        </div> :
+                            <div className='dashboard' data-testid="dashboard" >
+                                <IconContext.Provider value={{ color: "black", size: "40" }}>
+                                    <div className='icon iconRight'>
+                                        <FaChartBar onClick={() => setToggleChart(true)} />
+                                    </div>
+                                </IconContext.Provider>
+                                <div>
+                                    <Table rows={aggregateData} columns={columns} />
+                                </div>
+                            </div>
+                    }
+                </div>
+            }
+        </React.Fragment>
+
     )
 }
 
