@@ -1,0 +1,18 @@
+@font-face {
+  src: url('./assets/fonts/Ubuntu-Regular.ttf');
+  font-family: Ubuntu-Regular;
+}
+
+@font-face {
+  src: url('./assets/fonts/Ubuntu-Bold.ttf');
+  font-family: Ubuntu-Bold;
+}
+
+
+* {
+  font-family: Ubuntu-Regular;
+}
+
+.MuiDataGrid-colCellTitle {
+ font-family: Ubuntu-Bold;
+}
