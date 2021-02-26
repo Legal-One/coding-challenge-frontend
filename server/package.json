@@ -1,0 +1,36 @@
+{
+    "name": "coding-challenge-frontend",
+    "version": "1.0.0",
+    "description": "coding challenge ",
+    "main": "index.js",
+    "scripts": {
+        "test": "mocha --require @babel/register tests/**/*.test.js --exit",
+        "start": "node --require @babel/register -- ./index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Legal-One/coding-challenge-frontend.git"
+    },
+    "keywords": [
+        "challenge",
+        "frontend",
+        "coding"
+    ],
+    "author": "tariq.hassan@legal.one",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/Legal-One/coding-challenge-frontend/issues"
+    },
+    "homepage": "https://github.com/Legal-One/coding-challenge-frontend#readme",
+    "dependencies": {
+        "@babel/core": "^7.13.1",
+        "@babel/preset-env": "^7.13.5",
+        "@babel/register": "^7.13.0",
+        "chai": "^4.3.0",
+        "chai-http": "^4.3.0",
+        "cors": "^2.8.5",
+        "express": "^4.17.1",
+        "lodash": "^4.17.21",
+        "mocha": "^8.3.0"
+    }
+}
