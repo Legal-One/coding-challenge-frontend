@@ -1,0 +1,9 @@
+@charset "utf-8";
+@import '../node_modules/bulma/bulma.sass';
+
+.card {
+  &.table {
+    padding: 4rem;
+    border-radius: 3rem;
+  }
+}
