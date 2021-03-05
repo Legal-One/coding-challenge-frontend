@@ -27,7 +27,7 @@
 
         <div class="page-container">
             <div class="table">
-                <base-table :headings="tableHeadings" :rowData="rowData">
+                <base-table :headings="tableHeadings" :rowData="rowData" :loading="loading">
                     <template #table-row="{ row }">
                         <div class="call phonenumber link" @click="viewNumberHistory(row.number)">{{ row.number }}</div>
                         <div class="call last-call">{{ dateAndTime(row.dateTime) }}</div>
@@ -39,7 +39,9 @@
             </div>
 
             <div class="chart">
-                <apexchart type="donut" :series="series" :options="chartOptions" />
+                <Loader v-if="loading" :width="3" />
+
+                <apexchart type="donut" :series="series" :options="chartOptions" v-else />
             </div>
         </div>
     </div>
@@ -68,9 +70,11 @@ export default {
             email: '',
             photo: '',
         });
+        const loading = ref(false);
 
         const getAllCalls = async () => {
             const agentId = route.params.agentId;
+            loading.value = true;
 
             const {
                 data: { calls, agent },
@@ -78,6 +82,7 @@ export default {
 
             rowData.value = calls;
             agentProfile.value = agent;
+            loading.value = false;
         };
 
         const viewNumberHistory = number =>
@@ -160,6 +165,7 @@ export default {
             totalNumberOfFollowupCalls,
             chartOptions,
             series,
+            loading,
         };
     },
 };

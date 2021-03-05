@@ -6,7 +6,8 @@
             </div>
         </div>
         <div class="table-body">
-            <div class="table-row" v-for="(row, index) in rowData" :key="index">
+            <Loader v-if="loading" :width="3" />
+            <div class="table-row" v-else v-for="(row, index) in rowData" :key="index">
                 <slot name="table-row" :row="row" />
             </div>
         </div>
@@ -24,6 +25,11 @@ export default {
         rowData: {
             type: Array,
             default: () => [],
+        },
+
+        loading: {
+            type: Boolean,
+            default: false,
         },
     },
 };
@@ -66,6 +72,7 @@ export default {
 
 .table-body {
     margin: 15px 0 0;
+    min-height: 20rem;
 }
 
 .table-row {

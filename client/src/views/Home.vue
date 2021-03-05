@@ -5,6 +5,7 @@
                 <header class="stat-heading">Total Agents</header>
                 <p class="stat-count">{{ callData.totalAgents }}</p>
             </div>
+
             <div class="stat">
                 <header class="stat-heading">Total Calls</header>
                 <p class="stat-count">{{ callData.totalCalls }}</p>
@@ -13,7 +14,7 @@
 
         <div class="page-container">
             <div class="table">
-                <base-table :headings="tableHeadings" :rowData="rowData">
+                <base-table :headings="tableHeadings" :rowData="rowData" :loading="loading">
                     <template #table-row="{ row }">
                         <div class="call phonenumber link" @click="viewNumberHistory(row.phoneNumber)">
                             {{ row.phoneNumber }}
@@ -30,7 +31,8 @@
             </div>
 
             <div class="chart">
-                <apexchart type="bar" width="100%" height="300" :options="chartOptions" :series="series" />
+                <Loader v-if="loading" :width="3" />
+                <apexchart v-else type="bar" width="100%" height="300" :options="chartOptions" :series="series" />
             </div>
         </div>
     </div>
@@ -52,6 +54,7 @@ export default {
         const tableHeadings = ref(['Phone Number', 'Number of Calls', 'Last Call Details']);
         const rowData = ref([]);
         const callData = ref({ totalAgents: 0, totalCalls: 0 });
+        const loading = ref(false);
 
         const chartOptions = computed(() => {
             const phoneNumbers = rowData.value.map(callData => callData.phoneNumber);
@@ -88,6 +91,8 @@ export default {
         });
 
         const getAllCalls = async () => {
+            loading.value = true;
+
             const {
                 data: { calls, totalAgents, totalCalls },
             } = await fetchAllCallHistory();
@@ -96,6 +101,8 @@ export default {
 
             callData.value.totalAgents = totalAgents;
             callData.value.totalCalls = totalCalls;
+
+            loading.value = false;
         };
 
         const viewAgentHistory = agentId =>
@@ -126,6 +133,7 @@ export default {
             viewNumberHistory,
             chartOptions,
             series,
+            loading,
         };
     },
 };
