@@ -1,3 +1,19 @@
+## Quick Start
+
+```bash
+# Install dependencies
+yarn (or npm install)
+
+# Start development server
+yarn dev (or npm run dev)
+
+# Build for production
+yarn build (or npm run build)
+
+# Start production server
+yarn start (or npm start)
+```
+
 # Frontend / Javascipt - coding challenge.
 
 Welcome to Legal One coding challenge, through this challenge we get to know you better from the coding side of you. let's start.
