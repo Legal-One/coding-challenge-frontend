@@ -20,7 +20,6 @@ export class CallCenterRepository implements CallCenterRepoInterface {
     this.path = path.join(__dirname, '../../json-data')
   }
   async getCalls(): Promise<any> {
-    console.log('Dirname2: ', __dirname)
     const data = await fs.readFile(`${this.path}/logs.json`, {
       encoding: 'utf-8'
     })
