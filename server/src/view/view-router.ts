@@ -1,4 +1,5 @@
 import express from 'express'
+import path from 'path'
 import { Router } from '../utils/interfaces'
 
 export class ViewRouter implements Router {
@@ -9,7 +10,7 @@ export class ViewRouter implements Router {
     this.setRoutes()
   }
   setRoutes() {
-    this.app.get('/', (req: express.Request, res: express.Response) => {
+    this.app.get('*', (req: express.Request, res: express.Response) => {
       res.sendFile('index.html')
     })
   }
