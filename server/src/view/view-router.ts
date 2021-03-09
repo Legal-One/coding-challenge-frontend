@@ -11,7 +11,7 @@ export class ViewRouter implements Router {
   }
   setRoutes() {
     this.app.get('*', (req: express.Request, res: express.Response) => {
-      res.sendFile('index.html')
+      res.sendFile(path.resolve('index.html'))
     })
   }
 }
