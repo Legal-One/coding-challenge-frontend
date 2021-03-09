@@ -7758,6 +7758,18 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
   background-color: #fafafa;
   padding: 3rem 1.5rem 6rem; }
 
-.card.table {
-  padding: 4rem;
+.card {
+  padding: 3rem;
   border-radius: 3rem; }
+
+.border-bottom {
+  border-bottom: 1px solid #999; }
+
+.agent-profile {
+  display: flex;
+  align-items: center; }
+
+.profile-photo {
+  border-radius: 50%;
+  width: 150px;
+  height: auto; }
