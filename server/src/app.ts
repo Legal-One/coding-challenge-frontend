@@ -21,6 +21,15 @@ class App {
 
   configureApp(serviceContainer: ServiceContainer): void {
     this.instance.use(helmet())
+    this.instance.use(
+      helmet.contentSecurityPolicy({
+        directives: {
+          ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+          'img-src': ["'self'", 'via.placeholder.com']
+        }
+      })
+    )
+
     this.instance.use(express.urlencoded({ extended: true }))
     this.instance.use(express.json())
     this.instance.use(cors<express.Request>())
