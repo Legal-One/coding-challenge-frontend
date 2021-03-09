@@ -2,8 +2,19 @@
 @import '../node_modules/bulma/bulma.sass';
 
 .card {
-  &.table {
-    padding: 4rem;
-    border-radius: 3rem;
-  }
+  padding: 3rem;
+  border-radius: 3rem;
+}
+.border-bottom {
+  border-bottom: 1px solid #999;
+}
+
+.agent-profile {
+  display: flex;
+  align-items: center;
+}
+.profile-photo {
+  border-radius: 50%;
+  width: 150px;
+  height: auto;
 }
