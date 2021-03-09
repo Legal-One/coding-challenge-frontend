@@ -18,7 +18,6 @@ function Home() {
   const dispatch = useAppDispatch()
 
   const getCallData = useCallback(async () => {
-    console.log('It is called')
     await dispatch(getCalls())
   }, [dispatch])
 
