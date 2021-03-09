@@ -10,6 +10,11 @@
     "css-watch": "npm run css-build -- --watch",
     "css-build": "node-sass --omit-source-map-url sass/custom-styles.scss src/components/App/main.css"
   },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(css|less)$": "identity-obj-proxy"
+    }
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
