@@ -2,7 +2,7 @@ import React from 'react'
 import { createSelector } from '@reduxjs/toolkit'
 import { RootState } from '../../types'
 import { useSelector } from 'react-redux'
-import TableHeader from 'components/Table/table-header'
+import TableHeader from '../Table/table-header'
 import Table from '../Table'
 import AgentTableRow from '../Table/agent-table-row'
 
