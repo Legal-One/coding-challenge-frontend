@@ -1,6 +1,5 @@
 import express from 'express'
 import helmet from 'helmet'
-import bodyParser from 'body-parser'
 import cors from 'cors'
 import { ServiceContainer } from './service-container'
 
@@ -10,6 +9,7 @@ import { ViewRouter } from './view/view-router'
 
 class App {
   instance: express.Application
+
   constructor() {
     this.instance = express()
   }
@@ -21,8 +21,8 @@ class App {
 
   configureApp(serviceContainer: ServiceContainer): void {
     this.instance.use(helmet())
-    this.instance.use(bodyParser.urlencoded({ extended: true }))
-    this.instance.use(bodyParser.json())
+    this.instance.use(express.urlencoded({ extended: true }))
+    this.instance.use(express.json())
     this.instance.use(cors<express.Request>())
     this.instance.use(
       express.static(path.join(__dirname, '../../client/client-build'))
