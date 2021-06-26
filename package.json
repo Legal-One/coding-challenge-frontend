@@ -4,7 +4,8 @@
   "description": "coding challenge ",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "setup": "cd frontend && npm install"
   },
   "repository": {
     "type": "git",
