@@ -17,7 +17,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "check": "npx prettier --check .",
+    "format": "npx prettier --write ."
   },
   "eslintConfig": {
     "extends": [
@@ -53,6 +55,7 @@
     "@storybook/addon-links": "^6.3.0",
     "@storybook/node-logger": "^6.3.0",
     "@storybook/preset-create-react-app": "^3.1.7",
-    "@storybook/react": "^6.3.0"
+    "@storybook/react": "^6.3.0",
+    "prettier": "2.3.2"
   }
 }
