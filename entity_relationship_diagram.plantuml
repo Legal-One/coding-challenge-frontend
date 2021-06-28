@@ -1,4 +1,6 @@
 @startuml
+title  Coding Challenge - <b>Entity Relationship Diagram</b> for Call Log
+
 entity Log{
     * identifier: UUID <<PK>><<FK>>
     * agentIdentifier: UUID <<FK>>
@@ -6,14 +8,14 @@ entity Log{
     ' Log Attributes
     * number: String
     * dateTime: Timestamp <<ISO>>
-    * duration: Integer <<Sec>>
+    * duration: Integer <<sec>>
 }
-note right of Log: identifier is also the "FK" as it is the "PK" for Resolution
+note right of Log: identifier is also the <b>FK</b> as it is the <b>PK</b> for Resolution
 
 entity Agent{
     * identifier: UUID <<PK>>
     --
-    ' profile attributes
+    ' Agent attributes
     * firstName: String
     * lastName: String
     * email: String
@@ -27,6 +29,12 @@ entity Resolution{
     * resolution: String
 }
 
-Agent ||--|{ Log
+' one Agent can be mapped to zero or many Log
+' one Log can be mapped to zero one Agent
+Agent ||--o{ Log
+
+' one Resolution can be mapped to one Log
+' one Log can be mapped to one Resolution
 Resolution ||--|| Log
+
 @enduml
