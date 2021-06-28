@@ -1,0 +1,32 @@
+@startuml
+entity Log{
+    * identifier: UUID <<PK>><<FK>>
+    * agentIdentifier: UUID <<FK>>
+    --
+    ' Log Attributes
+    * number: String
+    * dateTime: Timestamp <<ISO>>
+    * duration: Integer <<Sec>>
+}
+note right of Log: identifier is also the "FK" as it is the "PK" for Resolution
+
+entity Agent{
+    * identifier: UUID <<PK>>
+    --
+    ' profile attributes
+    * firstName: String
+    * lastName: String
+    * email: String
+    * photo: String
+}
+
+entity Resolution{
+    * identifier: UUID <<PK>>
+    --
+    ' Resolution Attributes
+    * resolution: String
+}
+
+Agent ||--|{ Log
+Resolution ||--|| Log
+@enduml
