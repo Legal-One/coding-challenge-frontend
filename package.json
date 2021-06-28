@@ -5,7 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "setup": "cd frontend && npm install"
+    "setup": "cd backend && npm install && cd ..  && cd frontend && npm install",
+    "check": "npx prettier --check .",
+    "server": "cd backend && node index.js",
+    "client": "cd frontend && npm start",
+    "storybook": "cd frontend && npm run storybook"
   },
   "repository": {
     "type": "git",
@@ -21,5 +25,8 @@
   "bugs": {
     "url": "https://github.com/Legal-One/coding-challenge-frontend/issues"
   },
-  "homepage": "https://github.com/Legal-One/coding-challenge-frontend#readme"
+  "homepage": "https://github.com/Legal-One/coding-challenge-frontend#readme",
+  "devDependencies": {
+    "prettier": "2.3.2"
+  }
 }
