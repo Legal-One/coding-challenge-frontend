@@ -13,30 +13,10 @@ const logsWithResolutionsAndAgents = logs.map((log) => ({
 // get Dashboard Data
 async function getDashboardData(req, res) {
   try {
-    // array of all the distinct phone numbers
-    const uniqueNumbers = logsWithResolutionsAndAgents
-      .map((eachData) => eachData.number)
-      .filter((value, index, self) => self.indexOf(value) === index)
-
-    const finalData = uniqueNumbers.map((number) => {
-      // logDataForNumber is the logs With Resolutions And Agents data combined for each phone number
-      let logDataForNumber = logsWithResolutionsAndAgents.filter(
-        (log) => log.number === number
-      )
-
-      // total calls made to a specific number
-      let callCount = logDataForNumber.length
-
-      // last call Record is the last value in the array logDataForNumber
-      let lastCallRecord = logDataForNumber[callCount - 1]
-
-      return { ...lastCallRecord, callCount } // last call record and call count
-    })
-
     return res.json({
       status: 'success',
       message: 'Dashboard data',
-      data: finalData
+      data: logsWithResolutionsAndAgents
     })
   } catch (err) {
     return res.json({ status: 'error', message: err })
