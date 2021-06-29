@@ -1,32 +1,33 @@
 {
-  "name": "coding-challenge-frontend",
-  "version": "1.0.0",
-  "description": "coding challenge ",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "setup": "cd backend && npm install && cd ..  && cd frontend && npm install",
-    "check": "npx prettier --check .",
-    "server": "cd backend && node index.js",
-    "client": "cd frontend && npm start",
-    "storybook": "cd frontend && npm run storybook"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Legal-One/coding-challenge-frontend.git"
-  },
-  "keywords": [
-    "challenge",
-    "frontend",
-    "coding"
-  ],
-  "author": "tariq.hassan@legal.one",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Legal-One/coding-challenge-frontend/issues"
-  },
-  "homepage": "https://github.com/Legal-One/coding-challenge-frontend#readme",
-  "devDependencies": {
-    "prettier": "2.3.2"
-  }
+    "name": "coding-challenge-frontend",
+    "version": "1.0.0",
+    "description": "coding challenge ",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "setup": "cd backend && npm install && cd ..  && cd frontend && npm install",
+        "check": "cd backend && npx prettier --check . && cd ..  && cd frontend && npx prettier --check .",
+        "format": "cd backend && npx prettier --write . && cd ..  && cd frontend && npx prettier --write .",
+        "server": "cd backend && node index.js",
+        "client": "cd frontend && npm start",
+        "storybook": "cd frontend && npm run storybook"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Legal-One/coding-challenge-frontend.git"
+    },
+    "keywords": [
+        "challenge",
+        "frontend",
+        "coding"
+    ],
+    "author": "tariq.hassan@legal.one",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/Legal-One/coding-challenge-frontend/issues"
+    },
+    "homepage": "https://github.com/Legal-One/coding-challenge-frontend#readme",
+    "devDependencies": {
+        "prettier": "2.3.2"
+    }
 }
