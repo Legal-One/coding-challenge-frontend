@@ -20,26 +20,7 @@ import { dateTimeFormatter } from '../../utils/dateTimeFormatter'
 function DashBoard() {
   const dispatch = useDispatch()
   const history = useHistory()
-  const data = useSelector((state) => state.data)
-
-  // array of all the distinct phone numbers
-  const uniqueNumbers = data
-    ?.map((eachData) => eachData.number)
-    .filter((value, index, self) => self.indexOf(value) === index)
-
-  let finalTableData = uniqueNumbers?.map((number) => {
-    // logDataForNumber is the logs With Resolutions And Agents data combined for each phone number
-    let logDataForNumber = data?.filter((log) => log.number === number)
-
-    console.log(logDataForNumber)
-    // total calls made to a specific number
-    let callCount = logDataForNumber.length
-
-    // last call Record is the last value in the array logDataForNumber
-    let lastCallRecord = logDataForNumber[callCount - 1]
-
-    return { ...lastCallRecord, callCount } // last call record and call count
-  })
+  const dashboardTableData = useSelector((state) => state.dashboardTableData)
 
   // dashboard table header
   const header = [
@@ -184,7 +165,7 @@ function DashBoard() {
             <StatusCard
               status="INTERESTED 🚀"
               count={
-                finalTableData?.filter(
+                dashboardTableData?.filter(
                   (eachItem) => eachItem.resolution === 'interested'
                 ).length || 0
               }
@@ -192,7 +173,7 @@ function DashBoard() {
             <StatusCard
               status="NEEDS FOLLOW UP ☕"
               count={
-                finalTableData?.filter(
+                dashboardTableData?.filter(
                   (eachItem) => eachItem.resolution === 'needs follow up'
                 ).length || 0
               }
@@ -202,7 +183,7 @@ function DashBoard() {
             <StatusCard
               status="NEED RESCHEDULE ⏱"
               count={
-                finalTableData?.filter(
+                dashboardTableData?.filter(
                   (eachItem) => eachItem.resolution === 'need reschedule'
                 ).length || 0
               }
@@ -210,7 +191,7 @@ function DashBoard() {
             <StatusCard
               status="NO ANSWER 🤯"
               count={
-                finalTableData?.filter(
+                dashboardTableData?.filter(
                   (eachItem) => eachItem.resolution === 'no answer'
                 ).length || 0
               }
@@ -219,7 +200,7 @@ function DashBoard() {
         </div>
       </div>
       <div style={{ padding: '32px' }}></div>
-      {finalTableData && <Table header={header} data={finalTableData} />}
+      {dashboardTableData && <Table header={header} data={dashboardTableData} />}
     </>
   )
 }
