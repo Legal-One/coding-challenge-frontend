@@ -5,7 +5,8 @@ import {
 } from './actionTypes'
 
 let initialState = {
-  data: null
+  dashboardTableData: null,
+  completeLogData: null
 }
 
 const appReducer = (state = initialState, { type, payload }) => {
@@ -13,17 +14,19 @@ const appReducer = (state = initialState, { type, payload }) => {
     case FETCH_DASHBOARD_DATA:
       return {
         ...state,
-        data: payload
+        dashboardTableData: payload.finalDashboardTableData,
+        completeLogData: payload.completeLogData
       }
     default:
       return state
   }
 }
 
-const setDashboardData = (data) => ({
+const setDashboardData = (payload) => ({
   type: FETCH_DASHBOARD_DATA,
-  payload: data
+  payload
 })
+
 
 export { setDashboardData }
 
