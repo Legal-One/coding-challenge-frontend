@@ -1,0 +1,57 @@
+.dashboard {
+  background: #212121;
+  border-radius: 8px;
+  padding: 128px;
+}
+
+.intro {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.subheading {
+  max-width: 560px;
+  margin-top: 32px;
+}
+
+.lottieFile {
+  width: 640px;
+}
+
+.statusCardRoot {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: row;
+}
+
+.statusCardSet {
+  margin-right: 16px;
+}
+
+@media only screen and (max-width: 1023px) {
+  .dashboard {
+    padding: 64px;
+  }
+  .lottieFile {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .dashboard {
+    padding: 32px;
+  }
+  .intro {
+    flex-direction: column;
+  }
+  .statusCardRoot {
+    flex-direction: column;
+  }
+  .lottieFile {
+    width: 300px;
+  }
+  .statusCardSet {
+    margin: 0px;
+  }
+}

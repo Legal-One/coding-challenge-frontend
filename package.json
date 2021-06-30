@@ -29,5 +29,8 @@
     "homepage": "https://github.com/Legal-One/coding-challenge-frontend#readme",
     "devDependencies": {
         "prettier": "2.3.2"
+    },
+    "dependencies": {
+        "react-lottie": "^1.2.3"
     }
 }
