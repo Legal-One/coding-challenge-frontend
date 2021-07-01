@@ -111,7 +111,7 @@ function Agent(props) {
             alt={selectedAgentData[0].firstName}
             src={selectedAgentData[0].photo}
           />
-          <Text primary size="h2">
+          <Text primary size="h2" bold>
             {selectedAgentData[0].firstName || ''}{' '}
             {selectedAgentData[0].lastName || ''}
           </Text>

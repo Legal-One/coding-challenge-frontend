@@ -4,7 +4,7 @@ import './chart.css'
 
 import Text from '../../atoms/text'
 
-function Chart({ size, data, ...props }) {
+function Chart({ data, ...props }) {
   const [background, setBackground] = useState()
 
   useEffect(() => {
@@ -20,11 +20,7 @@ function Chart({ size, data, ...props }) {
   return (
     <div className="pieChartRoot" {...props}>
       <div
-        style={{
-          width: `${size && size}px`,
-          height: `${size && size}px`,
-          background
-        }}
+        style={{background}}
         className="pieChart"
       />
       <div>
@@ -40,8 +36,7 @@ function Chart({ size, data, ...props }) {
 }
 
 Chart.propTypes = {
-  size: PropTypes.number,
-  data: PropTypes.array
+  data: PropTypes.array.isRequired
 }
 
 export default Chart
