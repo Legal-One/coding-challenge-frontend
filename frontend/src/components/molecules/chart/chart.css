@@ -1,0 +1,37 @@
+.pieChartRoot {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.pieChart {
+  width: 300px;
+  height: 300px;
+  margin: 10px;
+  display: inline-block;
+  border-radius: 50%;
+}
+
+.label {
+  display: flex;
+  margin: 16px;
+}
+
+.colorBox {
+  width: 16px;
+  height: 16px;
+  margin-right: 16px;
+  border-radius: 4px;
+}
+
+@media only screen and (max-width: 767px) {
+  .pieChart {
+    width: 240px;
+    height: 240px;
+  }
+  .pieChartRoot {
+    align-items: center;
+    justify-content: center;
+  }
+}

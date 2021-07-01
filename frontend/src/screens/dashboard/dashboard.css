@@ -1,7 +1,7 @@
 .dashboard {
   background: #212121;
   border-radius: 8px;
-  padding: 128px;
+  padding: 64px;
 }
 
 .intro {
@@ -22,20 +22,12 @@
 .statusCardRoot {
   margin-top: 16px;
   display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
 }
 
 .statusCardSet {
   margin-right: 16px;
-}
-
-@media only screen and (max-width: 1023px) {
-  .dashboard {
-    padding: 64px;
-  }
-  .lottieFile {
-    width: 100%;
-  }
 }
 
 @media only screen and (max-width: 767px) {
@@ -44,12 +36,15 @@
   }
   .intro {
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
   .statusCardRoot {
     flex-direction: column;
   }
   .lottieFile {
-    width: 300px;
+    width: 100%;
+    min-width: 300px;
   }
   .statusCardSet {
     margin: 0px;

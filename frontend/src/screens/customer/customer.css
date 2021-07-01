@@ -1,0 +1,22 @@
+.customerDetails {
+  background: #212121;
+  border-radius: 16px;
+  padding: 64px;
+}
+
+.customerImage {
+  width: 150px;
+  height: 150px;
+  border-radius: 16px;
+}
+
+.link {
+  text-decoration: underline;
+  text-decoration-color: #ffffff;
+}
+
+@media only screen and (max-width: 767px) {
+  .customerDetails {
+    padding: 32px;
+  }
+}

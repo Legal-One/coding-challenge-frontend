@@ -12,6 +12,7 @@ import Text from '../../components/atoms/text'
 import Badge from '../../components/atoms/badge'
 import StatusCard from '../../components/molecules/statusCards'
 import Table from '../../components/molecules/table'
+import Chart from '../../components/molecules/chart'
 
 // import for the utils
 import { durationFormatter } from '../../utils/durationFormatter'
@@ -49,14 +50,6 @@ function DashBoard() {
       )
     },
     {
-      field: 'resolution',
-      headerName: 'Last Resolution Status',
-      description: 'resultion status as per last call',
-      type: 'string',
-      width: 200,
-      renderCell: (params) => <Badge status={params.row.resolution} />
-    },
-    {
       field: 'callCount',
       headerName: 'Number of calls',
       width: 200,
@@ -67,6 +60,14 @@ function DashBoard() {
           {params.row.callCount > 1 ? ' calls' : ' call'}
         </Text>
       )
+    },
+    {
+      field: 'resolution',
+      headerName: 'Last Resolution',
+      description: 'resultion status as per last call',
+      type: 'string',
+      width: 200,
+      renderCell: (params) => <Badge status={params.row.resolution} />
     },
     {
       field: 'fullName',
@@ -156,10 +157,11 @@ function DashBoard() {
               </Text>
             </div>
           </div>
-          <div className='lottieFile'>
+          <div className="lottieFile">
             <Lottie options={LOTTIE_OPTIONS} />
           </div>
         </div>
+        {dashboardTableData &&
         <div className="statusCardRoot">
           <div className="statusCardSet">
             <StatusCard
@@ -197,10 +199,78 @@ function DashBoard() {
               }
             />
           </div>
-        </div>
+          <div className="statusCardSet">
+            <StatusCard
+              status="Total Customers 💯"
+              count={dashboardTableData.length || 0}
+            />
+            <StatusCard
+              status="Total Calls 📞"
+              count={
+                dashboardTableData
+                  ?.map((eachItem) => eachItem.callCount)
+                  .reduce((prev, next) => prev + next) || 0
+              }
+            />
+          </div>
+        </div>}
+        <div style={{ marginTop: '32px' }} />
+        <Text size="p1" primary>
+          Percentage of each current resolution status for the numbers 👇
+        </Text>
+        <br/>
+        
+        {dashboardTableData &&
+        <Chart
+          // Chart data {color, text, percentage}
+          data={[
+            {
+              color: '#434343',
+              text: 'interested',
+              percentage:
+                (dashboardTableData?.filter(
+                  (eachItem) => eachItem.resolution === 'interested'
+                ).length /
+                  dashboardTableData.length) *
+                100
+            },
+            {
+              color: '#656565',
+              text: 'needs follow up',
+              percentage:
+                (dashboardTableData?.filter(
+                  (eachItem) => eachItem.resolution === 'needs follow up'
+                ).length /
+                  dashboardTableData.length) *
+                100
+            },
+            {
+              color: '#878787',
+              text: 'need reschedule',
+              percentage:
+                (dashboardTableData?.filter(
+                  (eachItem) => eachItem.resolution === 'need reschedule'
+                ).length /
+                  dashboardTableData.length) *
+                100
+            },
+            {
+              color: '#a9a9a9',
+              text: 'no answer',
+              percentage:
+                (dashboardTableData?.filter(
+                  (eachItem) => eachItem.resolution === 'no answer'
+                ).length /
+                  dashboardTableData.length) *
+                100
+            }
+          ]}
+        />}
       </div>
-      <div style={{ padding: '32px' }}></div>
-      {dashboardTableData && <Table header={header} data={dashboardTableData} />}
+      <div style={{ marginTop: '32px' }} />
+      {dashboardTableData && (
+        <Table header={header} data={dashboardTableData} />
+      )}
     </>
   )
 }

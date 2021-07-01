@@ -1,0 +1,22 @@
+.agentDetails {
+  background: #212121;
+  border-radius: 16px;
+  padding: 64px;
+}
+
+.agentImage {
+  width: 150px;
+  height: 150px;
+  border-radius: 16px;
+}
+
+.link {
+  text-decoration: underline;
+  text-decoration-color: #ffffff;
+}
+
+@media only screen and (max-width: 767px) {
+  .agentDetails {
+    padding: 32px;
+  }
+}

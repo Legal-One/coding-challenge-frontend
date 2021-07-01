@@ -14,6 +14,6 @@ const Template = (args) => <StatusCard {...args} />
 
 export const SampleCard = Template.bind({})
 SampleCard.args = {
-    status: "Sample Text",
-    count: 23
+  status: 'Sample Text',
+  count: 23
 }

@@ -6,10 +6,10 @@ export const getDashboardDataThunk = () => {
   return async function (dispatch, getState, endpoint) {
     const { data } = await axios.get(endpoint + ROUTES.DASHBOARD)
     if (data.status !== 'success') {
-      throw new Error('Error Message')
+      throw new Error(data.message)
     }
 
-    const completeLogData = data.data; 
+    const completeLogData = data.data
     completeLogData.forEach((each) => {
       each.id = each.identifier
     })
@@ -21,7 +21,9 @@ export const getDashboardDataThunk = () => {
 
     let finalDashboardTableData = uniqueNumbers.map((number) => {
       // logDataForNumber is the logs With Resolutions And Agents data combined for each phone number
-      let logDataForNumber = completeLogData.filter((log) => log.number === number)
+      let logDataForNumber = completeLogData.filter(
+        (log) => log.number === number
+      )
 
       // total calls made to a specific number
       let callCount = logDataForNumber.length
@@ -31,6 +33,6 @@ export const getDashboardDataThunk = () => {
 
       return { ...lastCallRecord, callCount } // last call record and call count
     })
-    dispatch(setDashboardData({finalDashboardTableData,completeLogData}))
+    dispatch(setDashboardData({ finalDashboardTableData, completeLogData }))
   }
 }

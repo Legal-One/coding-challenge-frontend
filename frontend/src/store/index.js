@@ -17,7 +17,7 @@ let store = createStore(
 )
 
 store.subscribe(() => {
-  console.log("console from store >>>",store.getState())
+  console.log('console from store >>>', store.getState())
 })
 
 let persistor = persistStore(store)
