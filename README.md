@@ -19,13 +19,17 @@ The designs and development is planned in a component driven approch and design 
 ### Entity Relationship Diagram for json data
 
 ![entity_relationship_diagram.png](entity_relationship_diagram.png)
+
 [**Check the uml code here**](entity_relationship_diagram.plantuml)
+
+### Available Scripts
 
 ### `npm run setup`
 
 This will install all the required npm packages for frontend and backend codebase at once.
 
 The actual command behind script.
+
 `cd backend && npm install && cd .. && cd frontend && npm install`
 
 ### `npm run storybook`
@@ -34,6 +38,7 @@ Runs the storybook in the development mode to visualise and test the UI componen
 Open [http://localhost:6006](http://localhost:3000) to view it in the browser.
 
 The actual command behind script.
+
 `cd frontend && npm run storybook`
 
 ### `npm run server`
@@ -42,6 +47,7 @@ Runs the nodejs backend app in the development mode.
 Open [http://localhost:8000](http://localhost:3000) to view it in the browser.
 
 The actual command behind script.
+
 `cd backend && node index.js`
 
 ### `npm run client`
@@ -50,6 +56,7 @@ Runs the frontend app in the development mode.
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The actual command behind script.
+
 `cd frontend && npm start`
 
 ### `npm run check`
@@ -57,6 +64,7 @@ The actual command behind script.
 Check the code with prettier.
 
 The actual command behind script.
+
 `cd backend && npx prettier --check . && cd .. && cd frontend && npx prettier --check .`
 
 ### `npm run format`
@@ -64,6 +72,7 @@ The actual command behind script.
 Format the code with prettier.
 
 The actual command behind script.
+
 `cd backend && npx prettier --write . && cd .. && cd frontend && npx prettier --write .`
 
 ## The challenge:
