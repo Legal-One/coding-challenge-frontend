@@ -110,6 +110,7 @@ function Customer(props) {
               Phone Number: {selectedNumberData[0].number}
             </Text>
           </div>
+          <div style={{ marginTop: '32px' }} />
           <Table header={header} data={selectedNumberData} />
         </>
       )}

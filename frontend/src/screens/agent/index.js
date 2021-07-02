@@ -176,6 +176,7 @@ function Agent(props) {
           />
         </div>
       )}
+      <div style={{ marginTop: '32px' }} />
       {selectedAgentData && <Table header={header} data={selectedAgentData} />}
     </>
   )
