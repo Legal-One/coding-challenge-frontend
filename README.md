@@ -16,6 +16,20 @@ The above link opens up the mockup designs for the website developed as a soluti
 
 The designs and development is planned in a component driven approch and design system is created considering the concepts of Brad Frost's [**Atomic Design System**](https://atomicdesign.bradfrost.com/)
 
+### Screen Shots
+
+#### Dashboard Desktop View
+
+![Dashboard](dashboard.png)
+
+#### Dashboard Mobile View
+
+![Dashboard Mobile](dashboard-mobile.png)
+
+#### Storybook Screen
+
+![Storybook](storybook.JPG)
+
 ### Entity Relationship Diagram for json data
 
 ![entity_relationship_diagram.png](entity_relationship_diagram.png)
@@ -29,7 +43,6 @@ The designs and development is planned in a component driven approch and design 
 This will install all the required npm packages for frontend and backend codebase at once.
 
 The actual command behind script.
-
 `cd backend && npm install && cd .. && cd frontend && npm install`
 
 ### `npm run storybook`
@@ -38,7 +51,6 @@ Runs the storybook in the development mode to visualise and test the UI componen
 Open [http://localhost:6006](http://localhost:3000) to view it in the browser.
 
 The actual command behind script.
-
 `cd frontend && npm run storybook`
 
 ### `npm run server`
@@ -47,7 +59,6 @@ Runs the nodejs backend app in the development mode.
 Open [http://localhost:8000](http://localhost:3000) to view it in the browser.
 
 The actual command behind script.
-
 `cd backend && node index.js`
 
 ### `npm run client`
@@ -56,7 +67,6 @@ Runs the frontend app in the development mode.
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The actual command behind script.
-
 `cd frontend && npm start`
 
 ### `npm run check`
@@ -64,7 +74,6 @@ The actual command behind script.
 Check the code with prettier.
 
 The actual command behind script.
-
 `cd backend && npx prettier --check . && cd .. && cd frontend && npx prettier --check .`
 
 ### `npm run format`
@@ -72,7 +81,6 @@ The actual command behind script.
 Format the code with prettier.
 
 The actual command behind script.
-
 `cd backend && npx prettier --write . && cd .. && cd frontend && npx prettier --write .`
 
 ## The challenge:
