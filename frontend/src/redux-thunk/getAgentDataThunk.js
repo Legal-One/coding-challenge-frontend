@@ -13,6 +13,6 @@ export const getAgentDataThunk = (id) => {
     agentLogs.forEach((each) => {
       each.id = each.identifier
     })
-    dispatch(setAgentData(agentLogs))
+    dispatch(setAgentData({ agentLogs, agent: data.agent }))
   }
 }

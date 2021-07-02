@@ -12,7 +12,18 @@
 
 .link {
   text-decoration: underline;
-  text-decoration-color: #ffffff;
+  text-decoration-color: #fff5e9;
+}
+
+.agentList {
+  margin-top: 32px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.agentList div {
+  width: 240px;
 }
 
 @media only screen and (max-width: 767px) {

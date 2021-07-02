@@ -1,12 +1,15 @@
 import {
   FETCH_DASHBOARD_DATA,
   FETCH_AGENT_DATA,
-  FETCH_CALL_DATA
+  FETCH_CALL_DATA,
+  FETCH_ALL_AGENTS
 } from './actionTypes'
 
 let initialState = {
   dashboardTableData: null,
-  completeLogData: null
+  completeLogData: null,
+  currentAgent: null,
+  allAgents: null
 }
 
 const appReducer = (state = initialState, { type, payload }) => {
@@ -23,11 +26,12 @@ const appReducer = (state = initialState, { type, payload }) => {
         completeLogData: state.completeLogData
           ? state.completeLogData.map(
               (eachlog) =>
-                payload.find(
+                payload.agentLogs.find(
                   (agentEachlog) => agentEachlog.id === eachlog.id
                 ) || eachlog
             )
-          : payload
+          : payload.agentLogs,
+        currentAgent: payload.agent
       }
     case FETCH_CALL_DATA:
       return {
@@ -40,6 +44,11 @@ const appReducer = (state = initialState, { type, payload }) => {
                 ) || eachlog
             )
           : payload
+      }
+    case FETCH_ALL_AGENTS:
+      return {
+        ...state,
+        allAgents: payload
       }
     default:
       return state
@@ -61,6 +70,11 @@ const setNumberData = (payload) => ({
   payload
 })
 
-export { setDashboardData, setAgentData, setNumberData }
+const setAllAgents = (payload) => ({
+  type: FETCH_ALL_AGENTS,
+  payload
+})
+
+export { setDashboardData, setAgentData, setNumberData, setAllAgents }
 
 export default appReducer

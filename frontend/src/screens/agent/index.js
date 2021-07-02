@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory, useParams } from 'react-router-dom'
 import { getAgentDataThunk } from '../../redux-thunk/getAgentDataThunk'
+import { ROUTES } from '../../routes'
 
 import './agent.css'
 
@@ -20,6 +21,7 @@ function Agent(props) {
   const { id } = useParams()
   const history = useHistory()
   const completeLogData = useSelector((state) => state.completeLogData)
+  const currentAgent = useSelector((state) => state.currentAgent)
   const selectedAgentData = completeLogData?.filter(
     (eachlog) => eachlog.agentIdentifier === id
   )
@@ -36,7 +38,7 @@ function Agent(props) {
         <span
           onClick={() =>
             history.push({
-              pathname: `/call/${params.row.number}`
+              pathname: `${ROUTES.CALL}/${params.row.number}`
             })
           }
           style={{
@@ -99,25 +101,24 @@ function Agent(props) {
             primary
             onClick={() =>
               history.push({
-                pathname: '/'
+                pathname: ROUTES.DASHBOARD
               })
             }
           >
-            🠔 Back to DashBoard
+            🠔 Back to Dashboard
           </Text>
           <div style={{ marginTop: '32px' }} />
           <img
             className="agentImage"
-            alt={selectedAgentData[0].firstName}
-            src={selectedAgentData[0].photo}
+            alt={currentAgent.firstName}
+            src={currentAgent.photo}
           />
           <Text primary size="h2" bold>
-            {selectedAgentData[0].firstName || ''}{' '}
-            {selectedAgentData[0].lastName || ''}
+            {currentAgent.firstName || ''} {currentAgent.lastName || ''}
           </Text>
-          <a className="link" href={`mailto:${selectedAgentData[0].email}`}>
+          <a className="link" href={`mailto:${currentAgent.email}`}>
             <Text primary size="p1">
-              {selectedAgentData[0].email || ''}
+              {currentAgent.email || ''}
             </Text>
           </a>
           <StatusCard
@@ -125,55 +126,60 @@ function Agent(props) {
             count={selectedAgentData.length || 0}
           />
           <div style={{ marginTop: '32px' }} />
-          <Text size="p1" primary>
-            Percentage of resolution for all the call logs by the agent 👇
-          </Text>
-          <br />
-          <Chart
-            // Chart data {color, text, percentage}
-            data={[
-              {
-                color: '#434343',
-                text: 'interested',
-                percentage:
-                  (selectedAgentData?.filter(
-                    (eachItem) => eachItem.resolution === 'interested'
-                  ).length /
-                    selectedAgentData.length) *
-                  100
-              },
-              {
-                color: '#656565',
-                text: 'needs follow up',
-                percentage:
-                  (selectedAgentData?.filter(
-                    (eachItem) => eachItem.resolution === 'needs follow up'
-                  ).length /
-                    selectedAgentData.length) *
-                  100
-              },
-              {
-                color: '#878787',
-                text: 'need reschedule',
-                percentage:
-                  (selectedAgentData?.filter(
-                    (eachItem) => eachItem.resolution === 'need reschedule'
-                  ).length /
-                    selectedAgentData.length) *
-                  100
-              },
-              {
-                color: '#a9a9a9',
-                text: 'no answer',
-                percentage:
-                  (selectedAgentData?.filter(
-                    (eachItem) => eachItem.resolution === 'no answer'
-                  ).length /
-                    selectedAgentData.length) *
-                  100
-              }
-            ]}
-          />
+
+          {selectedAgentData.length > 0 && (
+            <>
+              <Text size="p1" primary>
+                Percentage of resolution for all the call logs by the agent 👇
+              </Text>
+              <br />
+              <Chart
+                // Chart data {color, text, percentage}
+                data={[
+                  {
+                    color: '#434343',
+                    text: 'interested',
+                    percentage:
+                      (selectedAgentData?.filter(
+                        (eachItem) => eachItem.resolution === 'interested'
+                      ).length /
+                        selectedAgentData.length) *
+                      100
+                  },
+                  {
+                    color: '#656565',
+                    text: 'needs follow up',
+                    percentage:
+                      (selectedAgentData?.filter(
+                        (eachItem) => eachItem.resolution === 'needs follow up'
+                      ).length /
+                        selectedAgentData.length) *
+                      100
+                  },
+                  {
+                    color: '#878787',
+                    text: 'need reschedule',
+                    percentage:
+                      (selectedAgentData?.filter(
+                        (eachItem) => eachItem.resolution === 'need reschedule'
+                      ).length /
+                        selectedAgentData.length) *
+                      100
+                  },
+                  {
+                    color: '#a9a9a9',
+                    text: 'no answer',
+                    percentage:
+                      (selectedAgentData?.filter(
+                        (eachItem) => eachItem.resolution === 'no answer'
+                      ).length /
+                        selectedAgentData.length) *
+                      100
+                  }
+                ]}
+              />
+            </>
+          )}
         </div>
       )}
       <div style={{ marginTop: '32px' }} />
