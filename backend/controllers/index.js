@@ -47,7 +47,6 @@ async function getAgentData(req, res) {
     return res.json({
       status: 'success',
       message: `Data for Agent - ${id}`,
-      agent: agents.find((agent) => agent.identifier === id),
       logs: logsWithResolutionsAndAgents.filter(
         (log) => log.agentIdentifier === id
       )
