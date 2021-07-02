@@ -45,8 +45,8 @@ function AgentList() {
             count={completeLogData?.length}
           />
           <div className="agentList">
-            {completeLogData.map((eachAgent) => (
-              <div>
+            {completeLogData.map((eachAgent,id) => (
+              <div key={id}>
                 <div style={{ marginTop: '32px' }} />
                 <span
                   style={{
@@ -60,7 +60,7 @@ function AgentList() {
                     size="p1"
                     onClick={() =>
                       history.push({
-                        pathname: `${ROUTES.AGENT}}/${eachAgent.identifier}`
+                        pathname: `${ROUTES.AGENT}/${eachAgent.identifier}`
                       })
                     }
                   >
