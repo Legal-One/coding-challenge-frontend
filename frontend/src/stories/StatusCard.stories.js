@@ -4,7 +4,7 @@ import StatusCard from '../components/molecules/statusCards'
 
 export default {
   title: 'Legal One Coding Challenge Design System/Molecules/StatusCard',
-  component: StatusCard,
+  component: StatusCard
 }
 
 const Template = (args) => <StatusCard {...args} />

@@ -125,55 +125,55 @@ function Agent(props) {
             count={selectedAgentData.length || 0}
           />
           <div style={{ marginTop: '32px' }} />
-        <Text size="p1" primary>
-          Percentage of resolution for all the call logs by the agent 👇
-        </Text>
-        <br/>
-        <Chart
-          // Chart data {color, text, percentage}
-          data={[
-            {
-              color: '#434343',
-              text: 'interested',
-              percentage:
-                (selectedAgentData?.filter(
-                  (eachItem) => eachItem.resolution === 'interested'
-                ).length /
-                  selectedAgentData.length) *
-                100
-            },
-            {
-              color: '#656565',
-              text: 'needs follow up',
-              percentage:
-                (selectedAgentData?.filter(
-                  (eachItem) => eachItem.resolution === 'needs follow up'
-                ).length /
-                  selectedAgentData.length) *
-                100
-            },
-            {
-              color: '#878787',
-              text: 'need reschedule',
-              percentage:
-                (selectedAgentData?.filter(
-                  (eachItem) => eachItem.resolution === 'need reschedule'
-                ).length /
-                  selectedAgentData.length) *
-                100
-            },
-            {
-              color: '#a9a9a9',
-              text: 'no answer',
-              percentage:
-                (selectedAgentData?.filter(
-                  (eachItem) => eachItem.resolution === 'no answer'
-                ).length /
-                  selectedAgentData.length) *
-                100
-            }
-          ]}
-        />
+          <Text size="p1" primary>
+            Percentage of resolution for all the call logs by the agent 👇
+          </Text>
+          <br />
+          <Chart
+            // Chart data {color, text, percentage}
+            data={[
+              {
+                color: '#434343',
+                text: 'interested',
+                percentage:
+                  (selectedAgentData?.filter(
+                    (eachItem) => eachItem.resolution === 'interested'
+                  ).length /
+                    selectedAgentData.length) *
+                  100
+              },
+              {
+                color: '#656565',
+                text: 'needs follow up',
+                percentage:
+                  (selectedAgentData?.filter(
+                    (eachItem) => eachItem.resolution === 'needs follow up'
+                  ).length /
+                    selectedAgentData.length) *
+                  100
+              },
+              {
+                color: '#878787',
+                text: 'need reschedule',
+                percentage:
+                  (selectedAgentData?.filter(
+                    (eachItem) => eachItem.resolution === 'need reschedule'
+                  ).length /
+                    selectedAgentData.length) *
+                  100
+              },
+              {
+                color: '#a9a9a9',
+                text: 'no answer',
+                percentage:
+                  (selectedAgentData?.filter(
+                    (eachItem) => eachItem.resolution === 'no answer'
+                  ).length /
+                    selectedAgentData.length) *
+                  100
+              }
+            ]}
+          />
         </div>
       )}
       {selectedAgentData && <Table header={header} data={selectedAgentData} />}
