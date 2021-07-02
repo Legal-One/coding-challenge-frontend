@@ -3,6 +3,7 @@ import Lottie from 'react-lottie'
 import { getDashboardDataThunk } from '../../redux-thunk/getDashboardDataThunk'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
+import { ROUTES } from '../../routes'
 
 import './dashboard.css'
 import CallSupportAnimation from '../../assets/call.json'
@@ -35,7 +36,7 @@ function DashBoard() {
         <span
           onClick={() =>
             history.push({
-              pathname: `/call/${params.row.number}`
+              pathname: `${ROUTES.CALL}/${params.row.number}`
             })
           }
           style={{
@@ -77,17 +78,20 @@ function DashBoard() {
       width: 200,
       renderCell: (params) => (
         <span
-          onClick={() =>
-            history.push({
-              pathname: `/agent/${params.row.agentIdentifier}`
-            })
-          }
           style={{
             cursor: 'pointer',
             textDecoration: 'underline'
           }}
         >
-          <Text bold size="p1">
+          <Text
+            bold
+            size="p1"
+            onClick={() =>
+              history.push({
+                pathname: `${ROUTES.AGENT}/${params.row.agentIdentifier}`
+              })
+            }
+          >
             {params.row.firstName || ''} {params.row.lastName || ''}
           </Text>
         </span>
@@ -142,6 +146,27 @@ function DashBoard() {
             <Text size="h1" primary bold>
               Call Records
             </Text>
+            <div style={{ marginTop: '32px' }} />
+            <span
+              style={{
+                cursor: 'pointer',
+                textDecoration: 'underline',
+                textDecorationColor: '#fff5e9'
+              }}
+            >
+              <Text
+                size="h5"
+                bold
+                primary
+                onClick={() =>
+                  history.push({
+                    pathname: ROUTES.AGENT
+                  })
+                }
+              >
+                List of all the Agents 👨🏻‍💼
+              </Text>
+            </span>
             <div className="subheading">
               <Text size="p1" primary>
                 A call center makes tons of calls daily through call center

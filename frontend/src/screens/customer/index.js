@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory, useParams } from 'react-router-dom'
 import { getCallDataThunk } from '../../redux-thunk/getCallDataThunk'
+import { ROUTES } from '../../routes'
 
 import './customer.css'
 
@@ -35,7 +36,7 @@ function Customer(props) {
         <span
           onClick={() =>
             history.push({
-              pathname: `/agent/${params.row.agentIdentifier}`
+              pathname: `${ROUTES.AGENT}/${params.row.agentIdentifier}`
             })
           }
           style={{
@@ -99,11 +100,11 @@ function Customer(props) {
               primary
               onClick={() =>
                 history.push({
-                  pathname: '/'
+                  pathname: ROUTES.DASHBOARD
                 })
               }
             >
-              🠔 Back to DashBoard
+              🠔 Back to Dashboard
             </Text>
             <div style={{ marginTop: '32px' }} />
             <Text primary size="h5">
