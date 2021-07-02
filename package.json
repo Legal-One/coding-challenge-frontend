@@ -26,12 +26,5 @@
     "bugs": {
         "url": "https://github.com/Legal-One/coding-challenge-frontend/issues"
     },
-    "homepage": "https://github.com/Legal-One/coding-challenge-frontend#readme",
-    "devDependencies": {
-        "prettier": "2.3.2"
-    },
-    "dependencies": {
-        "eslint-plugin-react-hooks": "^4.2.0",
-        "react-lottie": "^1.2.3"
-    }
+    "homepage": "https://github.com/Legal-One/coding-challenge-frontend#readme"
 }
