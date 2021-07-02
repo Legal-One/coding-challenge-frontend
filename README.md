@@ -14,7 +14,7 @@ recommended: a good cup of coffee ☕ and lo-fi coding music 🎵.
 
 The above link opens up the mockup designs for the website developed as a solution to the challenge.
 
-The designs and development is planned in a component driven approch and design system is created considering the concepts of Brad Frost's [**Atomic Design System**](https://atomicdesign.bradfrost.com/)
+The designs and development is planned in a component driven approach and design system is created considering the concepts of Brad Frost's [**Atomic Design System**](https://atomicdesign.bradfrost.com/)
 
 ### Screen Shots
 
