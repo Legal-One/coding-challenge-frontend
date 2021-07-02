@@ -47,6 +47,7 @@ async function getAgentData(req, res) {
     return res.json({
       status: 'success',
       message: `Data for Agent - ${id}`,
+      agent: agents.find((agent) => agent.identifier === id),
       logs: logsWithResolutionsAndAgents.filter(
         (log) => log.agentIdentifier === id
       )
@@ -87,4 +88,17 @@ async function getCallsData(req, res) {
   }
 }
 
-module.exports = { getDashboardData, getAgentData, getCallsData }
+// get all Agent
+async function getAllAgents(req, res) {
+  try {
+    return res.json({
+      status: 'success',
+      message: 'Data for all Agents',
+      agents
+    })
+  } catch (err) {
+    return res.json({ status: 'error', message: err })
+  }
+}
+
+module.exports = { getDashboardData, getAgentData, getCallsData, getAllAgents }
