@@ -110,24 +110,24 @@ function Agent(props) {
           <div style={{ marginTop: '32px' }} />
           <img
             className="agentImage"
-            alt={currentAgent.firstName}
-            src={currentAgent.photo}
+            alt={currentAgent?.firstName}
+            src={currentAgent?.photo}
           />
           <Text primary size="h2" bold>
-            {currentAgent.firstName || ''} {currentAgent.lastName || ''}
+            {currentAgent?.firstName || ''} {currentAgent?.lastName || ''}
           </Text>
-          <a className="link" href={`mailto:${currentAgent.email}`}>
+          <a className="link" href={`mailto:${currentAgent?.email}`}>
             <Text primary size="p1">
-              {currentAgent.email || ''}
+              {currentAgent?.email || ''}
             </Text>
           </a>
           <StatusCard
             status="Total Calls 📞"
-            count={selectedAgentData.length || 0}
+            count={selectedAgentData?.length || 0}
           />
           <div style={{ marginTop: '32px' }} />
 
-          {selectedAgentData.length > 0 && (
+          {selectedAgentData?.length > 0 && (
             <>
               <Text size="p1" primary>
                 Percentage of resolution for all the call logs by the agent 👇
