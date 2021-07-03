@@ -1,0 +1,33 @@
+.badge {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  padding: 4px 8px;
+  display: inline-block;
+  border-radius: 6px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 18px;
+  margin: 4px;
+  white-space: nowrap;
+}
+
+.badge--no--answer {
+  background: linear-gradient(0deg, #db494922, #db494922), #ffffff;
+  color: #db4949;
+}
+
+.badge--interested {
+  background: linear-gradient(0deg, #1bc5bd22, #1bc5bd22), #ffffff;
+  color: #1bc5bd;
+}
+
+.badge--need--reschedule {
+  background: linear-gradient(0deg, #3699ff22, #3699ff22), #ffffff;
+  color: #3699ff;
+}
+
+.badge--needs--follow--up {
+  background: linear-gradient(0deg, #ffa80022, #ffa80022), #ffffff;
+  color: #ffa800;
+}
