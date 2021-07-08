@@ -65,7 +65,6 @@ router.get("/", function (req, res, next) {
 
   const dataMap = new Map();
   const mainDataMap = aggregateDataForTable(agentsData, logData, dataMap);
-  console.log([...mainDataMap.values()]);
   res.end(JSON.stringify([...mainDataMap.values()]));
 });
 
@@ -82,6 +81,7 @@ function aggregateDataForAgent(agentId, logData, reslData) {
       continue;
     }
     const newEntry = {
+      id: log.agentIdentifier,
       number: log.number,
       date_time: log.dateTime,
       duration: log.duration,
@@ -100,6 +100,7 @@ function aggregateDataForNumber(num, agentsData, logData, reslData) {
       continue;
     }
     const newEntry = {
+      id: log.identifier,
       agent_name: findAgentById(log.agentIdentifier, agentsData),
       date_time: log.dateTime,
       duration: log.duration,
