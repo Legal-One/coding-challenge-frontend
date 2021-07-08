@@ -59,11 +59,9 @@ router.get("/", function (req, res, next) {
 
   const agentPath = jsonDirPath + "agents.json";
   const logPath = jsonDirPath + "logs.json";
-  const reslPath = jsonDirPath + "resolution.json";
-
+  
   const agentsData = readFromPathSync(agentPath);
   const logData = readFromPathSync(logPath);
-  const reslData = readFromPathSync(reslPath);
 
   const dataMap = new Map();
   const mainDataMap = aggregateDataForTable(agentsData, logData, dataMap);
@@ -71,11 +69,54 @@ router.get("/", function (req, res, next) {
   res.end(JSON.stringify([...mainDataMap.values()]));
 });
 
+function findResolutionById(id, reslData) {
+  const instance = reslData.find(el => el.identifier == id);
+  return instance.resolution;
+} 
+
+function aggregateDataForAgent(agentId, logData, reslData) {
+  let agentLog = []
+  for (let it=0;it<logData.length;it++) {
+    const log = logData[it];
+    if (log.agentIdentifier != agentId) {
+      continue;
+    }
+    const newEntry = {
+      number: log.number,
+      date_time: log.dateTime,
+      duration: log.duration,
+      resolution: findResolutionById(log.identifier, reslData)
+    }
+    agentLog.push(newEntry);
+  }
+  return agentLog;
+}
+
+function aggregateDataForNumber(num, agentsData, logData, reslData) {
+  let numLog = []
+  for (let it=0;it<logData.length;it++) {
+    const log = logData[it];
+    if (log.number != num) {
+      continue;
+    }
+    const newEntry = {
+      agent_name: findAgentById(log.agentIdentifier, agentsData),
+      date_time: log.dateTime,
+      duration: log.duration,
+      resolution: findResolutionById(log.identifier, reslData)
+    }
+    numLog.push(newEntry);
+  }
+  return numLog;
+}
+
 /**
  *  GET specific agent call log
- *  Read json data, prepare dashboard display json
+ *  Agent specific call log, show all numbers, date-time, resolution for selected agent
  */
-router.get("/agent/:agentId", function (req, res, next) {
+router.get("/call/:number", function (req, res, next) {
+  
+  const selectedNum = req.params.number;
   const jsonDirPath = "public/json-data/";
 
   const agentPath = jsonDirPath + "agents.json";
@@ -86,7 +127,27 @@ router.get("/agent/:agentId", function (req, res, next) {
   const logData = readFromPathSync(logPath);
   const reslData = readFromPathSync(reslPath);
 
-  res.send(req.params);
+  const numberLog = aggregateDataForNumber(selectedNum, agentsData, logData, reslData);
+  res.send(JSON.stringify(numberLog));
+});
+
+/**
+ *  GET specific number call log
+ *  Number specific call log, show all agent names, date-time, resolution for selected number
+ */
+ router.get("/agent/:agentId", function (req, res, next) {
+  
+  const agentId = req.params.agentId;
+  const jsonDirPath = "public/json-data/";
+
+  const logPath = jsonDirPath + "logs.json";
+  const reslPath = jsonDirPath + "resolution.json";
+
+  const logData = readFromPathSync(logPath);
+  const reslData = readFromPathSync(reslPath);
+
+  const agentLogs = aggregateDataForAgent(agentId,logData, reslData);
+  res.send(JSON.stringify(agentLogs));
 });
 
 module.exports = router;
