@@ -1,0 +1,14 @@
+build/**
+data/
+node_modules/
+
+webpack.config.js
+config/firebaseConfig.js
+src/database/seeders/**
+types/
+test/**
+jest.config.js
+jestSetup.ts
+test/**
+_mocks_/**
+__tests__/**

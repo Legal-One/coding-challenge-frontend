@@ -1,0 +1,278 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:promise/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier",
+    "plugin:prettier/recommended"
+  ],
+  "rules": {
+    "prettier/prettier": "warn",
+    "@typescript-eslint/camelcase": "off",
+    "@typescript-eslint/explicit-function-return-type": [
+      "off",
+      { "allowExpressions": true }
+    ],
+    // Force function overloads to be declared together. This ensures readers understand APIs.
+    "@typescript-eslint/adjacent-overload-signatures": "error",
+
+    // disable the rule for all files
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+
+    // Warn when an empty interface is defined. These are generally not useful.
+    "@typescript-eslint/no-empty-interface": "warn",
+
+    // Do not allow internal modules or namespaces . These are deprecated in favor of ES6 modules.
+    "@typescript-eslint/no-namespace": "error",
+
+    // Do not allow type assertions that do nothing. This is a big warning that the developer may not understand the
+    // code currently being edited (they may be incorrectly handling a different type case that does not exist).
+    "@typescript-eslint/no-unnecessary-type-assertion": "error",
+
+    // prefer for( ... of ... ) to an index loop when the index is only used to fetch an object from an array.
+    // (Even better: check out utils like .map if transforming an array!)
+    "@typescript-eslint/prefer-for-of": "warn",
+
+    // Force the use of ES6-style imports instead of /// <reference path=> imports.
+    "@typescript-eslint/triple-slash-reference": "error",
+
+    // Warns if function overloads could be unified into a single function with optional or rest parameters.
+    "@typescript-eslint/unified-signatures": "warn",
+
+    // Do not allow super() to be called twice in a constructor.
+    "constructor-super": "error",
+
+    // Disallows the (often typo) syntax if (var1 = var2). Replace with if (var2) { var1 = var2 }.
+    "no-cond-assign": "error",
+
+    // Do not allow the same case to appear more than once in a switch block.
+    "no-duplicate-case": "error",
+
+    // Empty blocks are almost never needed. Allow the one general exception: empty catch blocks.
+    "no-empty": [
+      "error",
+      {
+        "allowEmptyCatch": true
+      }
+    ],
+    "no-empty-function": "error",
+
+    // The 'this' keyword can only be used inside of classes.
+    "no-invalid-this": "error",
+
+    // Do not allow the subtle/obscure comma operator.
+    "no-sequences": "error",
+
+    // Do not allow strings to be thrown because they will not include stack traces. Throw Errors instead.
+    "no-throw-literal": "error",
+
+    // Disallow control flow statements, such as return, continue, break, and throw in finally blocks.
+    "no-unsafe-finally": "error",
+
+    // Disallow nonsensical label usage.
+    "no-unused-labels": "error",
+
+    // Warn when variables are defined with var. Var has subtle meaning that can lead to bugs. Strongly prefer const for
+    // most values and let for values that will change.
+    "no-var": "warn",
+
+    "semi": ["error", "always"],
+    "comma-dangle": [
+      "off",
+      {
+        "arrays": "always-multiline",
+        "objects": "always-multiline",
+        "imports": "ignore",
+        "exports": "never"
+      }
+    ],
+    "object-curly-spacing": ["error", "always"],
+    "no-multiple-empty-lines": [
+      "error",
+      {
+        "max": 1,
+        "maxEOF": 1
+      }
+    ],
+    "eol-last": ["error", "always"],
+    "no-param-reassign": ["warn"],
+    "arrow-body-style": ["error", "as-needed"],
+    "arrow-parens": [
+      "warn",
+      "as-needed",
+      {
+        "requireForBlockBody": false
+      }
+    ],
+    "arrow-spacing": [
+      "error",
+      {
+        "before": true,
+        "after": true
+      }
+    ],
+    "no-const-assign": "error",
+    "no-dupe-class-members": "error",
+    "no-duplicate-imports": "error",
+    "no-new-symbol": "error",
+    "no-this-before-super": "error",
+    "no-useless-computed-key": "error",
+    "no-useless-constructor": "warn",
+    "no-useless-rename": [
+      "error",
+      {
+        "ignoreDestructuring": false,
+        "ignoreImport": false,
+        "ignoreExport": false
+      }
+    ],
+    "prefer-const": [
+      "error",
+      {
+        "destructuring": "all",
+        "ignoreReadBeforeAssign": true
+      }
+    ],
+    "prefer-template": "error",
+    "require-yield": "error",
+    "rest-spread-spacing": ["error", "never"],
+    "template-curly-spacing": "error",
+    "yield-star-spacing": ["error", "after"],
+    "prefer-spread": "error",
+    "symbol-description": "error",
+    "max-len": [
+      "error",
+      {
+        "code": 120
+      }
+    ],
+    "max-lines-per-function": ["off", 20],
+    "sort-keys": ["error", "asc"],
+    // Removed rule "disallow the use of console" from recommended eslint rules
+    "no-console": "off",
+
+    // Removed rule "disallow multiple spaces in regular expressions" from recommended eslint rules
+    "no-regex-spaces": "off",
+
+    // Removed rule "disallow the use of debugger" from recommended eslint rules
+    "no-debugger": "off",
+
+    // Removed rule "disallow mixed spaces and tabs for indentation" from recommended eslint rules
+    "no-mixed-spaces-and-tabs": "off",
+
+    // Removed rule "disallow the use of undeclared variables unless mentioned in /*global */ comments" from recommended eslint rules
+    "no-undef": "error",
+
+    // Warn against template literal placeholder syntax in regular strings
+    "no-template-curly-in-string": 1,
+
+    // Warn if return statements do not either always or never specify values
+    "consistent-return": "off",
+
+    // Warn if no return statements in callbacks of array methods
+    "array-callback-return": 1,
+
+    // Require the use of === and !==
+    "eqeqeq": 2,
+
+    // Disallow the use of alert, confirm, and prompt
+    "no-alert": 2,
+
+    // Disallow the use of arguments.caller or arguments.callee
+    "no-caller": 2,
+
+    // Disallow null comparisons without type-checking operators
+    "no-eq-null": 2,
+
+    // Disallow the use of eval()
+    "no-eval": 2,
+
+    // Warn against extending native types
+    "no-extend-native": 1,
+
+    // Warn against unnecessary calls to .bind()
+    "no-extra-bind": 1,
+
+    // Warn against unnecessary labels
+    "no-extra-label": 1,
+
+    // Disallow leading or trailing decimal points in numeric literals
+    "no-floating-decimal": 2,
+
+    // Warn against shorthand type conversions
+    "no-implicit-coercion": 1,
+
+    // Warn against function declarations and expressions inside loop statements
+    "no-loop-func": 1,
+
+    // Disallow new operators with the Function object
+    "no-new-func": 2,
+
+    // Warn against new operators with the String, Number, and Boolean objects
+    "no-new-wrappers": 1,
+
+    // Require using Error objects as Promise rejection reasons
+    "prefer-promise-reject-errors": 2,
+
+    // Enforce “for” loop update clause moving the counter in the right direction
+    "for-direction": 2,
+
+    // Enforce return statements in getters
+    "getter-return": 2,
+
+    // Disallow await inside of loops
+    "no-await-in-loop": 2,
+
+    // Disallow comparing against -0
+    "no-compare-neg-zero": 2,
+
+    // Warn against catch clause parameters from shadowing variables in the outer scope
+    "no-catch-shadow": 1,
+
+    // Disallow identifiers from shadowing restricted names
+    "no-shadow-restricted-names": 2,
+
+    // Enforce return statements in callbacks of array methods
+    "callback-return": 2,
+
+    // Require error handling in callbacks
+    "handle-callback-err": 2,
+
+    // Warn against string concatenation with __dirname and __filename
+    "no-path-concat": 1,
+
+    // Prefer using arrow functions for callbacks
+    "prefer-arrow-callback": 1,
+
+    // Return inside each then() to create readable and reusable Promise chains.
+    // Forces developers to return console logs and http calls in promises.
+    "promise/always-return": 1,
+
+    //Enforces the use of catch() on un-returned promises
+    "promise/catch-or-return": 1,
+
+    // Warn against nested then() or catch() statements
+    "promise/no-nesting": 1
+  },
+  "globals": {},
+  "parserOptions": {
+    "project": "tsconfig.json",
+    "sourceType": "module",
+    "ecmaVersion": 10
+  },
+  "env": {
+    "node": true,
+    "commonjs": true,
+    "es6": true
+  },
+  "plugins": ["@typescript-eslint", "prettier"],
+  "parser": "@typescript-eslint/parser",
+  "overrides": [
+    {
+      "files": ["*.js"],
+      "rules": {
+        "no-empty": "off"
+      }
+    }
+  ]
+}
