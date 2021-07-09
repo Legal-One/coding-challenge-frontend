@@ -9,6 +9,15 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import {Link, useParams} from "react-router-dom";
+import {
+    Tooltip,
+    BarChart,
+    CartesianGrid,
+    XAxis,
+    YAxis,
+    Legend,
+    Bar,
+  } from "recharts";
 const axios = require("axios").default;
 
 const useStyles = makeStyles({
@@ -28,15 +37,57 @@ type callDataType = {
     duration: number,
     resolution: string,
 }
+
+type chartDataType = {
+    name: string;
+    value: number;
+}
 function CallLog() {
   let { selectedNum } = useParams<RouteParams>();
   const classes = useStyles();
   const callUrl = `http://localhost:3000/call/${selectedNum}`;
   const [tableData, setTableData] = useState<callDataType[]>([]);
+  const [chartData, setChartData] = useState<chartDataType[]>([]);
 
+  const aggregateDataForChart = (data:callDataType[]) => {
+    const dataMap = new Map();
+    for(let it=0;it<data.length;it++) {
+        const row = data[it];
+        if (dataMap.get(row.resolution) != null) {
+            const prevRow = dataMap.get(row.resolution);
+            const newRow = {
+                duration: row.duration + prevRow.duration,
+                count: prevRow.count + 1,
+            }
+            dataMap.set(row.resolution, newRow);
+            continue;
+        }
+        const newRow = {
+            duration: row.duration,
+            count: 1,
+        }
+        dataMap.set(row.resolution, newRow);
+    }
+    return dataMap;
+  }
+
+  const prepareChartData = (tableData:callDataType[]) => {
+    const dataMap = aggregateDataForChart(tableData);
+    let tempDataArr: chartDataType[] = [];
+    dataMap.forEach((val,key)=> {
+        const avg = parseFloat((val.duration/val.count).toFixed(2));
+        const row: chartDataType = {
+            name: key,
+            value: avg,
+        }
+        tempDataArr.push(row);
+    })
+    setChartData(tempDataArr)
+  }
   const fetchDashboardData = async () => {
     const response = await axios.get(callUrl);
     setTableData(response.data);
+    prepareChartData(response.data)
   };
 
   const prettyPrintDateTime = (dateTimeStr: string) => {
@@ -49,6 +100,18 @@ function CallLog() {
   }, []);
 
   return (
+    <div>
+    <div id="barChart" className="chart-container">
+      <div>Avg Call Duration per Resolution For Agent</div>
+      <BarChart width={730} height={250} data={chartData}>
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="name" />
+        <YAxis />
+        <Tooltip />
+        <Legend />
+        <Bar dataKey="value" fill="#8884d8" />
+      </BarChart>
+    </div>
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
@@ -77,6 +140,7 @@ function CallLog() {
         </TableBody>
       </Table>
     </TableContainer>
+    </div>
   );
 }
 export default CallLog;

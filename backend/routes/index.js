@@ -81,7 +81,7 @@ function aggregateDataForAgent(agentId, logData, reslData) {
       continue;
     }
     const newEntry = {
-      id: log.agentIdentifier,
+      id: log.identifier,
       number: log.number,
       date_time: log.dateTime,
       duration: log.duration,
