@@ -102,7 +102,7 @@ function CallLog() {
   return (
     <div>
     <div id="barChart" className="chart-container">
-      <div>Avg Call Duration per Resolution For Agent</div>
+      <div>Avg Call Duration per Resolution For Number</div>
       <BarChart width={730} height={250} data={chartData}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="name" />

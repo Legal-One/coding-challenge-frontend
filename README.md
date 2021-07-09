@@ -1,3 +1,11 @@
+# Application Details
+
+## Architecture
+### Backend
+The way the application is setup, I am using express for the backend, all the required data is first formatted and aggregated in api endpoints which are similar to the routes that we need. It is then sent to the frontend as JSON
+
+### Frontend
+In the frontend I am using *REACT* for the UI framework. I am using *Material UI* as the UI component library. I am using *Rechart* as the charting library for producing graphs. This is a very simplistic implementation that fulfills what was required in the coding challenge.
 # Frontend / Javascipt - coding challenge.
 
 Welcome to Legal One coding challenge, through this challenge we get to know you better from the coding side of you. let's start.
