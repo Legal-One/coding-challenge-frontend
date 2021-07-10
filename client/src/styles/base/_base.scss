@@ -1,0 +1,15 @@
+input:focus,
+select {
+	outline: 0 none;
+}
+
+a:link,
+a:hover,
+a:visited {
+	text-decoration: none;
+	color: $color-black;
+}
+
+button:focus {
+	outline: none;
+}

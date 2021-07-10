@@ -1,6 +1,9 @@
 import Routes from './routes';
 
-const App = () => {
+// Styling
+import './styles/main.scss';
+
+const App = (): JSX.Element => {
 	return <Routes />;
 };
 

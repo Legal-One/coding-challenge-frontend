@@ -1,0 +1,66 @@
+// MEDIA QUERY MANAGER
+/*
+    0 -- 600px:     Phone
+    600 -- 900px:     Tablet portrait
+    900 -- 1200px:     Tablet landscape
+    [1200 -- 1800]px is where our normal styles apply
+    1800px:     Big desktop
+    
+    $breakpoint argument choices
+    -phone
+    -tab-port
+    -tab-land
+    -big-desktop
+    
+    1em - 16px
+    */
+@mixin respond($breakpoint) {
+	@if $breakpoint == phone {
+		@media (max-width: 37.5em) {
+			@content;
+		} //600px
+	}
+	@if $breakpoint == tab-port {
+		@media (max-width: 56.25em) {
+			@content;
+		} //900px
+	}
+	@if $breakpoint == tab-land {
+		@media (max-width: 75em) {
+			@content;
+		} //1200px
+	}
+	@if $breakpoint == big-desktop {
+		@media (min-width: 112.5em) {
+			@content;
+		} //1800px
+	}
+}
+
+// center objects
+@mixin center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+// @mixin boxShadow {
+// 	box-shadow: 0px 1px 8px rgba($color-gray-600, 0.15);
+// }
+
+// @mixin headerShadow {
+// 	box-shadow: 0px 4px 30px rgba(171, 179, 196, 0.2);
+// }
+// @mixin cardShadow {
+// 	box-shadow: 0px 2px 8px rgba($color-gray-600, 0.15);
+// }
+
+// Tag Mixin
+// @mixin chooseTag($color) {
+// 	@if $color == '--green' {
+// 		background-color: $color-cyan-100;
+// 		.tag__text {
+// 			color: $color-cyan-700;
+// 		}
+// 	}
+// }
