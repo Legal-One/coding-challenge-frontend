@@ -3,9 +3,9 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
-import Home from "./views/home";
-import CallLog from "./views/callLog";
-import AgentLog from "./views/agentLog"
+import Home from "./views/home/home";
+import CallLog from "./views/call/callLog";
+import AgentLog from "./views/agent/agentLog"
 
 function App() {
   return (

@@ -18,6 +18,7 @@ import {
     Legend,
     Bar,
   } from "recharts";
+import "./callLog.css";
 const axios = require("axios").default;
 
 const useStyles = makeStyles({

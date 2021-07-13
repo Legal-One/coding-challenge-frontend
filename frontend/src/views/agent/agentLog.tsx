@@ -17,6 +17,7 @@ import {
     Legend,
     Bar,
   } from "recharts";
+import "./agentLog.css";
 const axios = require("axios").default;
 
 const useStyles = makeStyles({
