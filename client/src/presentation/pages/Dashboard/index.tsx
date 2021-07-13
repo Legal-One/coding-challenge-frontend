@@ -7,10 +7,10 @@ const Home: FC<JSX.Element> = (): JSX.Element => {
 	return (
 		<main className="dashboard page__wrapper">
 			<div className="page__container">
-				<div className="dashboard__intro">
+				<section className="dashboard__intro">
 					<h2>Dashboard</h2>
 					<p>Call center agents calls summary and statistics</p>
-				</div>
+				</section>
 				<DataSummary />
 				<ChartColumn />
 				<AllCalls />

@@ -24,41 +24,26 @@ const Table: FC<TableProps> = props => {
 	});
 	return (
 		<div>
-			<table {...getTableProps()} style={{ border: 'solid 1px blue' }}>
-				<thead>
+			<table {...getTableProps()} className="table">
+				<thead className="table__head">
 					{headerGroups.map(headerGroup => (
-						<tr {...headerGroup.getHeaderGroupProps()}>
+						<tr {...headerGroup.getHeaderGroupProps()} className="table__head--row">
 							{headerGroup.headers.map(column => (
-								<th
-									{...column.getHeaderProps()}
-									style={{
-										borderBottom: 'solid 3px red',
-										background: 'aliceblue',
-										color: 'black',
-										fontWeight: 'bold',
-									}}
-								>
+								<th {...column.getHeaderProps()} className="table__head--data">
 									{column.render('Header')}
 								</th>
 							))}
 						</tr>
 					))}
 				</thead>
-				<tbody {...getTableBodyProps()}>
+				<tbody {...getTableBodyProps()} className="table__body">
 					{rows.map(row => {
 						prepareRow(row);
 						return (
-							<tr {...row.getRowProps()}>
+							<tr {...row.getRowProps()} className="table__body--row">
 								{row.cells.map(cell => {
 									return (
-										<td
-											{...cell.getCellProps()}
-											style={{
-												padding: '10px',
-												border: 'solid 1px gray',
-												background: 'papayawhip',
-											}}
-										>
+										<td {...cell.getCellProps()} className="table__body--data">
 											{cell.render('Cell')}
 										</td>
 									);

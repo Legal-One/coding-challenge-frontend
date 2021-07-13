@@ -41,4 +41,13 @@
 			}
 		}
 	}
+	&__allCalls {
+		margin: 1.6rem 0;
+		h2 {
+			color: $color-primary;
+			text-transform: uppercase;
+			font-weight: 400;
+			margin-bottom: 2rem;
+		}
+	}
 }

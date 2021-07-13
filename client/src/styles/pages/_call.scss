@@ -1,0 +1,37 @@
+.callPage {
+	&__header {
+		width: 100%;
+		color: $color-white;
+		background-color: $color-secondary;
+		border-radius: $raddi-10;
+		padding: 2rem;
+		margin-top: 1rem;
+
+		h2 {
+			font-family: $font-secondary;
+			font-size: 1.8rem;
+			font-weight: 400;
+			padding: 2rem 0;
+			span {
+				font-weight: 600;
+			}
+		}
+	}
+}
+
+.goBack {
+	display: flex;
+	align-items: center;
+	background: transparent;
+	border: none;
+	margin-top: 2rem;
+	cursor: pointer;
+
+	p {
+		font-size: 1.4rem;
+		font-weight: 400;
+		margin-left: 0.8rem;
+		color: $color-white;
+		font-family: $font-main;
+	}
+}

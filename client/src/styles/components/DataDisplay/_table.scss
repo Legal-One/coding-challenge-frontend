@@ -1,0 +1,29 @@
+.table {
+	width: 100%;
+	border-spacing: 0;
+	&__head {
+		&--data {
+			font-size: 1.2rem;
+			color: $color-secondary;
+			font-weight: 600;
+			padding: 1rem 1rem;
+			text-align: left;
+			text-transform: uppercase;
+		}
+	}
+	&__body {
+		border-radius: $raddi-10;
+		&--row {
+			border-color: #f2f8ff;
+
+			// margin: 0.2rem 0;
+		}
+		&--data {
+			font-size: 1.4rem;
+			color: #495057;
+			font-weight: 500;
+			padding: 1.2rem 1rem;
+			border-bottom: 1px solid #f2f8ff;
+		}
+	}
+}

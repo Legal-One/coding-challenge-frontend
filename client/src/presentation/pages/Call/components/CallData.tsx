@@ -6,22 +6,16 @@ import { Badge, Card, Table } from '../../../components/DataDisplay';
 
 import { selectType } from '../../../../utils';
 
-const AllCalls: FC = () => {
+const CallData: FC = () => {
 	const formatedTableHead = [...tableHead];
-	formatedTableHead[5] = {
-		...formatedTableHead[5],
+	formatedTableHead[4] = {
+		...formatedTableHead[4],
 		Cell: ({ value }: any) => {
 			return <Badge text={value} type={selectType(value)} />;
 		},
 	};
 	formatedTableHead[0] = {
 		...formatedTableHead[0],
-		Cell: ({ value, row }: any) => {
-			return <Link to={`/call/${row.id}`}>{value}</Link>;
-		},
-	};
-	formatedTableHead[1] = {
-		...formatedTableHead[1],
 		Cell: ({ value, row }: any) => {
 			return <Link to={`/agent/${row.id}`}>{value}</Link>;
 		},
@@ -34,4 +28,4 @@ const AllCalls: FC = () => {
 	);
 };
 
-export default AllCalls;
+export default CallData;
