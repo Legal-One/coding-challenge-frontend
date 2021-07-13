@@ -1,0 +1,11 @@
+.chart-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.chart-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
