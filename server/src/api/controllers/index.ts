@@ -50,6 +50,14 @@ const getNumberRecords = async (req: Request, res: Response): Promise<Response<u
 	}
 };
 
+const getAllAgents = async (req: Request, res: Response): Promise<Response<unknown, Record<string, unknown>>> => {
+	try {
+		return utilityResponse({ data: agents, message: 'All agents', res, statusCode: 200 });
+	} catch (err) {
+		return utilityResponse({ message: err.msg, res, statusCode: 500 });
+	}
+};
+
 const getAllDashData = () => {
 	const dataWithResolutionLogData: IDashboardResponse[] = logs.map(log => ({
 		...resolutions.find(resolution => resolution.identifier === log.identifier),
@@ -59,4 +67,4 @@ const getAllDashData = () => {
 	return dataWithResolutionLogData;
 };
 
-export { getAgentRecords, getDashboardData, getNumberRecords };
+export { getAllAgents, getAgentRecords, getDashboardData, getNumberRecords };

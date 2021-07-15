@@ -1,9 +1,9 @@
 import { Response } from 'express';
-import { IDashboardResponse, IAgentResponse } from '../controllers/types';
+import { IDashboardResponse, IAgentResponse, IAgentData } from '../controllers/types';
 
 type UtilityResponseType = {
 	res: Response;
-	data?: IDashboardResponse[] | IAgentResponse | null;
+	data?: IDashboardResponse[] | IAgentResponse | IAgentData[] | null;
 	message: string;
 	statusCode: number;
 };

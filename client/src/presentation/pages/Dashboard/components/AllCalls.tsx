@@ -1,12 +1,18 @@
-import { FC } from 'react';
+import { FC, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { tableData, tableHead } from '../constants';
+import { tableHead } from '../constants';
 
 import { Badge, Card, Table } from '../../../components/DataDisplay';
 
 import { selectType } from '../../../../utils';
+import { Context } from '../../../../infrastructure/context';
 
-const AllCalls: FC = () => {
+const AllCalls: FC = (): JSX.Element => {
+	const { state } = useContext<any>(Context);
+	const {
+		dashboardSummary: { tableData },
+	} = state;
+
 	const formatedTableHead = [...tableHead];
 	formatedTableHead[5] = {
 		...formatedTableHead[5],
@@ -28,8 +34,8 @@ const AllCalls: FC = () => {
 	};
 	return (
 		<Card className="dashboard__allCalls">
-			<h2>Call Frequency</h2>
-			<Table tableHead={formatedTableHead} tableData={tableData} />
+			<h2>All calls</h2>
+			<Table tableHead={formatedTableHead} tableData={tableData ? tableData : []} />
 		</Card>
 	);
 };

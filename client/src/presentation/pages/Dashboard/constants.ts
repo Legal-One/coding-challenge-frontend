@@ -4,13 +4,13 @@ import { StatsCardProps } from '../../components/Common/types';
 
 type TableDataInterface = {
 	id?: string | number;
-	phoneNumber: string;
+	number: string;
 	agent: string;
 	date: string;
 	time: string;
 	duration: string;
 	resolution: string;
-	calls: string;
+	count: string;
 };
 
 const summaryData: StatsCardProps[] = [
@@ -34,7 +34,7 @@ const summaryData: StatsCardProps[] = [
 const tableHead: Array<Column<TableDataInterface>> = [
 	{
 		Header: 'Phone number',
-		accessor: 'phoneNumber',
+		accessor: 'number',
 	},
 	{
 		Header: 'Agent',
@@ -58,80 +58,80 @@ const tableHead: Array<Column<TableDataInterface>> = [
 	},
 	{
 		Header: 'Calls',
-		accessor: 'calls',
+		accessor: 'count',
 	},
 ];
 
 const tableData: TableDataInterface[] = [
 	{
 		id: '1',
-		phoneNumber: '+49151484522',
+		number: '+49151484522',
 		agent: 'Abraham Ellis',
 		date: '10/07/2021',
 		time: '03:00 PM',
 		duration: '3m 9s',
 		resolution: 'needs follow up',
-		calls: '13',
+		count: '13',
 	},
 	{
 		id: '2',
-		phoneNumber: '+49151484522',
+		number: '+49151484522',
 		agent: 'Abraham Ellis',
 		date: '10/07/2021',
 		time: '03:00 PM',
 		duration: '3m 9s',
 		resolution: 'needs follow up',
-		calls: '13',
+		count: '13',
 	},
 	{
 		id: '3',
-		phoneNumber: '+49151484522',
+		number: '+49151484522',
 		agent: 'Abraham Ellis',
 		date: '10/07/2021',
 		time: '03:00 PM',
 		duration: '3m 9s',
 		resolution: 'needs follow up',
-		calls: '13',
+		count: '13',
 	},
 	{
 		id: '4',
-		phoneNumber: '+49151484522',
+		number: '+49151484522',
 		agent: 'Abraham Ellis',
 		date: '10/07/2021',
 		time: '03:00 PM',
 		duration: '3m 9s',
 		resolution: 'needs follow up',
-		calls: '13',
+		count: '13',
 	},
 	{
 		id: '5',
-		phoneNumber: '+49151484522',
+		number: '+49151484522',
 		agent: 'Abraham Ellis',
 		date: '10/07/2021',
 		time: '03:00 PM',
 		duration: '3m 9s',
 		resolution: 'needs follow up',
-		calls: '13',
+		count: '13',
 	},
 	{
 		id: '6',
-		phoneNumber: '+49151484522',
+		number: '+49151484522',
 		agent: 'Abraham Ellis',
 		date: '10/07/2021',
 		time: '03:00 PM',
 		duration: '3m 9s',
 		resolution: 'needs follow up',
-		calls: '13',
+		count: '13',
 	},
 	{
 		id: '7',
-		phoneNumber: '+49151484522',
+		number: '+49151484522',
 		agent: 'Abraham Ellis',
 		date: '10/07/2021',
 		time: '03:00 PM',
 		duration: '3m 9s',
 		resolution: 'needs follow up',
-		calls: '13',
+		count: '13',
 	},
 ];
 

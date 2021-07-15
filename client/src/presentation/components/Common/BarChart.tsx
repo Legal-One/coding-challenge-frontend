@@ -3,7 +3,7 @@ import { ResponsiveBar } from '@nivo/bar';
 import { BarChartProps } from './types';
 
 const BarChart: FC<BarChartProps> = props => {
-	const { data, indexBy, keys } = props;
+	const { data, indexBy, keys, leftAxisLegend } = props;
 	return (
 		<ResponsiveBar
 			data={data}
@@ -33,7 +33,7 @@ const BarChart: FC<BarChartProps> = props => {
 			fill={[
 				{
 					match: {
-						id: 'calls',
+						id: keys[0],
 					},
 					id: 'lines',
 				},
@@ -42,7 +42,7 @@ const BarChart: FC<BarChartProps> = props => {
 				tickSize: 5,
 				tickPadding: 5,
 				tickRotation: 0,
-				legend: '',
+				legend: leftAxisLegend,
 				legendPosition: 'middle',
 				legendOffset: 32,
 			}}
