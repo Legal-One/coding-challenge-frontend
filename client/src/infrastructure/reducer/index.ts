@@ -1,9 +1,11 @@
-import { FETCHED_DASHBOARD_DATA } from './actionTypes';
+import { Reducer } from 'react';
+import ActionTypes from './actionTypes';
+import { IInitialState, IAction } from '../types';
 
-const reducer = (state: any, { type, payload }: any) => {
+const reducer: Reducer<IInitialState, IAction> = (state, action) => {
+	const { type, payload } = action;
 	switch (type) {
-		case FETCHED_DASHBOARD_DATA:
-			console.log(payload);
+		case ActionTypes.FETCHED_DASHBOARD_DATA:
 			return { ...state, dashboardSummary: payload.dashboardSummary, allLogs: payload.allLogs };
 		default:
 			return state;

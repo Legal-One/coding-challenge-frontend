@@ -5,12 +5,13 @@ import AllCalls from './components/AllCalls';
 
 import useFetchDashboardData from './hooks/useFetchDashboardData';
 import { Context } from '../../../infrastructure/context';
+import { ContextType } from '../../../infrastructure/types';
 
-import { FETCHED_DASHBOARD_DATA } from '../../../infrastructure/reducer/actionTypes';
+import ActionTypes from '../../../infrastructure/reducer/actionTypes';
 const Dashboard: FC<JSX.Element> = (): JSX.Element => {
 	const { allLogs, dashboardData, totalCalls, totalCustomers, totalAgents } = useFetchDashboardData();
 
-	const { dispatch } = useContext<any>(Context);
+	const { dispatch } = useContext<ContextType | any>(Context);
 
 	useEffect(() => {
 		const dashboardSummary = {
@@ -20,7 +21,7 @@ const Dashboard: FC<JSX.Element> = (): JSX.Element => {
 			tableData: dashboardData,
 		};
 		dispatch({
-			type: FETCHED_DASHBOARD_DATA,
+			type: ActionTypes.FETCHED_DASHBOARD_DATA,
 			payload: { allLogs, dashboardSummary },
 		});
 	}, [dispatch, dashboardData, totalCalls, totalAgents, totalCustomers, allLogs]);

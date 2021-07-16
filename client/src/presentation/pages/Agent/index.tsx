@@ -1,15 +1,20 @@
 import { FC } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { ArrowIcon } from '../../../assets/SVG';
 
 import UserInfo from './components/UserInfo';
 import CallData from './components/CallData';
+import useFetchAgentData from './hooks/useFetchAgentData';
 
 const Agent: FC = () => {
+	const params: any = useParams();
+	const { agentData, agentLogs } = useFetchAgentData(params.id);
+	console.log(agentLogs);
 	const { goBack } = useHistory();
 	const onGoBackClick = () => {
 		goBack();
 	};
+
 	return (
 		<main className="callPage page__wrapper">
 			<div className="page__container">
@@ -19,11 +24,11 @@ const Agent: FC = () => {
 						<p>Go Back</p>
 					</button>
 					<h2>
-						Agent: <span>Abraham Omale</span>
+						Agent: <span>{agentData ? `${agentData.firstName} ${agentData.lastName}` : ''}</span>
 					</h2>
 				</section>
-				<UserInfo />
-				<CallData />
+				<UserInfo data={agentData} logs={agentLogs} />
+				<CallData records={agentLogs} />
 			</div>
 		</main>
 	);

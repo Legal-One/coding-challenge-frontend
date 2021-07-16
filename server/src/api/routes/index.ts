@@ -5,7 +5,7 @@ const router: Router = Router();
 
 router.get('/', getDashboardData);
 router.get('/agents', getAllAgents);
-router.get('/agent/:id', getAgentRecords);
+router.get('/agent/:identifier', getAgentRecords);
 router.get('/call/:number', getNumberRecords);
 
 export default router;

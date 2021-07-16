@@ -1,7 +1,9 @@
 import { ResolutionTypes } from '../presentation/components/DataDisplay/types';
+import { LogData } from '../presentation/pages/Dashboard/types';
+import { PieData, PieFillObject, PieProps } from '../presentation/components/DataDisplay/types';
 
-const generatePieData = (logs: any): any => {
-	const pieData: any = [];
+const generatePieData = (logs: LogData[]): PieProps => {
+	const pieData: PieData[] = [];
 	Object.values(ResolutionTypes).forEach(resolutionItem => {
 		const item = logs.filter((log: any) => log.resolution === resolutionItem);
 		const itemPercentage = Math.round((item.length / logs.length) * 100);
@@ -13,11 +15,10 @@ const generatePieData = (logs: any): any => {
 	});
 
 	const pieFill = generatePieFill(pieData);
-	console.log(pieFill);
 	return { pieData, pieFill };
 };
 
-const generatePieFill = (logs: any): any => {
+const generatePieFill = (logs: PieData[]): PieFillObject[] => {
 	return logs.map((log: any) => {
 		let id = '';
 		if (log.id === 'needs follow up') id = 'lines';

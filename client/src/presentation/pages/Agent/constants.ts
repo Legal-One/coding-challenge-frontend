@@ -2,7 +2,7 @@ import { Column } from 'react-table';
 
 type TableDataInterface = {
 	id?: string | number;
-	phoneNumber: string;
+	number: string;
 	date: string;
 	time: string;
 	duration: string;
@@ -12,7 +12,7 @@ type TableDataInterface = {
 const tableHead: Array<Column<TableDataInterface>> = [
 	{
 		Header: 'Phone number',
-		accessor: 'phoneNumber',
+		accessor: 'number',
 	},
 	{
 		Header: 'Date',
@@ -35,7 +35,7 @@ const tableHead: Array<Column<TableDataInterface>> = [
 const tableData: TableDataInterface[] = [
 	{
 		id: '1',
-		phoneNumber: '+49151484522',
+		number: '+49151484522',
 		date: '10/07/2021',
 		time: '03:00 PM',
 		duration: '3m 9s',
@@ -43,7 +43,7 @@ const tableData: TableDataInterface[] = [
 	},
 	{
 		id: '2',
-		phoneNumber: '+49151484522',
+		number: '+49151484522',
 		date: '10/07/2021',
 		time: '03:00 PM',
 		duration: '3m 9s',
@@ -51,7 +51,7 @@ const tableData: TableDataInterface[] = [
 	},
 	{
 		id: '3',
-		phoneNumber: '+49151484522',
+		number: '+49151484522',
 		date: '10/07/2021',
 		time: '03:00 PM',
 		duration: '3m 9s',
@@ -59,7 +59,7 @@ const tableData: TableDataInterface[] = [
 	},
 	{
 		id: '4',
-		phoneNumber: '+49151484522',
+		number: '+49151484522',
 		date: '10/07/2021',
 		time: '03:00 PM',
 		duration: '3m 9s',
@@ -67,7 +67,7 @@ const tableData: TableDataInterface[] = [
 	},
 	{
 		id: '5',
-		phoneNumber: '+49151484522',
+		number: '+49151484522',
 		date: '10/07/2021',
 		time: '03:00 PM',
 		duration: '3m 9s',
@@ -75,7 +75,7 @@ const tableData: TableDataInterface[] = [
 	},
 	{
 		id: '6',
-		phoneNumber: '+49151484522',
+		number: '+49151484522',
 		date: '10/07/2021',
 		time: '03:00 PM',
 		duration: '3m 9s',
@@ -83,7 +83,7 @@ const tableData: TableDataInterface[] = [
 	},
 	{
 		id: '7',
-		phoneNumber: '+49151484522',
+		number: '+49151484522',
 		date: '10/07/2021',
 		time: '03:00 PM',
 		duration: '3m 9s',

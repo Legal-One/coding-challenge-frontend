@@ -4,4 +4,6 @@ const ROUTES = {
 	CALL: '/call',
 };
 
-export { ROUTES };
+const BASE_API = 'http://localhost:5000';
+
+export { BASE_API, ROUTES };

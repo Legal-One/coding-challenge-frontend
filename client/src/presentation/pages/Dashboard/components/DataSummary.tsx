@@ -2,9 +2,10 @@ import { FC, useContext } from 'react';
 import StatsCard from '../../../components/Common/StatsCard';
 import { summaryData } from '../constants';
 import { Context } from '../../../../infrastructure/context';
+import { ContextType } from '../../../../infrastructure/types';
 
 const DataSummary: FC = (): JSX.Element => {
-	const { state } = useContext<any>(Context);
+	const { state } = useContext<ContextType | any>(Context);
 	const { dashboardSummary } = state;
 
 	const renderCards = () => {

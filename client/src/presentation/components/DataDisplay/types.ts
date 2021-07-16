@@ -29,3 +29,21 @@ export interface BadgeProps {
 	text: string;
 	type: BadgeTypes;
 }
+
+export interface PieData {
+	id: string;
+	label: string;
+	value: number;
+}
+
+export interface PieFillObject {
+	match: {
+		id: string;
+	};
+	id: string;
+}
+
+export interface PieProps {
+	pieData: PieData[];
+	pieFill: PieFillObject[];
+}

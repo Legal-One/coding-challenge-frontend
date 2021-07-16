@@ -4,32 +4,10 @@ import PieChart from '../../../components/Common/PieChart';
 import { Card } from '../../../components/DataDisplay';
 import { Context } from '../../../../infrastructure/context';
 import generatePieData from '../../../../utils/generatePieData';
-
-// const data = [
-// 	{
-// 		number: '+49151484522',
-// 		count: 13,
-// 	},
-// 	{
-// 		number: '+49158544147',
-// 		count: 3,
-// 	},
-// 	{
-// 		number: '+49151783331',
-// 		count: 3,
-// 	},
-// 	{
-// 		number: '+49151514231',
-// 		count: 3,
-// 	},
-// 	{
-// 		number: '+49221514231',
-// 		count: 6,
-// 	},
-// ];
+import { ContextType } from '../../../../infrastructure/types';
 
 const ChartColumn: FC = (): JSX.Element => {
-	const { state } = useContext<any>(Context);
+	const { state } = useContext<ContextType | any>(Context);
 	const {
 		allLogs,
 		dashboardSummary: { tableData },
@@ -43,13 +21,13 @@ const ChartColumn: FC = (): JSX.Element => {
 					data={tableData ? tableData : []}
 					keys={['count']}
 					indexBy="number"
-					bottomAxisLegend="Phone numbers"
-					leftAxisLegend="Phone calls"
+					bottomAxisLegend="Phone calls"
+					leftAxisLegend="Phone numbers"
 				/>
 			</Card>
 			<Card className="dashboard__chartColumn--section">
 				<h2>Call resolution statistics</h2>
-				<PieChart data={pieData} fill={pieFill} />
+				<PieChart pieData={pieData} pieFill={pieFill} />
 			</Card>
 		</section>
 	);

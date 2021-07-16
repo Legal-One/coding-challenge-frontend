@@ -23,13 +23,14 @@ const AllCalls: FC = (): JSX.Element => {
 	formatedTableHead[0] = {
 		...formatedTableHead[0],
 		Cell: ({ value, row }: any) => {
-			return <Link to={`/call/${row.id}`}>{value}</Link>;
+			return <Link to={`/call/${row.values.number}`}>{value}</Link>;
 		},
 	};
 	formatedTableHead[1] = {
 		...formatedTableHead[1],
 		Cell: ({ value, row }: any) => {
-			return <Link to={`/agent/${row.id}`}>{value}</Link>;
+			const { original } = row;
+			return <Link to={`/agent/${original.agentIdentifier}`}>{value}</Link>;
 		},
 	};
 	return (

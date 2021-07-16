@@ -1,10 +1,14 @@
 import { FC } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { ArrowIcon } from '../../../assets/SVG';
+import useFetchCallData from './hooks/useFetchCallData';
 
 import CallData from './components/CallData';
 
 const Agent: FC<JSX.Element> = (): JSX.Element => {
+	const params: any = useParams();
+	const { callRecords } = useFetchCallData(params?.id);
+
 	const { goBack } = useHistory();
 	const onGoBackClick = () => {
 		goBack();
@@ -18,10 +22,10 @@ const Agent: FC<JSX.Element> = (): JSX.Element => {
 						<p>Go Back</p>
 					</button>
 					<h2>
-						Phone Number: <span>+29388399290</span>
+						Phone Number: <span>{params.id}</span>
 					</h2>
 				</section>
-				<CallData />
+				<CallData records={callRecords ? callRecords : []} />
 			</div>
 		</main>
 	);

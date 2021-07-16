@@ -4,16 +4,19 @@ import useSWR from 'swr';
 import fetcher from '../../../../utils/fetcher';
 import formatNumber from '../../../../utils/formatNumber';
 
-const BASE_API = 'http://localhost:5000';
+import { LogData, LogExtendedData, DashboardFetchHook } from '../types';
+import { BASE_API } from '../../../../constants';
 
-const useFetchDashboardData = () => {
+const useFetchDashboardData: DashboardFetchHook = () => {
 	const { data: logData, error: logError } = useSWR(`${BASE_API}`, fetcher);
 	const { data: agentsData, error: agentsError } = useSWR(`${BASE_API}/agents`, fetcher);
-	const [dashboardData, setDashboardData] = useState<Array<object>>([]);
-	const [allLogs, setAllLogs] = useState<Array<object>>([]);
+	const [dashboardData, setDashboardData] = useState<Array<LogExtendedData>>([]);
+	const [allLogs, setAllLogs] = useState<Array<LogData>>([]);
 	const [totalCalls, setTotalCalls] = useState<number>(0);
 	const [totalCustomers, setTotalCustomers] = useState<number>(0);
 	const [totalAgents, setTotalAgents] = useState<number>(0);
+
+	console.log(logData);
 
 	if (logError || agentsError) console.log(logError | agentsError);
 	useEffect(() => {

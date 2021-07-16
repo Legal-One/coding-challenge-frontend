@@ -1,5 +1,6 @@
-import { useReducer, createContext, useMemo, Dispatch } from 'react';
+import { useReducer, createContext, useMemo, FC } from 'react';
 import reducer from '../reducer';
+import { ContextType, ProviderProps } from '../types';
 
 let initialState = {
 	allLogs: [],
@@ -11,14 +12,9 @@ let initialState = {
 	},
 };
 
-interface ContextType {
-	state: any;
-	dispatch: Dispatch<any>;
-}
-
 const Context = createContext<ContextType | null>(null);
 
-const Provider = ({ children }: any) => {
+const Provider: FC<ProviderProps> = ({ children }) => {
 	const [state, dispatch] = useReducer(reducer, initialState);
 	const contextValue = useMemo(() => ({ state, dispatch }), [state, dispatch]);
 

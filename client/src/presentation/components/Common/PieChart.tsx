@@ -1,9 +1,10 @@
 import { FC } from 'react';
-import { ResponsivePie } from '@nivo/pie';
+import { ComputedDatum, ResponsivePie } from '@nivo/pie';
+import { PieProps } from '../DataDisplay/types';
 
-const PieChart: FC<any> = ({ data, fill }) => (
+const PieChart: FC<PieProps> = ({ pieData, pieFill }) => (
 	<ResponsivePie
-		data={data}
+		data={pieData}
 		margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
 		innerRadius={0.5}
 		padAngle={0.7}
@@ -14,6 +15,7 @@ const PieChart: FC<any> = ({ data, fill }) => (
 		arcLinkLabelsSkipAngle={10}
 		arcLinkLabelsTextColor="#333333"
 		arcLinkLabelsThickness={2}
+		arcLabel={(data: ComputedDatum<unknown>) => `${data.value}%`}
 		arcLinkLabelsColor={{ from: 'color' }}
 		arcLabelsSkipAngle={10}
 		arcLabelsTextColor={{ from: 'color', modifiers: [['darker', 2]] }}
@@ -37,7 +39,7 @@ const PieChart: FC<any> = ({ data, fill }) => (
 				spacing: 10,
 			},
 		]}
-		fill={fill}
+		fill={pieFill}
 		legends={[
 			{
 				anchor: 'bottom',

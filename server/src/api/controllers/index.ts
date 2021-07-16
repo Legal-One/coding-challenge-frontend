@@ -19,7 +19,7 @@ const getDashboardData = async (req: Request, res: Response): Promise<Response<u
 // Get agent data
 const getAgentRecords = async (req: Request, res: Response): Promise<Response<unknown, Record<string, unknown>>> => {
 	try {
-		const { id } = req.params;
+		const { identifier: id } = req.params;
 		if (!id) return utilityResponse({ message: 'Invalid Id', res, statusCode: 400 });
 
 		const agentData = agents.find(agent => agent.identifier === id);
