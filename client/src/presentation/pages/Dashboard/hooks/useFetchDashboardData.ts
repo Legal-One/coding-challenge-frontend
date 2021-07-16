@@ -16,8 +16,6 @@ const useFetchDashboardData: DashboardFetchHook = () => {
 	const [totalCustomers, setTotalCustomers] = useState<number>(0);
 	const [totalAgents, setTotalAgents] = useState<number>(0);
 
-	console.log(logData);
-
 	if (logError || agentsError) console.log(logError | agentsError);
 	useEffect(() => {
 		if (logData) {
@@ -26,8 +24,8 @@ const useFetchDashboardData: DashboardFetchHook = () => {
 				id: log.identifier,
 			}));
 
-			const uniqueNumbers = [...new Set(allLogData.map(item => item.number))];
-			const transformedLogs = uniqueNumbers.map(num => {
+			const uniqueNumbers: string[] = [...new Set(allLogData.map(item => item.number))];
+			const transformedLogs: LogExtendedData[] = uniqueNumbers.map(num => {
 				const logNumber = allLogData.filter(log => log.number === num);
 				const count = logNumber.length;
 				const lastRecord = logNumber[count - 1];

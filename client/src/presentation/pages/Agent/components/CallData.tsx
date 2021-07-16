@@ -7,7 +7,6 @@ import { Badge, Card, Table } from '../../../components/DataDisplay';
 import { selectType } from '../../../../utils';
 
 const CallData: FC<CallDataProps> = ({ records }): JSX.Element => {
-	console.log(records);
 	const formatedTableHead = [...tableHead];
 	formatedTableHead[4] = {
 		...formatedTableHead[4],

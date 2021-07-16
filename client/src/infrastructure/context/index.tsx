@@ -1,8 +1,8 @@
 import { useReducer, createContext, useMemo, FC } from 'react';
 import reducer from '../reducer';
-import { ContextType, ProviderProps } from '../types';
+import { ContextType, ProviderProps, IInitialState } from '../types';
 
-let initialState = {
+let initialState: IInitialState = {
 	allLogs: [],
 	dashboardSummary: {
 		allCalls: 0,

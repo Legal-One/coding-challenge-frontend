@@ -23,7 +23,11 @@ const Table: FC<TableProps> = props => {
 		data,
 	});
 	return (
-		<div>
+		<div
+			style={{
+				overflowX: 'auto',
+			}}
+		>
 			<table {...getTableProps()} className="table">
 				<thead className="table__head">
 					{headerGroups.map(headerGroup => (

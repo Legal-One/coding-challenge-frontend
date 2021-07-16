@@ -1,6 +1,7 @@
 .table {
 	width: 100%;
 	border-spacing: 0;
+	overflow-x: scroll;
 	&__head {
 		&--data {
 			font-size: 1.2rem;
@@ -24,6 +25,7 @@
 			font-weight: 500;
 			padding: 1.2rem 1rem;
 			border-bottom: 1px solid #f2f8ff;
+			white-space: nowrap;
 		}
 	}
 }

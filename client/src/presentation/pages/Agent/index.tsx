@@ -9,7 +9,6 @@ import useFetchAgentData from './hooks/useFetchAgentData';
 const Agent: FC = () => {
 	const params: any = useParams();
 	const { agentData, agentLogs } = useFetchAgentData(params.id);
-	console.log(agentLogs);
 	const { goBack } = useHistory();
 	const onGoBackClick = () => {
 		goBack();
