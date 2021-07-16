@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/Legal-One/coding-challenge-frontend/issues"
   },
-  "homepage": "https://github.com/Legal-One/coding-challenge-frontend#readme"
+  "homepage": "https://github.com/Legal-One/coding-challenge-frontend#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
