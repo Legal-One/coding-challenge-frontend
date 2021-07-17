@@ -1,20 +1,22 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import Container from 'react-bootstrap/Container';
-import CallLogTable from '../components/CallLogTable';
-import {getUniqueValues, sort} from '../utils';
+import CallLogTable from './CallLogTable';
+import {getUniqueValues, sort} from '../../utils';
 
 const Home = () => {
     const [errorMsg, setErrorMsg] = useState('');
-    const [agents, setAgents] = useState([]);
-    const [logs, setLogs] = useState([]);
+    const [agentsData, setAgentsData] = useState([]);
+    const [logsData, setLogsData] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     const getData = async () => {
         try {
             const agentsJson = await axios.get(`/agents`);
-            setAgents(agentsJson.data);
+            setAgentsData(agentsJson.data);
             const logsJson = await axios.get(`/logs`);
-            setLogs(logsJson.data);
+            setLogsData(logsJson.data);
+            setIsLoading(false);
         } catch (error) {
             error.response && setErrorMsg(error.response.data);
         }
@@ -24,18 +26,17 @@ const Home = () => {
         getData();
     }, []);
 
-    const uniquePhoneNumbers = getUniqueValues(logs, 'number');
-    const callCounts = (number) => logs.reduce((acc, cur) => cur.number === number ? ++acc : acc, 0);
+    if (isLoading) {
+        return <div className="App">Loading...</div>;
+    }
+
+    const uniquePhoneNumbers = getUniqueValues(logsData, 'number');
+    const callCounts = (number) => logsData.reduce((acc, cur) => cur.number === number ? ++acc : acc, 0);
     const getLastCallDetails = (number) => {
-        let filteredArray = [];
+        let filteredArray = logsData.filter(log => log.number === number);
         let lastCallTime = '';
         let lastCallAgentId = '';
         let lastCallDetails = {};
-
-        // filter the logs for the phone number
-        for (let i = 0; i < logs.length; i++) {
-            filteredArray = logs.filter(log => log.number === number);
-        }
 
         // find the most recent call log time and agent id
         for (let i = 0; i < filteredArray.length; i++) {
@@ -50,7 +51,7 @@ const Home = () => {
         let formattedTime = dateObject.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
         // look up agent
-        let lastCallAgent = agents.find(agent => agent.identifier === lastCallAgentId);
+        let lastCallAgent = agentsData.find(agent => agent.identifier === lastCallAgentId);
 
         lastCallDetails.agentName = `${lastCallAgent.firstName} ${lastCallAgent.lastName}`;
         lastCallDetails.agentId = lastCallAgent.identifier;

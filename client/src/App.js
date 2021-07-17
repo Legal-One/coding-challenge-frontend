@@ -1,7 +1,7 @@
 import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
-import Home from './views/Home';
-import Agent from './views/Agent';
-import Call from './views/Call';
+import Home from './views/home/Home';
+import Agent from './views/agent/Agent';
+import Call from './views/call/Call';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './components/Navbar';
