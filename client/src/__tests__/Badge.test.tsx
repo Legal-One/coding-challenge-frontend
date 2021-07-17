@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
-import Badge from '../../presentation/components/DataDisplay/Badge';
-import { BadgeTypes } from '../../presentation/components/DataDisplay/types';
+import Badge from '../presentation/components/DataDisplay/Badge';
+import { BadgeTypes } from '../presentation/components/DataDisplay/types';
 
 beforeEach(() => {
 	render(<Badge text="not following" type={BadgeTypes.PRIMARY} />);
