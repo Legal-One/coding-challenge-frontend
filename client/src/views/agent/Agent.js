@@ -53,9 +53,7 @@ const Agent = () => {
     }
 
     let sortedTableData = sort(tableData, 'callDateTime');
-
     const agent = agentsData.find(agent => agent.identifier === id);
-    console.log(agent)
 
     return (
         <Container>
