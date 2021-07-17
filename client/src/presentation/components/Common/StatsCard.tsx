@@ -11,8 +11,8 @@ const StatsCard: FC<StatsCardProps> = (props): JSX.Element => {
 					<Icon />
 				</div>
 				<div className="stats-card__info">
-					<p>{title}</p>
-					<h3>{value}</h3>
+					<p data-testid="stats-title">{title}</p>
+					<h3 data-testid="stats-value">{value}</h3>
 				</div>
 			</div>
 		</Card>

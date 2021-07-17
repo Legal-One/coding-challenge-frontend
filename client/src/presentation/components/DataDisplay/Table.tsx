@@ -28,10 +28,10 @@ const Table: FC<TableProps> = props => {
 				overflowX: 'auto',
 			}}
 		>
-			<table {...getTableProps()} className="table">
-				<thead className="table__head">
+			<table {...getTableProps()} className="table" data-testid="table">
+				<thead className="table__head" data-testid="table-head">
 					{headerGroups.map(headerGroup => (
-						<tr {...headerGroup.getHeaderGroupProps()} className="table__head--row">
+						<tr {...headerGroup.getHeaderGroupProps()} className="table__head--row" data-testid="table-row">
 							{headerGroup.headers.map(column => (
 								<th {...column.getHeaderProps()} className="table__head--data">
 									{column.render('Header')}
@@ -40,11 +40,11 @@ const Table: FC<TableProps> = props => {
 						</tr>
 					))}
 				</thead>
-				<tbody {...getTableBodyProps()} className="table__body">
+				<tbody {...getTableBodyProps()} className="table__body" data-testid="table-body">
 					{rows.map(row => {
 						prepareRow(row);
 						return (
-							<tr {...row.getRowProps()} className="table__body--row">
+							<tr {...row.getRowProps()} className="table__body--row" data-testid="table-row">
 								{row.cells.map(cell => {
 									return (
 										<td {...cell.getCellProps()} className="table__body--data">
