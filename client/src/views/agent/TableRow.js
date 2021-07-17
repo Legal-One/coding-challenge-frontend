@@ -3,11 +3,15 @@ import { Link } from 'react-router-dom';
 
 const TableRow = (props) => {
     return (
-        <tr>
-            <td><Link to={`/call/${props.phoneNumber}`}>{props.phoneNumber}</Link></td>
-            <td>{props.callDate} {props.callTime}</td>
-            <td>{props.resolution}</td>
-        </tr>
+        <>
+            { props.tableData.map((row, index) =>
+                <tr key={index}>
+                    <td><Link to={`/call/${row.phoneNumber}`}>{row.phoneNumber}</Link></td>
+                    <td>{row.callDate} {row.callTime}</td>
+                    <td>{row.resolution}</td>
+                </tr>
+            )}
+        </>
     )
 }
 
