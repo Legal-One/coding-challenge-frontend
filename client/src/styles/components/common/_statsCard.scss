@@ -1,0 +1,26 @@
+.stats-card {
+	display: flex;
+	padding: 1.2rem 0;
+	&__icon {
+		width: 5rem;
+		height: 5rem;
+		background-color: $color-primary-light;
+		border-radius: 50%;
+		@include center;
+	}
+	&__info {
+		margin-left: 1.5rem;
+		p {
+			font-size: 1.2rem;
+			text-transform: uppercase;
+			color: $color-grey-light;
+			font-weight: 600;
+		}
+		h3 {
+			font-family: $font-secondary;
+			font-size: 3.6rem;
+			color: $color-grey-dark;
+			font-weight: 500;
+		}
+	}
+}

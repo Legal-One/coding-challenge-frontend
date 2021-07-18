@@ -1,0 +1,31 @@
+.badge {
+	font-size: 1.2rem;
+	border-radius: $radii-5;
+	padding: 0.1rem 0.5rem;
+	text-transform: uppercase;
+	&.warning {
+		color: $color-warning-text;
+		background: $color-warning;
+		border: 1px solid $color-warning-border;
+	}
+	&.success {
+		color: $color-success-text;
+		background: $color-success;
+		border: 1px solid $color-success-border;
+	}
+	&.danger {
+		color: $color-danger-text;
+		background: $color-danger;
+		border: 1px solid $color-danger-border;
+	}
+	&.info {
+		color: $color-info-text;
+		background: $color-info;
+		border: 1px solid $color-info-border;
+	}
+	&.primary {
+		color: $color-pri-text;
+		background: $color-pri;
+		border: 1px solid $color-pri-border;
+	}
+}
