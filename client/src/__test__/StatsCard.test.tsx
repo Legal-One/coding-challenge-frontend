@@ -1,7 +1,7 @@
 import { render, cleanup } from '@testing-library/react';
 
-import StatsCard from '../../presentation/components/Common/StatsCard';
-import { AgentIcon } from '../../assets/SVG';
+import StatsCard from '../presentation/components/Common/StatsCard';
+import { AgentIcon } from '../assets/SVG';
 
 afterEach(cleanup);
 

@@ -21,4 +21,3 @@ app.use("/", routes_1.default);
 app.listen(port, () => {
     return console.log(`server is listening on ${port}`);
 });
-//# sourceMappingURL=index.js.map

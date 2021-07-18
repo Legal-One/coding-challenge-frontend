@@ -1,7 +1,7 @@
 import { render, screen, cleanup } from '@testing-library/react';
 
-import { Table } from '../../presentation/components/DataDisplay';
-import { tableHead, tableBody } from '../dummy/tableDummy';
+import { Table } from '../presentation/components/DataDisplay';
+import { tableHead, tableBody } from '../constants';
 
 beforeEach(() => {
 	render(<Table tableHead={tableHead} tableData={tableBody} />);
