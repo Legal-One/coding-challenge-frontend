@@ -1,0 +1,31 @@
+.agentPage {
+	&__profile {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		img {
+			width: 18rem;
+			height: 18rem;
+			object-fit: contain;
+			border-radius: $raddi-10;
+		}
+		h3 {
+			font-size: 1.6rem;
+			font-weight: 600;
+			color: $color-secondary;
+			margin-top: 1.2rem;
+		}
+		p {
+			font-size: 1.4rem;
+			color: $color-grey-dark;
+			margin-top: 0.5rem;
+			&:last-child {
+				margin-top: 2rem;
+				span {
+					font-weight: 600;
+				}
+			}
+		}
+	}
+}
