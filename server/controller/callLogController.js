@@ -6,8 +6,8 @@ const compareDate = require('../utils/compareDate');
 exports.getCallLogs = async (req, res) => {
   const basePath = path.dirname(process.mainModule.filename);
   try {
-    const callLogData = await getJsonFileData(path.join(basePath, '/json-data/logs.json'));
-    const agentData = await getJsonFileData(path.join(basePath, '/json-data/agents.json'));
+    const callLogData = await getJsonFileData(path.join(basePath, '../json-data/logs.json'));
+    const agentData = await getJsonFileData(path.join(basePath, '../json-data/agents.json'));
     const callLogs = formatData(callLogData, agentData);
     return res.status(200).json(callLogs);
   } catch (err) {

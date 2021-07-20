@@ -6,8 +6,8 @@ exports.getAgentData = async (req, res) => {
   const agentId = req.params.agentId;
   const basePath = path.dirname(process.mainModule.filename);
   try {
-    const callLogData = await getJsonFileData(path.join(basePath, '/json-data/logs.json'));
-    const resolutionData = await getJsonFileData(path.join(basePath, '/json-data/resolution.json'));
+    const callLogData = await getJsonFileData(path.join(basePath, '../json-data/logs.json'));
+    const resolutionData = await getJsonFileData(path.join(basePath, '../json-data/resolution.json'));
     const callLogs = formatData(callLogData, resolutionData, agentId);
     return res.status(200).json(callLogs);
   } catch (err) {
