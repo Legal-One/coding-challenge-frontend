@@ -1,10 +1,10 @@
 import React from "react";
-
-
+import { Link } from "react-router-dom";
+import "./index.scss";
 function Header() {
     return (
         <header>
-            <h2>Legal one Customer Care Service</h2>
+            <Link to="/"><img src="https://legal.one/img/logo.svg" alt="company logo" /></Link>
         </header>
     );
 }
