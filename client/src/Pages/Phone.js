@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { useParams } from "react-router-dom";
+import { useFetchData } from "../hooks/fetchHook";
 import Table from "../components/Table";
 import Chart from "../components/Chart";
 import { getFormattedDateTime } from "../utils/timeFormat";
@@ -19,33 +18,29 @@ const dataMapper = (phoneLogs) => {
 
 function Phone() {
     const { phoneNumber } = useParams();
+    const [data, isLoading, isError] = useFetchData(apiUrl + phoneNumber);
 
-    const [phoneNumberCallLogs, setPhoneNumberCallLogs] = useState([]);
-
-    useEffect(() => {
-        const fetchPhoneNumberCallLogs = async () => {
-            const response = await axios.get(apiUrl + phoneNumber);
-            setPhoneNumberCallLogs(response.data);
-        };
-        fetchPhoneNumberCallLogs();
-    }, [phoneNumber]);
-
-    const counter = {};
-    for (var i = 0; i < phoneNumberCallLogs.length; i++) {
-        const currentValue = phoneNumberCallLogs[i].resolution;
-        if (counter[currentValue]) {
-            counter[currentValue]++;
+    const counter = data.reduce((acc, cur) => {
+        if (acc[cur.resolution]) {
+            acc[cur.resolution]++;
         } else {
-            counter[currentValue] = 1;
+            acc[cur.resolution] = 1;
         }
-    }
+        return acc;
+    }, {});
 
     const chartData = [["Resolution", "Count"], ...Object.entries(counter)];
 
     return (
         <main>
-            <Table headers={headers} rows={dataMapper(phoneNumberCallLogs)} />
-            <Chart chartType="PieChart" chartData={chartData} />
+            {!isLoading && (
+                <>
+                    <Table headers={headers} rows={dataMapper(data)} />
+                    <Chart chartType="PieChart" chartData={chartData} />
+                </>
+            )}
+            {isLoading && <h3>Fetching data...</h3>}
+            {isError && <h3>Error fetching data. Please refresh your page</h3>}
         </main>
     );
 }

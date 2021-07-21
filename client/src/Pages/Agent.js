@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
+import { useFetchData } from "../hooks/fetchHook";
 import Table from "../components/Table";
 import Chart from "../components/Chart";
 import { getFormattedDateTime } from "../utils/timeFormat";
@@ -21,36 +20,29 @@ const dataMapper = (agentData) => {
 
 function Agent() {
     const { agentId } = useParams();
-    const [agentCallLogs, setAgentCallLogs] = useState([]);
+    const [data, isLoading, isError] = useFetchData(apiUrl + agentId);
 
-    useEffect(() => {
-        const fetchAgentCallLogs = async () => {
-            const response = await axios.get(apiUrl + agentId);
-            setAgentCallLogs(response.data);
-        };
-        fetchAgentCallLogs();
-    }, [agentId]);
-
-    const counter = {};
-    for (var i = 0; i < agentCallLogs.length; i++) {
-        const currentValue = agentCallLogs[i].resolution;
-        if (counter[currentValue]) {
-            counter[currentValue]++;
+    const counter = data.reduce((acc, cur) => {
+        if (acc[cur.resolution]) {
+            acc[cur.resolution]++;
         } else {
-            counter[currentValue] = 1;
+            acc[cur.resolution] = 1;
         }
-    }
+        return acc;
+    }, {});
 
     const chartData = [["Resolution", "Count"], ...Object.entries(counter)];
 
     return (
         <main>
-            <Table
-                headers={headers}
-                rows={dataMapper(agentCallLogs)}
-            />
-
-            <Chart chartType="PieChart" chartData={chartData} />
+            {!isLoading && (
+                <>
+                    <Table headers={headers} rows={dataMapper(data)} />
+                    <Chart chartType="PieChart" chartData={chartData} />
+                </>
+            )}
+            {isLoading && <h3>Fetching data...</h3>}
+            {isError && <h3>Error fetching data. Please refresh your page</h3>}
         </main>
     );
 }

@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import { useFetchData } from "../hooks/fetchHook";
 import Table from "../components/Table";
 import Chart from "../components/Chart";
 import { getFormattedTime } from "../utils/timeFormat";
@@ -28,26 +27,23 @@ const dataMapper = (cl) => {
 };
 
 function Home() {
-    const [callLogs, setCallLogs] = useState([]);
-
-    useEffect(() => {
-        const fetchCallLogs = async () => {
-            const response = await axios.get(apiUrl);
-            setCallLogs(response.data);
-        };
-        fetchCallLogs();
-    }, []);
+    const [data, isLoading, isError] = useFetchData(apiUrl);
 
     const chartData = [
         ["Phone number", "Call count"],
-        ...callLogs.map((cl) => [cl.phoneNumber, parseInt(cl.callCount)]),
+        ...data.map((cl) => [cl.phoneNumber, parseInt(cl.callCount)]),
     ];
 
-    console.log(callLogs);
     return (
         <main>
-            <Table headers={headers} rows={dataMapper(callLogs)} />
-            <Chart chartType="BarChart" chartData={chartData} />
+            {!isLoading && (
+                <>
+                    <Table headers={headers} rows={dataMapper(data)} />
+                    <Chart chartType="BarChart" chartData={chartData} />
+                </>
+            )}
+            {isLoading && <h3>Fetching data...</h3>}
+            {isError && <h3>Error fetching data. Please refresh your page</h3>}
         </main>
     );
 }
