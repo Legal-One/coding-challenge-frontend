@@ -1,12 +1,12 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { useFetchData } from "../hooks/fetchHook";
+import { useFetchData } from "../hooks/useFetchData";
 import Table from "../components/Table";
 import Chart from "../components/Chart";
 import { getFormattedDateTime } from "../utils/timeFormat";
 import "./index.scss";
 
-const apiUrl = "http://localhost:5000/api/agent/";
+const apiUrl = "/api/agent/";
 const headers = ["Phone number", "Call date and time", "Resolution"];
 const dataMapper = (agentData) => {
     return agentData.map((agent) => {

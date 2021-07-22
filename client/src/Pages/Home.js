@@ -1,13 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useFetchData } from "../hooks/fetchHook";
+import { useFetchData } from "../hooks/useFetchData";
 import Table from "../components/Table";
 import Chart from "../components/Chart";
 import { getFormattedTime } from "../utils/timeFormat";
 
 import "./index.scss";
 
-const apiUrl = "http://localhost:5000/api/call-logs";
+const apiUrl = "/api/call-logs";
 const headers = ["Phone number", "Number of calls", "Last call details"];
 const title = `Call summary`;
 
