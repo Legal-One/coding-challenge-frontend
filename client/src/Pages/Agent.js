@@ -1,3 +1,4 @@
+import React from "react";
 import { useParams } from "react-router-dom";
 import { useFetchData } from "../hooks/fetchHook";
 import Table from "../components/Table";
@@ -7,7 +8,6 @@ import "./index.scss";
 
 const apiUrl = "http://localhost:5000/api/agent/";
 const headers = ["Phone number", "Call date and time", "Resolution"];
-
 const dataMapper = (agentData) => {
     return agentData.map((agent) => {
         return [
@@ -19,7 +19,8 @@ const dataMapper = (agentData) => {
 };
 
 function Agent() {
-    const { agentId } = useParams();
+    const { agentId, agentName } = useParams();
+    const title = `Call history for ${agentName}`;
     const [data, isLoading, isError] = useFetchData(apiUrl + agentId);
 
     const counter = data.reduce((acc, cur) => {
@@ -35,9 +36,13 @@ function Agent() {
 
     return (
         <main>
-            {!isLoading && (
+            {!isLoading && !isError && (
                 <>
-                    <Table headers={headers} rows={dataMapper(data)} />
+                    <Table
+                        title={title}
+                        headers={headers}
+                        rows={dataMapper(data)}
+                    />
                     <Chart chartType="PieChart" chartData={chartData} />
                 </>
             )}

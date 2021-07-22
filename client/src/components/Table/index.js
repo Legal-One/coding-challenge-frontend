@@ -1,3 +1,5 @@
+import React from "react";
+
 import "./index.scss";
 
 /*
@@ -9,26 +11,29 @@ import "./index.scss";
             ["cell7", "cell8", "cell"]
         ]
 */
-const Table = ({ headers, rows }) => {
+const Table = ({ title, headers, rows }) => {
     return (
-        <table className="Table">
-            <thead>
-                <tr>
-                    {headers.map((header, i) => (
-                        <th key={i}>{header}</th>
-                    ))}
-                </tr>
-            </thead>
-            <tbody>
-                {rows.map((row, i) => (
-                    <tr key={i}>
-                        {row.map((cell, i) => (
-                            <td key={i}>{cell}</td>
+        <>
+            <h3>{title}</h3>
+            <table className="Table">
+                <thead>
+                    <tr>
+                        {headers.map((header, i) => (
+                            <th key={i}>{header}</th>
                         ))}
                     </tr>
-                ))}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {rows.map((row, i) => (
+                        <tr key={i}>
+                            {row.map((cell, i) => (
+                                <td key={i}>{cell}</td>
+                            ))}
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </>
     );
 };
 

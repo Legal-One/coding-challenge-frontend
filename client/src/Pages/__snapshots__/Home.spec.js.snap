@@ -1,0 +1,90 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HomePage render when waiting for response from api service 1`] = `
+<DocumentFragment>
+  <main>
+    <h3>
+      Fetching data...
+    </h3>
+  </main>
+</DocumentFragment>
+`;
+
+exports[`HomePage render with all props passed 1`] = `
+<DocumentFragment>
+  <main>
+    <h3>
+      Call summary
+    </h3>
+    <table
+      class="Table"
+    >
+      <thead>
+        <tr>
+          <th>
+            Phone number
+          </th>
+          <th>
+            Number of calls
+          </th>
+          <th>
+            Last call details
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <a
+              href="/call/+4912345678"
+            >
+              +4912345678
+            </a>
+          </td>
+          <td>
+            13 calls
+          </td>
+          <td>
+            <a
+              href="/agent/beb04834-9f8b-11e7-9469-8a39b455b609/John Doe"
+            >
+              John Doe
+            </a>
+             / 15:50
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <a
+              href="/call/+4912345678"
+            >
+              +4912345678
+            </a>
+          </td>
+          <td>
+            1 call
+          </td>
+          <td>
+            <a
+              href="/agent/aeb04834-9f8b-11e7-9469-8a39b455b709/Spiderman"
+            >
+              Spiderman
+            </a>
+             / 14:50
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+</DocumentFragment>
+`;
+
+exports[`HomePage render with error from api service 1`] = `
+<DocumentFragment>
+  <main>
+    <h3>
+      Error fetching data. Please refresh your page
+    </h3>
+  </main>
+</DocumentFragment>
+`;

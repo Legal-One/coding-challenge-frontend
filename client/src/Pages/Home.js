@@ -1,3 +1,4 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import { useFetchData } from "../hooks/fetchHook";
 import Table from "../components/Table";
@@ -8,16 +9,17 @@ import "./index.scss";
 
 const apiUrl = "http://localhost:5000/api/call-logs";
 const headers = ["Phone number", "Number of calls", "Last call details"];
+const title = `Call summary`;
 
-const dataMapper = (cl) => {
-    return cl.map((callLog) => {
+const dataMapper = (callLogs) => {
+    return callLogs.map((callLog) => {
         return [
             <Link to={`/call/${callLog.phoneNumber}`}>
                 {callLog.phoneNumber}
             </Link>,
             callLog.callCount + (callLog.callCount === 1 ? " call" : " calls"),
             <>
-                <Link to={`/agent/${callLog.agentIdentifier}`}>
+                <Link to={`/agent/${callLog.agentIdentifier}/${callLog.agentName}`}>
                     {callLog.agentName}
                 </Link>
                 &nbsp;/&nbsp;{getFormattedTime(callLog.lastCallTime)}
@@ -36,9 +38,9 @@ function Home() {
 
     return (
         <main>
-            {!isLoading && (
+            {!isLoading && !isError && (
                 <>
-                    <Table headers={headers} rows={dataMapper(data)} />
+                    <Table title={title} headers={headers} rows={dataMapper(data)} />
                     <Chart chartType="BarChart" chartData={chartData} />
                 </>
             )}

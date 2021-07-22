@@ -11,7 +11,7 @@ function App() {
             <Router>
                 <Header />
                 <Switch>
-                    <Route path="/agent/:agentId" component={Agent} />
+                    <Route path="/agent/:agentId/:agentName" component={Agent} />
                     <Route path="/call/:phoneNumber" component={Phone} />
                     <Route path="/" component={Home} />
                 </Switch>

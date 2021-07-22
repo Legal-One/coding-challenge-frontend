@@ -1,3 +1,4 @@
+import React from "react";
 import { useParams } from "react-router-dom";
 import { useFetchData } from "../hooks/fetchHook";
 import Table from "../components/Table";
@@ -18,6 +19,7 @@ const dataMapper = (phoneLogs) => {
 
 function Phone() {
     const { phoneNumber } = useParams();
+    const title = `Call history for ${phoneNumber}`;
     const [data, isLoading, isError] = useFetchData(apiUrl + phoneNumber);
 
     const counter = data.reduce((acc, cur) => {
@@ -33,9 +35,9 @@ function Phone() {
 
     return (
         <main>
-            {!isLoading && (
+            {!isLoading && !isError && (
                 <>
-                    <Table headers={headers} rows={dataMapper(data)} />
+                    <Table title={title} headers={headers} rows={dataMapper(data)} />
                     <Chart chartType="PieChart" chartData={chartData} />
                 </>
             )}

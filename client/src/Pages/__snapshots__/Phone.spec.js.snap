@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PhonePage render when waiting for response from api service 1`] = `
+<DocumentFragment>
+  <main>
+    <h3>
+      Fetching data...
+    </h3>
+  </main>
+</DocumentFragment>
+`;
+
+exports[`PhonePage render with all props passed 1`] = `
+<DocumentFragment>
+  <main>
+    <h3>
+      Call history for +4912345678
+    </h3>
+    <table
+      class="Table"
+    >
+      <thead>
+        <tr>
+          <th>
+            Agent Name
+          </th>
+          <th>
+            Call date and time
+          </th>
+          <th>
+            Resolution
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            John Doe
+          </td>
+          <td>
+            10/6/2020 3:50:00 PM
+          </td>
+          <td>
+            mock-resolution
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Spiderman
+          </td>
+          <td>
+            11/6/2020 2:50:00 PM
+          </td>
+          <td>
+            mock-resolution-2
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+</DocumentFragment>
+`;
+
+exports[`PhonePage render with error from api service 1`] = `
+<DocumentFragment>
+  <main>
+    <h3>
+      Error fetching data. Please refresh your page
+    </h3>
+  </main>
+</DocumentFragment>
+`;

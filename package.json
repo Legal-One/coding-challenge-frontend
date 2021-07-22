@@ -6,6 +6,9 @@
     "scripts": {
         "client": "cd ./client && npm run start",
         "server": "cd ./server && npm run server",
+        "client-test": "cd ./client && npm run test",
+        "server-test": "cd ./server && npm run test",
+        "test": "concurrently --kill-others-on-fail \"npm run client-test\" \"npm run server-test\"",
         "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
     },
     "repository": {
@@ -25,9 +28,5 @@
     "homepage": "https://github.com/Legal-One/coding-challenge-frontend#readme",
     "devDependencies": {
         "concurrently": "^6.2.0"
-    },
-    "dependencies": {
-        "node-sass": "^6.0.1",
-        "react-router-dom": "^5.2.0"
     }
 }
