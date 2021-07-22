@@ -4,7 +4,7 @@ const getJsonFileData = require('../utils/jsonFileReader');
 
 exports.getCallDetails = async (req, res) => {
   const phoneNumber = req.params.phoneNumber;
-  const basePath = path.dirname(process.mainModule.filename);
+  const basePath = path.dirname(require.main.filename);
   try {
     const callLogData = await getJsonFileData(path.join(basePath, '../json-data/logs.json'));
     const resolutionData = await getJsonFileData(path.join(basePath, '../json-data/resolution.json'));
