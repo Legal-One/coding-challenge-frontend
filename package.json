@@ -12,7 +12,7 @@
         "server-test": "cd ./server && npm run test",
         "test": "concurrently --kill-others-on-fail \"npm run client-test\" \"npm run server-test\"",
         "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
-        "heroku-postbuild": "cd ./client && npm install && npm run build",
+        "heroku-postbuild": "cd ./client && npm install && npm run build"
     },
     "repository": {
         "type": "git",
