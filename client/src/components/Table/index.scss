@@ -7,6 +7,10 @@ h3 {
     border-collapse: collapse;
     width: 100%;
 
+    a {
+        text-decoration: none;
+    }
+
     td,
     th {
         border: 1px solid #ddd;
