@@ -24,11 +24,7 @@ function Agent() {
     const [data, isLoading, isError] = useFetchData(apiUrl + agentId);
 
     const counter = data.reduce((acc, cur) => {
-        if (acc[cur.resolution]) {
-            acc[cur.resolution]++;
-        } else {
-            acc[cur.resolution] = 1;
-        }
+        acc[cur.resolution] = ++acc[cur.resolution] || 1;
         return acc;
     }, {});
 

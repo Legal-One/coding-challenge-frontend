@@ -23,11 +23,7 @@ function Phone() {
     const [data, isLoading, isError] = useFetchData(apiUrl + phoneNumber);
 
     const counter = data.reduce((acc, cur) => {
-        if (acc[cur.resolution]) {
-            acc[cur.resolution]++;
-        } else {
-            acc[cur.resolution] = 1;
-        }
+        acc[cur.resolution] = ++acc[cur.resolution] || 1;
         return acc;
     }, {});
 
@@ -37,7 +33,11 @@ function Phone() {
         <main>
             {!isLoading && !isError && (
                 <>
-                    <Table title={title} headers={headers} rows={dataMapper(data)} />
+                    <Table
+                        title={title}
+                        headers={headers}
+                        rows={dataMapper(data)}
+                    />
                     <Chart chartType="PieChart" chartData={chartData} />
                 </>
             )}

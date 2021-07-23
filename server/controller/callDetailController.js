@@ -6,9 +6,14 @@ exports.getCallDetails = async (req, res) => {
   const phoneNumber = req.params.phoneNumber;
   const basePath = path.dirname(require.main.filename);
   try {
-    const callLogData = await getJsonFileData(path.join(basePath, '../json-data/logs.json'));
-    const resolutionData = await getJsonFileData(path.join(basePath, '../json-data/resolution.json'));
-    const agentData = await getJsonFileData(path.join(basePath, '../json-data/agents.json'));
+    const callLogPromise = getJsonFileData(path.join(basePath, '../json-data/logs.json'));
+    const resPromise = getJsonFileData(path.join(basePath, '../json-data/resolution.json'));
+    const agentPromise = getJsonFileData(path.join(basePath, '../json-data/agents.json'));
+    const [callLogData, agentData, resolutionData] = await Promise.all([
+      callLogPromise,
+      agentPromise,
+      resPromise,
+    ]);
     const callLogs = formatData(callLogData, agentData, resolutionData, phoneNumber);
     return res.status(200).json(callLogs);
   } catch (err) {
