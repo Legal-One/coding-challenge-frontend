@@ -6,13 +6,13 @@
     "scripts": {
         "client": "cd ./client && npm run start",
         "server": "cd ./server && npm run server",
-        "prestart": "cd ./client && npm run build",
-        "start": "cd ./server && npm run start",
+        "build-client": "cd ./client && npm install && npm run build",
+        "start": "npm run build-client && cd ./server && npm run start",
         "client-test": "cd ./client && npm run test",
         "server-test": "cd ./server && npm run test",
         "test": "concurrently --kill-others-on-fail \"npm run client-test\" \"npm run server-test\"",
         "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
-        "heroku-postbuild": "cd ./client && npm install && npm run build"
+        "heroku-postbuild": "npm run build-client"
     },
     "repository": {
         "type": "git",
