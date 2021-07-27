@@ -10,7 +10,7 @@ Vue.use(VueRouter)
 Vue.use(VueApexCharts)
 Vue.component('apexchart', VueApexCharts)
 const routes = [
-  { path: '/', component: Home },
+  {path: '/', component: Home },
   {path: '/call/:number',component: Agent},
   {path:'/agent/:id',component: InfoByName}
 

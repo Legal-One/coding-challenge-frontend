@@ -42,7 +42,7 @@
 export default {
   name: "Home",
   props: {
-    all: Object,
+    aggregated_numbers: Object,
   },
   data: function () {
     return {
