@@ -32,43 +32,23 @@
                 </tr>
               </thead>
               <tbody class="bg-white divide-y divide-gray-200">
-                <tr v-for="item in rows_data" :key="item.id">
-                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {{ item.number }}
-                  </td>
-                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {{ item.number_of_calls }}
-                  </td>
-                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {{ item.agent_name }}
-                  </td>
-                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {{ hourAndMinute(item.date) }}
-                  </td>
-                </tr>
+                <slot></slot>
               </tbody>
             </table>
           </div>
         </div>
       </div>
     </div>
-    <!-- <div v-for="agent in aggreageted_data" :key="agent.id">
-      {{ agent.agent_name }}
-    </div> -->
   </div>
 </template>
 
 <script>
-import { hourAndMinute } from "../utils";
 
 export default {
   props: {
-    rows_data: Array,
     headings: Array,
   },
-  methods: {
-    hourAndMinute: hourAndMinute,
-  },
+  
 };
 </script>
 
