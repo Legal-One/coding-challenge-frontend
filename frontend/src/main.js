@@ -5,7 +5,7 @@ import App from './App.vue'
 
 import VueApexCharts from 'vue-apexcharts'
 
-import './index.css'
+import './assets/index.css'
 
 Vue.use(VueApexCharts)
 
