@@ -1,7 +1,5 @@
 <template>
-  <div class="root">
     <loader />
-  </div>
 </template>
 
 <script>
