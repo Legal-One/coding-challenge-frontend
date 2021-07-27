@@ -1,9 +1,9 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router'
 
-import Home from '../components/Home'
-import Agent from '../components/Agent'
-import PhoneNumber from '../components/PhoneNumber'
+import Home from '../views/Home'
+import Agent from '../views/Agent'
+import PhoneNumber from '../views/PhoneNumber'
 
 Vue.use(VueRouter);
 
