@@ -1,10 +1,10 @@
 <template>
   <div id="root">
-    <loader v-if="loading_state" />
-    <Table :headings="headings" v-if="!loading_state" class="m-12">
+    <loader v-if="isLoading" />
+    <Table :headings="headings" v-if="!isLoading" class="m-12">
       <tr v-for="item in aggreageted_data" :key="item.id">
         <router-link :to="`/call/${item.number}`" custom v-slot="{ navigate }">
-          <td @click="navigate" @keypress.enter="navigate" class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 cursor-pointer hover:text-red-400">
+          <td @click="navigate" @keypress.enter="navigate" class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 cursor-pointer hover:text-red-400 font-bold">
             {{ item.number }}
           </td>
         </router-link> 
@@ -12,7 +12,7 @@
           {{ item.number_of_calls }}
         </td>
         <router-link :to="`/agent/${item.agent_identifier}`" custom v-slot="{ navigate }">
-          <td @click="navigate" @keypress.enter="navigate" class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 cursor-pointer hover:text-red-400">
+          <td @click="navigate" @keypress.enter="navigate" class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 cursor-pointer hover:text-red-400 font-bold">
             {{ item.agent_name }}
           </td>
         </router-link> 
@@ -21,29 +21,39 @@
         </td>
       </tr>
     </Table>
+    <Chart v-if="!isLoading" :data="aggreageted_data" />
   </div>
 </template>
 
 <script>
 import Loader from "../components/Loader.vue";
 import Table from "../components/Table.vue";
+import Chart from "../components/Chart.vue"
+
+import {mapState} from 'vuex'
+
 import { get_aggregated_data, hourAndMinute } from "../utils";
+
 
 export default {
   data() {
     return {
-      loading_state: false,
       headings: ["Number", "Number of calls", "Last caller", "Last call time"],
     };
   },
-  components: { Loader, Table },
+  components: { Loader, Table, Chart },
   computed: {
+    ...mapState({
+      loadStatus: state => state.loadStatus
+    }),
+    isLoading() {
+      return this.loadStatus === true;
+    },
     aggreageted_data() {
       if (this.$store.state.logs.length != 0) {
         return get_aggregated_data(this.agents, this.$store.state.logs);
       }
-      
-      return this.$store.state.agents;
+      return [];
     },
     agents() {
       return this.$store.state.agents;

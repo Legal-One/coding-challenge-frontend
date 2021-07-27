@@ -1,7 +1,7 @@
 <template>
   <div id="root">
-    <loader v-if="loading_state" />
-    <Table :headings="headings" v-if="!loading_state" class="m-12">
+    <loader v-if="isLoading" />
+    <Table :headings="headings" v-if="!isLoading" class="m-12">
       <tr v-for="item in data" :key="item.id">
         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
           {{ item["number"] }}
@@ -21,19 +21,25 @@
 import Loader from "../components/Loader.vue";
 import Table from "../components/Table.vue";
 import { dateAndTime } from "../utils";
+import {mapState} from 'vuex'
 
 export default {
   name: "Agent",
 
   data() {
     return {
-      loading_state: false,
       headings: ["Numbers", "Call date and time", "Resolution"],
       identifier: this.$route.params.agentId,
     };
   },
   components: { Loader, Table },
   computed: {
+    ...mapState({
+      loadStatus: state => state.loadStatus
+    }),
+    isLoading() {
+      return this.loadStatus === true;
+    },
     data() {
       if (this.$store.state.logs.length != 0) {
         const agentLogs = this.fetchLogsById(this.identifier, this.logs);
