@@ -1,15 +1,15 @@
 <template>
   <div id="root">
     <loader v-if="loading_state"/>
-    <div v-for="agent in agents" :key="agent.id">
-      {{ agent.firstName }}
+    <div v-for="agent in aggreageted_data" :key="agent.id">
+      {{ agent.agent_name }}
     </div>
   </div>
 </template>
 
 <script>
 import Loader from "../components/Loader.vue"
-// import { getAgentName } from '../utils'
+import { get_aggregated_data } from '../utils'
 
 export default {
   data() {
@@ -19,6 +19,12 @@ export default {
   },
   components: { Loader },
   computed: {
+    aggreageted_data() {
+      if((this.$store.state.logs).length!=0){
+        return get_aggregated_data(this.agents, this.$store.state.logs) 
+      }
+      return this.$store.state.agents
+    },
     agents() {
       return this.$store.state.agents
     },
@@ -31,9 +37,6 @@ export default {
     this.$store.dispatch("getLogs")
     this.loading_state = false
   },
-  methods: {
-    
-  }
 };
 </script>
 
