@@ -28,7 +28,7 @@ export default {
 
   data() {
     return {
-      loading_state: true,
+      loading_state: false,
       headings: ["Agents", "Call date and time", "Resolution"],
       phone_number: this.$route.params.number,
     };
@@ -36,11 +36,11 @@ export default {
   components: { Loader, Table },
   computed: {
     data() {
-      console.log(this.$store.state)
       let vm = this
+      console.log(this.$store.state)
+      
       if (this.$store.state.logs.length != 0) {
         var filtered_logs = this.fetchLogsByNumber(vm.phone_number, this.logs)
-        vm.loading_state = false
         return this.mergeLogsAgentsResolutions(filtered_logs, this.agents, this.resolutions)
       }
       return [];
@@ -55,9 +55,8 @@ export default {
       return this.$store.state.agents
     },
   },
-  mounted() {
+  created() {
     this.$store.dispatch("getAllData")
-
   },
   methods:{
     dateAndTime: dateAndTime,

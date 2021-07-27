@@ -20,6 +20,7 @@ const getters = {}
 //to handle actions
 const actions = {
     getAllData({commit}) {
+        commit('SET_LOAD_STATUS', true);
         Promise.all([
             axios.get(BASE_URL + 'agents').then((response) => response.data),
             axios.get(BASE_URL + 'logs').then((response) => response.data),

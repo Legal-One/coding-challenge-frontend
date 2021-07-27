@@ -3,9 +3,11 @@
     <loader v-if="loading_state" />
     <Table :headings="headings" v-if="!loading_state" class="m-12">
       <tr v-for="item in aggreageted_data" :key="item.id">
-        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-          {{ item.number }}
-        </td>
+        <router-link :to="`/call/${item.number}`" custom v-slot="{ navigate }">
+          <td @click="navigate" @keypress.enter="navigate" class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 cursor-pointer hover:text-red-400">
+            {{ item.number }}
+          </td>
+        </router-link> 
         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
           {{ item.number_of_calls }}
         </td>
@@ -28,16 +30,14 @@ import { get_aggregated_data, hourAndMinute } from "../utils";
 export default {
   data() {
     return {
-      loading_state: true,
+      loading_state: false,
       headings: ["Number", "Number of calls", "Last caller", "Last call time"],
     };
   },
   components: { Loader, Table },
   computed: {
     aggreageted_data() {
-      let vm = this
       if (this.$store.state.logs.length != 0) {
-        vm.loading_state = false
         return get_aggregated_data(this.agents, this.$store.state.logs);
       }
       
