@@ -37,8 +37,7 @@ export default {
   computed: {
     data() {
       let vm = this
-      console.log(this.$store.state)
-      
+            
       if (this.$store.state.logs.length != 0) {
         var filtered_logs = this.fetchLogsByNumber(vm.phone_number, this.logs)
         return this.mergeLogsAgentsResolutions(filtered_logs, this.agents, this.resolutions)

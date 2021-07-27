@@ -11,9 +11,11 @@
         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
           {{ item.number_of_calls }}
         </td>
-        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-          {{ item.agent_name }}
-        </td>
+        <router-link :to="`/agent/${item.agent_identifier}`" custom v-slot="{ navigate }">
+          <td @click="navigate" @keypress.enter="navigate" class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 cursor-pointer hover:text-red-400">
+            {{ item.agent_name }}
+          </td>
+        </router-link> 
         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
           {{ hourAndMinute(item.date) }}
         </td>
