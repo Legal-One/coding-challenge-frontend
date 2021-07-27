@@ -1,7 +1,7 @@
 <template>
   <div id="root">
     <loader v-if="loading_state" />
-    <Table :headings="headings" class="m-12">
+    <Table :headings="headings" v-if="!loading_state" class="m-12">
       <tr v-for="item in aggreageted_data" :key="item.id">
         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
           {{ item.number }}
@@ -35,9 +35,12 @@ export default {
   components: { Loader, Table },
   computed: {
     aggreageted_data() {
+      let vm = this
       if (this.$store.state.logs.length != 0) {
+        vm.loading_state = false
         return get_aggregated_data(this.agents, this.$store.state.logs);
       }
+      
       return this.$store.state.agents;
     },
     agents() {
@@ -48,9 +51,7 @@ export default {
     },
   },
   mounted() {
-    this.$store.dispatch("getAgents");
-    this.$store.dispatch("getLogs");
-    this.loading_state = false;
+    this.$store.dispatch("getAllData");
   },
   methods: {
     hourAndMinute: hourAndMinute,

@@ -10,7 +10,8 @@ let BASE_URL = process.env.BASE_URL
 const state = {
     agents: [],
     logs: [],
-    resolutions: []
+    resolutions: [],
+    loadStatus: true
 }
 
 //to handle state
@@ -18,6 +19,18 @@ const getters = {}
 
 //to handle actions
 const actions = {
+    getAllData({commit}) {
+        Promise.all([
+            axios.get(BASE_URL + 'agents').then((response) => response.data),
+            axios.get(BASE_URL + 'logs').then((response) => response.data),
+            axios.get(BASE_URL + 'resolutions').then((response) => response.data)
+        ]).then(([agents, logs, resolutions]) => {
+            commit('SET_AGENTS', agents);
+            commit('SET_LOGS', logs);
+            commit('SET_RESOLUTIONS', resolutions);
+            commit('SET_LOAD_STATUS', false);
+        });
+    },
     getAgents({ commit }) {
         axios.get(BASE_URL + 'agents')
             .then(response => {
@@ -48,6 +61,9 @@ const mutations = {
     },
     SET_RESOLUTIONS(state, resolutions) {
         state.resolutions = resolutions
+    },
+    SET_LOAD_STATUS(state, loadStatus) {
+        state.loadStatus = loadStatus
     }
 }
 
