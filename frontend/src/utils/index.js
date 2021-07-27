@@ -25,9 +25,25 @@ export const findLatestCall = (agents, data) => {
       return new Date(a.dateTime) > new Date(b.dateTime) ? a : b;
     });
     return {
+      number: data[0]["number"],
       number_of_calls: Object.keys(data).length,
       date: filtered_data["dateTime"],
       agent_identifier: filtered_data["agentIdentifier"],
       agent_name: getAgentName(agents, filtered_data["agentIdentifier"]),
     };
 }
+
+export const hourAndMinute = originalDate => {
+  const date = new Date(originalDate);
+
+  return `${date.getHours()}:${date.getMinutes()}`;
+};
+
+export const dateAndTime = originalDate => {
+  const date = new Date(originalDate);
+
+  const dateOnly = date.toLocaleDateString();
+  const timeOnly = date.toTimeString().split(' ')[0];
+
+  return `${dateOnly} ${timeOnly}`;
+};
