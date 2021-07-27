@@ -1,3 +1,42 @@
+# Screenshot
+Home Page            |  Call Page
+:-------------------------:|:-------------------------:
+![](https://i.ibb.co/ww0Sc1v/Home-Screen.png)  |  ![](https://i.ibb.co/Yd4K63d/Call.png)
+
+# Technologies Used
+- VueJS
+- TailwindCSS
+- Axios
+- Express.js
+- Vuex
+- ApexCharts
+
+# Project setup
+To run backend server
+```
+npm start
+```
+To run the frontend part
+```
+npm install
+```
+
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
+
+### Compiles and minifies for production
+```
+npm run build
+```
+
+### Lints and fixes files
+```
+npm run lint
+```
+
+
 # Frontend / Javascipt - coding challenge.
 
 Welcome to Legal One coding challenge, through this challenge we get to know you better from the coding side of you. let's start.
