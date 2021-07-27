@@ -3,7 +3,7 @@ const resolutionRoutes = (app, fs) => {
     const dataPath = './data/json-data/resolution.json';
   
     // READ
-    app.get('/resolution', (req, res) => {
+    app.get('/resolutions', (req, res) => {
        
       fs.readFile(dataPath, 'utf8', (err, data) => {
         if (err) {
