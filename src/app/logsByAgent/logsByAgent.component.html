@@ -1,0 +1,18 @@
+<h1>Detailed Log of a Agent</h1>
+
+<table class="table">
+  <thead>
+  <tr>
+    <th>Phone number</th>
+    <th>Call date and time</th>
+    <th>Resolution</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of logsByAgent | keyvalue">
+    <td>{{data.value.number}}</td>
+    <td>{{ data.value.dateTime | date: "dd/MM/yyyy" }}</td>
+    <td>{{ data.value.resolution}}</td>
+  </tr>
+  </tbody>
+</table>

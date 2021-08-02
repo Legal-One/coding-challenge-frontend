@@ -1,0 +1,18 @@
+<h1>List Of Call Logs</h1>
+
+<table class="table">
+  <thead>
+  <tr>
+    <th>Phone number</th>
+    <th>Number of calls</th>
+    <th>Last call details</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of callLogsData| keyvalue">
+    <td (click)='getDetailsPerNumber(data.value.number)'>{{ data.value.number }}</td>
+    <td>{{ data.value.callCounts}}</td>
+    <td (click)='getDetailsPerAgent(data.value.agentIdentifier)'>{{ data.value.agentName}} / {{data.value.lastCall | date:'HH:mm'}}</td>
+  </tr>
+  </tbody>
+</table>
