@@ -4,7 +4,12 @@
   "description": "coding challenge ",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "modules": "npm install && cd client && npm install",
+    "start": "cd client && react-scripts start",
+    "client": "cd client && react-scripts start",
+    "server": "node server.js",
+    "build": "react-scripts build"
   },
   "repository": {
     "type": "git",
@@ -20,5 +25,10 @@
   "bugs": {
     "url": "https://github.com/Legal-One/coding-challenge-frontend/issues"
   },
-  "homepage": "https://github.com/Legal-One/coding-challenge-frontend#readme"
+  "homepage": "https://github.com/Legal-One/coding-challenge-frontend#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "node-sass": "^6.0.1",
+    "react-scripts": "^4.0.3"
+  }
 }
