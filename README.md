@@ -1,62 +1,47 @@
-# Frontend / Javascipt - coding challenge.
+# Task Briefing
+Greetings,
+For this task, I've gone for a minimal configuration approach where I've made kind of a wannabe mono-repo where the main directory contains the code for the server-side ( server.js ) and the client-side ( client folder ), and a series of scripts to up and run both the apps.
+The client side is a React App bootstrapped via the CRA, and the backend service is a very simple NodeJS app on Express.js.
 
-Welcome to Legal One coding challenge, through this challenge we get to know you better from the coding side of you. let's start.
+## Starting the Project
+#### Install node-modules
+#### `npm run modules`
 
-recommended: a good cup of coffee ☕  and lo-fi coding music 🎵.
-___
+#### Run API Server
+#### `npm run server`
 
-## The challenge: 
-A call center makes tons of calls daily through call center agents and these calls are dumped in JSON files. We need you to handle this large amount of data, and present it in a nice way for the supervisors. 
+#### Run Client Side App
+#### `npm run client`
 
-The issue with the data is the structure, it is spread across multiple files. We need your mind to solve this issue and present the data in a useful way.
+# Task Description
+### Backend Task
+For this whole assignment I've followed the assumption that the main focus was the Front-End task. Hence for Back-End I've simply created a tiny node.js app with Express that return back the 3 JSON unaltered, in a single API. Since the process is very fast, I've added a timeout of 1 second, to mimic the behavior of an actual real world API.
 
+### Frontend Task
+For this assignment, I've used the following packages
+- Node-sass ( SCSS )
+- React-Router-Dom ( Routing )
+- Recharts ( Charting Library )
+- Moment.js ( For Date/Time related activity )
+- Bootstrap 4.4.1 ( CDN )
+- Bootstrap Icons 1.5.0 ( CDN )
 
-## Tech TODO: 
-### 1. The first part:
-Create a simple nodeJS app that can serve the data. You can use any nodeJS framework for that. The data in `json-data` folder should not be changed.
+#### File Structure of the ./src
+> |- api ( For External API functions )
+> |- components  ( Contains components that had the potential to used more than once throughout the app, such as Maps and Tables.
+> |- screen ( These are the independent screens that are to be rendered when their specific paths are visited. )
+> |- navigation ( The navigation component that is responsible to serve the screens based on the path )
+> |  styles ( Contains _global.scss and _variable.scss files )
+> |- utils ( Contains an index.js file where the actual data manipulation takes place,  and a constants.js file that contains stuff that needs to be kept constant and hard-coded )
+>  |- App.js  ( the app.js file which basically calls the navigation component wrapping it around with an error boundary )
 
+## IMPROVEMENTS AND SCALING
+Since the scope of the app was small there weren't many instances of component re-rendering. However if the application is to scale up, following are some things that need to be taken care of.
+- #### State Management.
+Since the data wasn't being drilled down as is, through components as props, to a very high degree of depth, introducing state management would have been an overkill. But if it has to grow any further, introducing a state-management library would be very useful.
 
-### 2. The second part:
-Create an app which uses a modern JS frontend framework *(e.g. Vue, React, etc...)*. The frontend app should have these routes:
+- #### Memoizing
+The application at this point, didn't have many instances where a component was going through 'wasted re-renders' , but if it cases arrive where it does, it would be a wise to memoize the component.
 
-  - `/` a home page to show an aggregated table for the calls, for ex:
-
-    | Phone number | Number of calls |  Last call details |
-    |--------------|-----------------|--------------------|
-    | +49151484522 |     3 calls     | Agent name / 11:46 |
-    | +49158544147 |     1 call      | Agent name / 14:46 |
-    | +49151783331 |     2 calls     | Agent name / 16:46 |
-
-    by clicking on the agent name it would go to the agent log
-
-    by clicking on the **Phone number** it would go to that number log
-
-  - `/agent/${ID}` to show an agent specific call log, for ex:
-
-    | Phone number | Call date and time  |     Resolution     |
-    |--------------|---------------------|--------------------|
-    | +49151484522 | 22/1/2020 14:20:22  |  need reschedule   |
-    | +49158544147 | 22/1/2020 16:54:12  |    no response     |
-    | +49158544147 | 22/1/2020 17:54:12  |    no response     |
-
-
-  - `/call/${number}` to show call logs of a specific number  
-
-    |  Agent Name  | Call date and time  |     Resolution     |
-    |--------------|---------------------|--------------------|
-    |   John Bob   | 22/1/2020 14:20:22  |  need reschedule   |
-    |  Chris Toms  | 22/1/2020 17:54:12  |    no response     |
-    |   John Bob   | 22/1/2020 17:54:12  |    no response     |
-
-
-## Important notes: 
-* app should run with no errors nor hiccups.
-* the data in `json-data` folder should not be changed!.
-* representing the data using charts is a plus. 
-* unit testing of the code is a plus. 
-
-## Submission:
-Fork this repo and submit your application either via PR or email. Add build, test and run scripts to package.json (if applicable).
-
-
-## Happy coding !
+##### BEST WISHES
+##### Raheed Farooq.

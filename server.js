@@ -28,17 +28,6 @@ app.get("/", async (req, res) => {
   }, 1000);
 });
 
-// app.get("/agent", async (req, res) => {
-
-//   res.status(200).send({ data: agent });
-// });
-
-// app.get("/resolution", async (req, res) => {
-//   let resolution = ;
-//   res.status(200).send({ data: resolution });
-// });
-
-
 console.log("Project Up and Running on port ", port);
 
 app.listen(port);

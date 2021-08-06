@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 import MapComponent from '../../components/MapComponent';
 import Table from '../../components/Table';
 import { convetSecToTime, montlyCallLogs } from '../../utils';
@@ -6,17 +6,17 @@ import { useHistory } from 'react-router-dom';
 import { MAP_AXIS, MAP_TITLE, TABLE_HEADINGS } from '../../utils/constants';
 
 function Home({ logs, agents }) {
-    console.log("Home");
-    const memoizedData = useMemo(() => montlyCallLogs({ logs, agents }), [logs, agents]);
+
+    const componentData = montlyCallLogs({ logs, agents })
     const history = useHistory();
 
     return (
         <div>
-            <MapComponent data={memoizedData.mapData} axis={MAP_AXIS.HOME} title={MAP_TITLE.HOME} />
+            <MapComponent data={componentData.mapData} axis={MAP_AXIS.HOME} title={MAP_TITLE.HOME} />
             <Table headings={TABLE_HEADINGS.HOME} >
                 {
-                    memoizedData.tableData &&
-                    Object.values(memoizedData.tableData).map((val) => (
+                    componentData.tableData &&
+                    Object.values(componentData.tableData).map((val) => (
                         <tr key={val[0].number}>
                             <td><span onClick={() => history.push(`/call/${val[0].number}`)}>
                                 {val[0].number}

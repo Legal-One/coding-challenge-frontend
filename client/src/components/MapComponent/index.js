@@ -55,4 +55,4 @@ function MapComponent({ data, axis, mapType, title }) {
     )
 }
 
-export default React.memo(MapComponent)
+export default MapComponent
