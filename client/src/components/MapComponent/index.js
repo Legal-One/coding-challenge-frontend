@@ -27,7 +27,7 @@ function MapComponent({ data, axis, mapType, title }) {
                     }}
                 >
                     <CartesianGrid />
-                    <XAxis className="x-axis" axisLine={false} dataKey={axis.x} />
+                    <XAxis style={{fontSize: '13px'}} axisLine={false} dataKey={axis.x} />
                     <YAxis
                         className="y-axis"
                         ticks={mapType === 'CALL' ? [0, 1, 2, 3] : null}
@@ -36,6 +36,7 @@ function MapComponent({ data, axis, mapType, title }) {
                             return val;
                         }}
                         axisLine={false} dataKey={axis.y} tickCount={4}
+                        style={{fontSize: '13px'}}
                     />
                     <Tooltip formatter={(val, name, props) => {
                         if (mapType === 'CALL') return props.payload.resolution;

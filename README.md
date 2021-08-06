@@ -79,8 +79,10 @@ Since the data wasn't being drilled down as is, through components as props, to 
 
 The application at this point, didn't have many instances where a component was going through 'wasted re-renders' , but if it cases arrive where it does, it would be a wise to memoize the component.
 
-  
+- #### Lazy Loading.
 
+One more thing which can be done is to lazy load components and pages that might not be very frequently visited by a user. This way the js resources could decrease, improving the overall load time of the application.
+  
 ##### BEST WISHES
 
 ##### Raheed Farooq.
