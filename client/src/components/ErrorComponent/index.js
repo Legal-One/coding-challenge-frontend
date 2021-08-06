@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './styles.scss';
 
 function ErrorComponent({ error, resetErrorBoundary }) {
@@ -17,7 +18,8 @@ function ErrorComponent({ error, resetErrorBoundary }) {
 }
 
 ErrorComponent.propTypes = {
-
+    error: PropTypes.object,
+    resetErrorBoundary: PropTypes.func.isRequired
 }
 
 export default ErrorComponent

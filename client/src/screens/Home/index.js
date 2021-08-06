@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types';
 import MapComponent from '../../components/MapComponent';
 import Table from '../../components/Table';
 import { convetSecToTime, montlyCallLogs } from '../../utils';
@@ -32,5 +33,10 @@ function Home({ logs, agents }) {
         </div>
     )
 }
+
+Home.propTypes = {
+    logs:PropTypes.arrayOf(PropTypes.object),
+    agents:PropTypes.object,
+};
 
 export default Home;

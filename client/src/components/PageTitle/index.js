@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useHistory, useLocation } from 'react-router-dom';
 import './styles.scss';
 
@@ -23,4 +24,8 @@ const PageTitle = ({ agents }) => {
     )
 }
  
+PageTitle.propTypes = {
+    agents: PropTypes.object,
+}
+
 export default PageTitle

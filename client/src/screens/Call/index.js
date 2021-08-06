@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types';
 import MapComponent from '../../components/MapComponent';
 import Table from '../../components/Table';
 import { numberCallLogs } from '../../utils';
@@ -34,5 +35,11 @@ function CallComponent({ logs, agents, resolution }) {
         </div>
     )
 }
+
+CallComponent.propTypes = {
+    logs:PropTypes.arrayOf(PropTypes.object),
+    agents:PropTypes.object,
+    resolution:PropTypes.object,
+};
 
 export default CallComponent;

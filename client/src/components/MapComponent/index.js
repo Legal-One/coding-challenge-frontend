@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
     LineChart,
     Line,
@@ -8,7 +9,7 @@ import {
     Tooltip,
     ResponsiveContainer
 } from "recharts";
-import { CALL_INTEREST } from '../../utils/constants';
+import { CALL_INTEREST, MAP_TITLE } from '../../utils/constants';
 import './styles.scss';
 
 function MapComponent({ data, axis, mapType, title }) {
@@ -53,6 +54,16 @@ function MapComponent({ data, axis, mapType, title }) {
             <span className="map-title">{title}</span>
         </div>
     )
+}
+
+MapComponent.propTypes = {
+    data: PropTypes.array,
+    axis: PropTypes.shape({
+        x: PropTypes.string,
+        y: PropTypes.string
+    }),
+    mapType: PropTypes.string,
+    title: PropTypes.oneOf(Object.values(MAP_TITLE))
 }
 
 export default MapComponent

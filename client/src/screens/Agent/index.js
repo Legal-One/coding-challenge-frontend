@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types';
 import MapComponent from '../../components/MapComponent';
 import Table from '../../components/Table';
 import { agentCallLogs } from '../../utils';
@@ -30,5 +31,11 @@ function Agent({ logs, agents, resolution }) {
         </div>
     )
 }
+
+Agent.propTypes = {
+    logs:PropTypes.arrayOf(PropTypes.object),
+    agents:PropTypes.object,
+    resolution:PropTypes.object,
+};
 
 export default Agent;
