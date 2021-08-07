@@ -8,12 +8,13 @@ function App() {
 
   return (
     <div className="App">
+
       <header className="App-header">
         RAHEED FAROOQ ASSIGNMENT
       </header>
 
       <div className="container p-0">
-        <ErrorBoundary FallbackComponent={ErrorComponent} onReset={() => window.history.back()}>
+        <ErrorBoundary FallbackComponent={ErrorComponent} onReset={() => window.location.reload()}>
           <Navigation />
         </ErrorBoundary>
       </div>

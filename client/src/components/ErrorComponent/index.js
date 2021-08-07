@@ -9,10 +9,6 @@ function ErrorComponent({ error, resetErrorBoundary }) {
             <div className="error">{error.message}</div>
             <strong>Lets try this again, shall we?</strong><br/>
             <button className="btn btn-info" onClick={resetErrorBoundary}>Try again</button>
-
-            <div>
-                
-            </div>
         </div>
     )
 }
