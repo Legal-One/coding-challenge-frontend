@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 const PhoneLogs = {
 
     updateOrCreatePhoneLog: (phoneNumber, newValue) => {
@@ -6,6 +8,18 @@ const PhoneLogs = {
         PhoneLog.logs = [...PhoneLog.logs, newValue];
         return PhoneLog;
     },
+    getPhoneLogsMap: () => new Promise((resolve, reject) => {
+        fs.readFile('json-data/logs.json', (err, data) => {
+            if (err) reject(err);
+            const logs = JSON.parse(data);
+            const phoneLogsMap = new Map();
+            logs.forEach((value) => {
+                const { number } = value;
+                phoneLogsMap.set(number, PhoneLogs.updateOrCreatePhoneLog(phoneLogsMap, value));
+            })
+            resolve(phoneLogsMap);
+        });
+    }),
 };
 
 module.exports = PhoneLogs;
