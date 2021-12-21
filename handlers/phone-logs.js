@@ -1,7 +1,6 @@
 const fs = require('fs');
 
 const PhoneLogs = {
-
     updateOrCreatePhoneLog: (phoneNumber, newValue) => {
         const { number } = newValue;
         let PhoneLog = phoneNumber.get(number) || { number, logs: [], };
@@ -20,6 +19,16 @@ const PhoneLogs = {
             resolve(phoneLogsMap);
         });
     }),
+    getPhoneNumberFromLogs: () => new Promise((resolve, reject) => {
+        PhoneLogs.getPhoneLogsMap().then((phoneLogsMap) => {
+            resolve(Array.from(phoneLogsMap.values()));
+        });
+    }),
+    getPhoneNumbers: (req, res) => {
+        PhoneLogs.getPhoneNumberFromLogs().then((phoneLogs, reject) => {
+            res.json({ phoneLogs });
+        });
+    },
 };
 
 module.exports = PhoneLogs;
