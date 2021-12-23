@@ -14,4 +14,18 @@ module.exports = {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
   },
+  settings: {
+    "import/resolver": {
+      node: {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      },
+      alias: {
+        "map" : [
+          ["@components","./src/components/*"]
+          ["@","./src/*"]
+        ],
+        "extensions": [".vue"]
+      },
+    }
+  },
 };
