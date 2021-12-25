@@ -1,20 +1,20 @@
 const fs = require('fs');
 
 const PhoneLogs = {
-    updateOrCreatePhoneLog: (phoneNumber, newValue) => {
-        const { number } = newValue;
-        let PhoneLog = phoneNumber.get(number) || { number, logs: [], };
-        PhoneLog.logs = [...PhoneLog.logs, newValue];
+    updateOrCreatePhoneLog: (agentsMap, phoneNumbers, newValue) => {
+        const { number, agentIdentifier } = newValue;
+        let PhoneLog = phoneNumbers.get(number) || { number, logs: [], };
+        PhoneLog.logs = [...PhoneLog.logs, {...newValue, agent: agentsMap.get(agentIdentifier)}];
         return PhoneLog;
     },
-    getPhoneLogsMap: () => new Promise((resolve, reject) => {
+    getPhoneLogsMap: (agentsMap) => new Promise((resolve, reject) => {
         fs.readFile('json-data/logs.json', (err, data) => {
             if (err) reject(err);
             const logs = JSON.parse(data);
             const phoneLogsMap = new Map();
             logs.forEach((value) => {
                 const { number } = value;
-                phoneLogsMap.set(number, PhoneLogs.updateOrCreatePhoneLog(phoneLogsMap, value));
+                phoneLogsMap.set(number, PhoneLogs.updateOrCreatePhoneLog(agentsMap, phoneLogsMap, value));
             })
             resolve(phoneLogsMap);
         });
@@ -32,8 +32,10 @@ const PhoneLogs = {
         });
     }),
     getPhoneNumberFromLogs: () => new Promise((resolve, reject) => {
-        PhoneLogs.getPhoneLogsMap().then((phoneLogsMap) => {
-            resolve(Array.from(phoneLogsMap.values()));
+        PhoneLogs.getAgentsMap().then((agentsMap) => {
+            PhoneLogs.getPhoneLogsMap(agentsMap).then((phoneLogsMap) => {
+                resolve(Array.from(phoneLogsMap.values()));
+            });
         });
     }),
     getPhoneNumbers: (req, res) => {
