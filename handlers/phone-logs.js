@@ -38,7 +38,7 @@ const PhoneLogs = {
             });
         });
     }),
-    getPhoneNumbers: (req, res) => {
+    fetchPhoneLogs: (req, res) => {
         PhoneLogs.getPhoneNumberFromLogs().then((phoneLogs, reject) => {
             res.json({ phoneLogs });
         });
