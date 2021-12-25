@@ -2,12 +2,15 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
-
+const { fetchPhoneLogs } = require('./handlers/phone-logs');
 const app = express();
 
 app.use(morgan('tiny'));
 app.use(cors());
 app.use(bodyParser.json());
+app.use(express.static('public'));
+
+app.get('/logs', fetchPhoneLogs);
 
 app.get('/', (req, res) => {
     res.json({
