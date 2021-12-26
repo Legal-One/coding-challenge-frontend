@@ -3,6 +3,7 @@ const {
     getPhoneLogsMap,
     getPhoneNumberFromLogs
 } = require('../phone-logs');
+const { getAgentsMap } = require('../../utils/agent');
 const mockPhoneLogs = require('./phone-logs-mock.json');
 
 const newPhoneLogDummyData = {
@@ -47,8 +48,10 @@ describe('PhoneLogs', () => {
     });
 
     test('getPhoneLogsMap', () => {
-        return getPhoneLogsMap().then((phoneLogsMap) => {
-            expect(phoneLogsMap.has('+49151484522')).toEqual(true);
+        return getAgentsMap().then((agentsMap) => {
+            return getPhoneLogsMap(agentsMap).then((phoneLogsMap) => {
+                expect(phoneLogsMap.has('+49151484522')).toEqual(true);
+            });
         });
     });
 

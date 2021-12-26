@@ -1,4 +1,5 @@
 const fs = require('fs');
+const { getAgentsMap } = require('../utils/agent');
 
 const PhoneLogs = {
     updateOrCreatePhoneLog: (agentsMap, phoneNumbers, newValue) => {
@@ -19,20 +20,8 @@ const PhoneLogs = {
             resolve(phoneLogsMap);
         });
     }),
-    getAgentsMap: () => new Promise((resolve, _) => {
-        fs.readFile('json-data/agents.json', (err, data) => {
-            if (err) resolve(new Map());
-            const agents = JSON.parse(data);
-            const agentsMap = new Map();
-            agents.forEach((value) => {
-                const { identifier } = value;
-                agentsMap.set(identifier, value);
-            })
-            resolve(agentsMap);
-        });
-    }),
     getPhoneNumberFromLogs: () => new Promise((resolve, reject) => {
-        PhoneLogs.getAgentsMap().then((agentsMap) => {
+        getAgentsMap().then((agentsMap) => {
             PhoneLogs.getPhoneLogsMap(agentsMap).then((phoneLogsMap) => {
                 resolve(Array.from(phoneLogsMap.values()));
             });
