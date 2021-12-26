@@ -1,15 +1,19 @@
 <template>
-  <div class="phone-logs-content">
+  <div class="agent-content">
     <div class="">Agent Details</div>
     <div v-if="isLoading">
       Loaging
     </div>
     <AgentDetails v-if="!isLoading" :agent="agent"></AgentDetails>
+    <div class="agent-content__logs" v-if="!isLoading">
+      <AgentLogItem v-for="(log, index) in logs" :phoneLog="log" :key="index"></AgentLogItem>
+    </div>
   </div>
 </template>
 
 <script>
 import AgentDetails from '@/components/AgentDetails.vue';
+import AgentLogItem from '@/components/AgentLogItem.vue';
 
 export default {
   name: 'Agent',
@@ -37,6 +41,14 @@ export default {
         this.agentDetails = value;
       },
     },
+    logs: {
+      get() {
+        return this.agentLogs;
+      },
+      set(value) {
+        this.agentLogs = value;
+      },
+    },
   },
   methods: {
     loadAgentDetails() {
@@ -48,7 +60,7 @@ export default {
         .then(({ status, agent, logs }) => {
           if (status === 200) {
             self.agent = agent;
-            self.agentLogs = logs;
+            self.logs = logs;
           }
         });
     },
@@ -58,10 +70,15 @@ export default {
   },
   components: {
     AgentDetails,
+    AgentLogItem,
   },
 };
 </script>
 
-<style>
-
+<style lang="scss">
+  .agent-content {
+    &__logs {
+      margin-top: 35px;
+    }
+  }
 </style>
