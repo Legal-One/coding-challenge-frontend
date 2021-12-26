@@ -1,10 +1,11 @@
 <template>
   <div class="agent-content">
-    <div class="">Agent Details</div>
+    <h2 class="">Agent Details</h2>
     <div v-if="isLoading">
       Loaging
     </div>
     <AgentDetails v-if="!isLoading" :agent="agent"></AgentDetails>
+    <h2 class="">Agent Logs</h2>
     <div class="agent-content__logs" v-if="!isLoading">
       <AgentLogItem v-for="(log, index) in logs" :phoneLog="log" :key="index"></AgentLogItem>
     </div>
