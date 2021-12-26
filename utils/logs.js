@@ -25,6 +25,25 @@ const Logs = {
             });
         });
     }),
+    getPhoneLogsByNumber: (targetNumber, agentsMap = new Map(), path = 'json-data/logs.json') => new Promise((resolve, reject) => {
+        Logs.getResolutionsMap().then((resolutions) => {
+            fs.readFile(path, (err, data) => {
+                if (err) {
+                    reject(err);
+                    return;
+                }
+
+                const logs = JSON.parse(data);
+                let filteredLogs = logs.filter(({ number }) => number === targetNumber);
+                filteredLogs = filteredLogs.map((log) => ({ 
+                    ...log, 
+                    resolution: resolutions.get(log.identifier) || 'unknow',
+                    agent: agentsMap.get(log.agentIdentifier) || null,
+                }));
+                resolve(filteredLogs);
+            });
+        });
+    }),
 };
 
 module.exports = Logs;
