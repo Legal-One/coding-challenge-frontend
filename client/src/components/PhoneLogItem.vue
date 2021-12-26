@@ -7,7 +7,10 @@
       {{ phoneLog.logs.length }} calls
     </div>
     <div class="phone-logs-item__agent">
-      {{ getLastCallDetails() }}
+      <router-link :to="`/agent/${lastAgent.identifier}`">
+        {{ lastAgent.firstName + " " + lastAgent.lastName}}
+      </router-link>
+      / {{ lastCall.dateTime }}
     </div>
   </div>
 </template>
@@ -18,8 +21,18 @@ export default {
   props: {
     phoneLog: Object,
   },
+  data() {
+    return {
+      lastAgent: {},
+      lastCall: {},
+    };
+  },
   created() {
     console.log(JSON.stringify(this.phoneLog));
+    const { logs = [] } = this.phoneLog;
+    this.lastCall = logs.at(-1);
+    const { agent = {} } = this.lastCall;
+    this.lastAgent = agent;
   },
   methods: {
     getLastCallDetails() {
