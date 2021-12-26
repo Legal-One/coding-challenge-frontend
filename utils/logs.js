@@ -14,10 +14,14 @@ const Logs = {
             resolve(resolutionMap);
         });
     }),
-    getPhoneLogsByAgent: (targetAgentIdentifier) => new Promise((resolve, reject) => {
+    getPhoneLogsByAgent: (targetAgentIdentifier, path = 'json-data/logs.json') => new Promise((resolve, reject) => {
         Logs.getResolutionsMap().then((resolutions) => {
-            fs.readFile('json-data/logs.json', (err, data) => {
-                if (err) reject(err);
+            fs.readFile(path, (err, data) => {
+                if (err) {
+                    reject(err);
+                    return;
+                }
+
                 const logs = JSON.parse(data);
                 let filteredLogs = logs.filter(({ agentIdentifier }) => agentIdentifier === targetAgentIdentifier);
                 filteredLogs = filteredLogs.map((log) => ({ ...log, resolution: resolutions.get(log.identifier) || 'unknow' }));
