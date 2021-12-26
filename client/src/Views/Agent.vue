@@ -26,6 +26,22 @@ export default {
     },
   },
   methods: {
+    loadAgentDetails() {
+      const self = this;
+      console.log('env ', process.env.VUE_APP_API_URL);
+      const { id } = this.$route.params;
+      fetch(`${process.env.VUE_APP_API_URL}agent/${id}`)
+        .then((response) => response.json())
+        .then(({ status, agent, logs }) => {
+          if (status === 200) {
+            self.agent = agent;
+            self.agentLogs = logs;
+          }
+        });
+    },
+  },
+  created() {
+    this.loadAgentDetails();
   },
   components: {
 
