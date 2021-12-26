@@ -1,5 +1,6 @@
 const fs = require('fs');
 const { getAgentsMap } = require('../utils/agent');
+const { getPhoneLogsByNumber } = require('../utils/logs');
 
 const PhoneLogs = {
     updateOrCreatePhoneLog: (agentsMap, phoneNumbers, newValue) => {
@@ -32,6 +33,13 @@ const PhoneLogs = {
             res.json({ phoneLogs });
         });
     },
+    fetchPhoneLogsByNumber: (req, res) => {
+        const { params } = req;
+        const { number } = params;
+        getPhoneLogsByNumber(number).then((phoneLogs) => {
+            res.json({ phoneLogs });
+        });
+    }
 };
 
 module.exports = PhoneLogs;

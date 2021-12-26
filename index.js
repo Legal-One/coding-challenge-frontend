@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
-const { fetchPhoneLogs } = require('./handlers/phone-logs');
+const { fetchPhoneLogs, fetchPhoneLogsByNumber } = require('./handlers/phone-logs');
 const { getAgentDetails } = require('./handlers/agent-logs');
 const app = express();
 
@@ -12,6 +12,7 @@ app.use(bodyParser.json());
 app.use(express.static('public'));
 
 app.get('/logs', fetchPhoneLogs);
+app.get('/logs/:number', fetchPhoneLogsByNumber);
 app.get('/agent/:id', getAgentDetails);
 
 app.get('/', (req, res) => {
