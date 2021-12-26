@@ -1,7 +1,9 @@
 <template>
   <div class="phone-logs-item">
     <div class="phone-logs-item__number">
-      {{ phoneLog.number }}
+      <router-link :to="`/call/${phoneLog.number}`">
+        {{ phoneLog.number }}
+      </router-link>
     </div>
     <div class="phone-logs-item__calls">
       {{ phoneLog.logs.length }} calls
@@ -44,11 +46,17 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss">
   .phone-logs-item {
     display: grid;
+    align-items: center;
     width: 100%;
-    height: 70px;
+    height: 30px;
     grid-template-columns: 3fr 1fr 3fr;
+    background-color: #fff;
+
+    &:hover {
+      background-color: #dedede;
+    }
   }
 </style>
