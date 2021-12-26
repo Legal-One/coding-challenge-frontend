@@ -33,10 +33,11 @@ const PhoneLogs = {
             res.json({ phoneLogs });
         });
     },
-    fetchPhoneLogsByNumber: (req, res) => {
+    fetchPhoneLogsByNumber: async (req, res) => {
         const { params } = req;
         const { number } = params;
-        getPhoneLogsByNumber(number).then((phoneLogs) => {
+        const agentsMap = await getAgentsMap();
+        getPhoneLogsByNumber(number, agentsMap).then((phoneLogs) => {
             res.json({ phoneLogs });
         });
     }
