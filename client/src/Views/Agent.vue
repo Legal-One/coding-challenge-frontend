@@ -1,11 +1,15 @@
 <template>
   <div class="phone-logs-content">
     <div class="">Agent Details</div>
-
+    <div v-if="isLoading">
+      Loaging
+    </div>
+    <AgentDetails v-if="!isLoading" :agent="agent"></AgentDetails>
   </div>
 </template>
 
 <script>
+import AgentDetails from '@/components/AgentDetails.vue';
 
 export default {
   name: 'Agent',
@@ -13,9 +17,18 @@ export default {
     return {
       agentDetails: {},
       agentLogs: [],
+      loading: false,
     };
   },
   computed: {
+    isLoading: {
+      get() {
+        return this.loading;
+      },
+      set(value) {
+        this.loading = value;
+      },
+    },
     agent: {
       get() {
         return this.agentDetails;
@@ -44,7 +57,7 @@ export default {
     this.loadAgentDetails();
   },
   components: {
-
+    AgentDetails,
   },
 };
 </script>
