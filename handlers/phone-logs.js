@@ -36,9 +36,18 @@ const PhoneLogs = {
     fetchPhoneLogsByNumber: async (req, res) => {
         const { params } = req;
         const { number } = params;
+        if (!number) {
+            return res.status(400).json({status: 400, message: "number must be present"})
+        }
+
         const agentsMap = await getAgentsMap();
         getPhoneLogsByNumber(number, agentsMap).then((phoneLogs) => {
-            res.json({ phoneLogs });
+            res.json({ 
+                status: 200,
+                phoneLogs,
+            });
+        }).catch(({ message }) => {
+            res.status(404).json({ status: 404, message });
         });
     }
 };
