@@ -6,8 +6,8 @@ import NumberDetails from '@/Views/NumberDetails.vue';
 
 const routes = [
   { path: '/', component: App },
-  { path: '/agent/:id', component: Agent },
-  { path: '/call/:number', component: NumberDetails },
+  { path: '/agent/:id?', component: Agent },
+  { path: '/call/:number?', component: NumberDetails },
 ];
 
 const router = createRouter({

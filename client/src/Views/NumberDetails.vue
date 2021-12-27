@@ -1,5 +1,5 @@
 <template>
-  <div class="number-details">
+  <div class="number-details" v-if="!onError.hasError">
     <div class="number-details__title">Call Logs from {{ number }} </div>
     <div v-if="isLoading">
       Loaging
@@ -7,6 +7,9 @@
     <div class="agent-content__logs" v-if="!isLoading">
       <NumberLogItem v-for="(log, index) in callLogs" :phoneLog="log" :key="index"></NumberLogItem>
     </div>
+  </div>
+  <div class="error-content" v-else>
+    {{ onError.message }}
   </div>
 </template>
 
@@ -19,6 +22,7 @@ export default {
     return {
       logs: [],
       loading: false,
+      error: { hasError: false },
     };
   },
   computed: {
@@ -44,6 +48,14 @@ export default {
         this.logs = value;
       },
     },
+    onError: {
+      get() {
+        return this.error;
+      },
+      set(value) {
+        this.error = value;
+      },
+    },
   },
   methods: {
     loadCalls() {
@@ -52,15 +64,29 @@ export default {
       const { number } = this.$route.params;
       fetch(`${process.env.VUE_APP_API_URL}logs/${number}`)
         .then((response) => response.json())
-        .then(({ status, phoneLogs }) => {
-          if (status === 200) {
+        .then(({ status, phoneLogs, message }) => {
+          if (status === 200 && phoneLogs.length > 0) {
             self.callLogs = phoneLogs;
+          } else {
+            this.onError = {
+              message: message || 'Number logs could not be found',
+              hasError: true,
+            };
           }
         });
     },
   },
   created() {
-    this.loadCalls();
+    const { number } = this.$route.params;
+    if (!number) {
+      this.onError = {
+        status: 400,
+        message: 'Number is required',
+        hasError: true,
+      };
+    } else {
+      this.loadCalls();
+    }
   },
   components: {
     NumberLogItem,
@@ -77,5 +103,10 @@ export default {
     &__logs {
       margin-top: 35px;
     }
+  }
+
+  .error-content {
+    color: red;
+    font-weight: bold;
   }
 </style>
