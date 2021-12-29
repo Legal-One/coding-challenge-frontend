@@ -1,40 +1,92 @@
-<script setup>
-import { ref } from 'vue'
+<script>
+import { ref } from "vue";
+import ChartView from '../components/chat.vue'
 
-defineProps({
-  msg: String
-})
-
-const count = ref(0)
+export default {
+  components: {
+    ChartView
+  },
+  setup() {
+    const callLogs = ref([]);
+    fetch("http://localhost:4000/call-logs")
+      .then((response) => response.json())
+      .then((data) => {
+        callLogs.value = data;
+      });
+    return { callLogs };
+  },
+  computed: {
+    getChartLabels () {
+      if (this.callLogs) return this.callLogs?.map(item => item.phoneNumber)
+      return this.callLogs?.map(item => item.phoneNumber) || []
+    },
+    getChartData () {
+      return this.callLogs?.map(item => item.callCount) || []
+    },
+    getTime () {
+      return arg => {
+        const date = new Date(arg)
+        return `${date.getHours()}:${date.getMinutes()}`
+      }
+    }
+  }
+};
 </script>
 
 <template>
-  <h1>{{ msg }}</h1>
-
-  <p>
-    Recommended IDE setup:
-    <a href="https://code.visualstudio.com/" target="_blank">VSCode</a>
-    +
-    <a href="https://github.com/johnsoncodehk/volar" target="_blank">Volar</a>
-  </p>
-
-  <p>
-    <a href="https://vitejs.dev/guide/features.html" target="_blank">
-      Vite Documentation
-    </a>
-    |
-    <a href="https://v3.vuejs.org/" target="_blank">Vue 3 Documentation</a>
-  </p>
-
-  <button type="button" @click="count++">count is: {{ count }}</button>
-  <p>
-    Edit
-    <code>components/HelloWorld.vue</code> to test hot module replacement.
-  </p>
+  <div class="py-5">
+    <h2 class="text-2xl font-semibold my-8">Call Summary</h2>
+    <div class="mx-auto max-w-4xl w-full mb-16">
+      <ChartView
+        heading="Call-Logs"
+        :data="getChartData"
+        :labels="getChartLabels"
+        v-if="getChartData.length && getChartLabels.length"
+      />
+    </div>
+    <table
+      class="
+        table-auto
+        mx-auto
+        max-w-4xl
+        w-full
+        whitespace-nowrap
+        rounded-lg
+        bg-white
+        divide-y divide-gray-300
+        overflow-hidden
+      "
+    >
+      <thead>
+        <tr
+          class="
+            bg-gray-900
+            text-white
+            font-semibold
+            text-sm
+            uppercase
+            px-6
+            py-4
+          "
+        >
+          <th class="font-semibold text-sm uppercase px-6 py-4">
+            Phone number
+          </th>
+          <th>Number of calls</th>
+          <th>Last call details</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-200">
+        <tr
+          v-for="data in callLogs"
+          :key="data.identifier"
+          class="hover:bg-gray-100"
+        >
+          <td class="px-6 py-4">{{ data.phoneNumber }}</td>
+          <td>{{ data.callCount }}</td>
+          <td>{{ data.agentName }} / {{ getTime(data.lastCallTime) }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </template>
-
-<style scoped>
-a {
-  color: #42b983;
-}
-</style>
