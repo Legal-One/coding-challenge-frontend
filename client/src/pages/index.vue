@@ -17,7 +17,6 @@ export default {
   },
   computed: {
     getChartLabels () {
-      if (this.callLogs) return this.callLogs?.map(item => item.phoneNumber)
       return this.callLogs?.map(item => item.phoneNumber) || []
     },
     getChartData () {
@@ -84,7 +83,11 @@ export default {
         >
           <td class="px-6 py-4">{{ data.phoneNumber }}</td>
           <td>{{ data.callCount }}</td>
-          <td>{{ data.agentName }} / {{ getTime(data.lastCallTime) }}</td>
+          <td>
+            <router-link :to="`/agent/${data.agentIdentifier}`">
+              {{ data.agentName }} 
+            </router-link> 
+            / {{ getTime(data.lastCallTime) }}</td>
         </tr>
       </tbody>
     </table>

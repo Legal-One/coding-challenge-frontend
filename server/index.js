@@ -57,6 +57,23 @@ server.get('/call-logs', (req, res) => {
   res.jsonp(callLogsArray)
 })
 
+server.get('/agent-logs/:id', (req, res) => {
+  const agentId = req.params?.id
+  const callLogs = db.logs
+  const resolution = db.resolution
+  const agentCallLogs = callLogs.filter((callLog) => callLog.agentIdentifier === agentId);
+  const  parseAgentCallLogs = agentCallLogs.map((call) => {
+    const callResolution = resolution.find((res) => res.identifier === call.identifier);
+    return {
+      phoneNumber: call.number,
+      identifier: call.identifier,
+      callTime: call.dateTime,
+      resolution: callResolution.resolution,
+    };
+  })
+  return res.jsonp(parseAgentCallLogs)
+})
+
 server.use(router)
 server.listen(4000, function () {
   console.log(`JSON Server is running ${4000}`)
