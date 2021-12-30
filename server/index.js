@@ -100,3 +100,5 @@ server.use(router)
 server.listen(4000, function () {
   console.log(`JSON Server is running ${4000}`)
 })
+
+module.exports = server
