@@ -1,6 +1,6 @@
 <template>
   <div class="py-5">
-    <h2 class="text-2xl font-semibold my-8">{{ agentName }} Call's Summary</h2>
+    <h2 class="text-2xl font-semibold my-8">{{ id }} Call History</h2>
     <div class="mx-auto max-w-xl w-full mb-16">
       <template
         v-if="
@@ -19,16 +19,16 @@
     <Table :headers="getTableHeaders">
       <template #tableRow>
         <tr
-          v-for="data in agentLogs"
+          v-for="data in getTableData"
           :key="data.identifier"
           class="hover:bg-gray-100"
         >
           <td class="px-6 py-4">
-            <router-link :to="`/phone-no/${data.phoneNumber}`">
-              {{ data.phoneNumber }}
+            <router-link :to="`/agent/${data.agentIdentifier}?name=${data.agentName}`">
+              {{ data.agentName }}
             </router-link>
           </td>
-          <td>{{ getFormatedTime(data.callTime) }}</td>
+          <td>{{ data.callTime }}</td>
           <td class="capitalize">
             {{ data.resolution }}
           </td>
@@ -38,10 +38,11 @@
   </div>
 </template>
 <script>
+import ChartView from "../components/chat.vue";
+import Table from "../components/table.vue";
+
 import { ref } from "vue";
 import { useRoute } from "vue-router";
-import ChartView from "../components/chat.vue";
-import Table from "../components/Table.vue";
 
 export default {
   components: {
@@ -49,24 +50,35 @@ export default {
     Table,
   },
   setup() {
-    const agentLogs = ref([]);
+    const phoneLogs = ref([]);
     const route = useRoute();
     const id = route.params.id;
-    const agentName = route.query.name || "Agent";
-    fetch(`http://localhost:4000/agent-logs/${id}`)
+    fetch(`http://localhost:4000/phone-no-logs/${id}`)
       .then((response) => response.json())
       .then((data) => {
-        agentLogs.value = data;
+        phoneLogs.value = data;
       });
-    return { agentLogs, agentName };
+    return { phoneLogs, id };
   },
   computed: {
     getTableHeaders() {
-      return ["Phone number", "Call date and time", "Resolution"];
+      return [ 'Agent Name', 'Call Date Time', 'Resolution' ]
+    },
+    getTableData() {
+      if (this.phoneLogs) {
+        const parseLogs = this.phoneLogs?.map((item) => {
+          return {
+            ...item,
+            callTime: this.getFormatedTime(item.callTime),
+          };
+        });
+        return parseLogs;
+      }
+      return [];
     },
     getChartData() {
-      if (this.agentLogs) {
-        const counter = this.agentLogs?.reduce((arr, cur) => {
+      if (this.phoneLogs) {
+        const counter = this.phoneLogs?.reduce((arr, cur) => {
           arr[cur.resolution] = ++arr[cur.resolution] || 1;
           return arr;
         }, {});

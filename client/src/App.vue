@@ -10,7 +10,11 @@
       to-pink-500
     "
   >
-    <h2 class="text-4xl font-bold py-4 text-white">Call Center Report</h2>
+    <h2 class="text-4xl font-bold py-4 text-white">
+      <router-link to="/">
+        Call Center Report
+      </router-link>
+    </h2>
   </div>
   <div class="container mx-auto">
     <router-view />

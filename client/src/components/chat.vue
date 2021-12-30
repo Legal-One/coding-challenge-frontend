@@ -1,3 +1,7 @@
+<template>
+  <canvas id="chartBar" ref="chartRef"></canvas>
+</template>
+
 <script>
 export default {
   props: {
@@ -80,6 +84,3 @@ export default {
   },
 };
 </script>
-<template>
-  <canvas id="chartBar" ref="chartRef"></canvas>
-</template>
