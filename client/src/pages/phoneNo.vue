@@ -42,9 +42,9 @@
 <script>
 import { ref } from "vue";
 import { useRoute } from "vue-router";
-import ChartView from "../components/chat.vue";
-import Table from "../components/table.vue";
-import { getPhoneNoCallLogs } from "../services";
+import ChartView from "@/components/chat.vue";
+import Table from "@/components/table.vue";
+import { getPhoneNoCallLogs } from "@/services";
 
 export default {
   components: {

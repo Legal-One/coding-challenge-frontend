@@ -38,9 +38,9 @@
 
 <script>
 import { ref } from "vue";
-import ChartView from "../components/chat.vue";
-import Table from "../components/table.vue";
-import { getCallLogs } from "../services";
+import ChartView from "@/components/chat.vue";
+import Table from "@/components/table.vue";
+import { getCallLogs } from "@/services";
 
 export default {
   components: {
