@@ -24,7 +24,9 @@
           class="hover:bg-gray-100"
         >
           <td class="px-6 py-4">
-            <router-link :to="`/agent/${data.agentIdentifier}?name=${data.agentName}`">
+            <router-link
+              :to="`/agent/${data.agentIdentifier}?name=${data.agentName}`"
+            >
               {{ data.agentName }}
             </router-link>
           </td>
@@ -38,11 +40,11 @@
   </div>
 </template>
 <script>
-import ChartView from "../components/chat.vue";
-import Table from "../components/table.vue";
-
 import { ref } from "vue";
 import { useRoute } from "vue-router";
+import ChartView from "../components/chat.vue";
+import Table from "../components/table.vue";
+import { getPhoneNoCallLogs } from "../services";
 
 export default {
   components: {
@@ -53,16 +55,15 @@ export default {
     const phoneLogs = ref([]);
     const route = useRoute();
     const id = route.params.id;
-    fetch(`http://localhost:4000/phone-no-logs/${id}`)
-      .then((response) => response.json())
-      .then((data) => {
-        phoneLogs.value = data;
-      });
+
+    getPhoneNoCallLogs(id).then((data) => {
+      phoneLogs.value = data;
+    });
     return { phoneLogs, id };
   },
   computed: {
     getTableHeaders() {
-      return [ 'Agent Name', 'Call Date Time', 'Resolution' ]
+      return ["Agent Name", "Call Date Time", "Resolution"];
     },
     getTableData() {
       if (this.phoneLogs) {

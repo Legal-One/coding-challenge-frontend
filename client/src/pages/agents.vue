@@ -41,7 +41,8 @@
 import { ref } from "vue";
 import { useRoute } from "vue-router";
 import ChartView from "../components/chat.vue";
-import Table from "../components/Table.vue";
+import Table from "../components/table.vue";
+import { getAgentCallLogs } from "../services";
 
 export default {
   components: {
@@ -53,11 +54,9 @@ export default {
     const route = useRoute();
     const id = route.params.id;
     const agentName = route.query.name || "Agent";
-    fetch(`http://localhost:4000/agent-logs/${id}`)
-      .then((response) => response.json())
-      .then((data) => {
-        agentLogs.value = data;
-      });
+    getAgentCallLogs(id).then((data) => {
+      agentLogs.value = data;
+    });
     return { agentLogs, agentName };
   },
   computed: {

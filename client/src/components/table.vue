@@ -5,7 +5,7 @@
       mx-auto
       max-w-4xl
       w-full
-      whitespace-nowrap
+      lg:whitespace-nowrap
       rounded-lg
       bg-white
       divide-y divide-gray-300
