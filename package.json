@@ -4,7 +4,7 @@
   "description": "coding challenge ",
   "main": "index.js",
   "scripts": {
-    "client": "cd ./client && npm run start",
+    "client": "cd ./client && npm run dev",
     "server": "cd ./server && nodemon index.js",
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
     "start": "node ./server/index.js",
@@ -27,6 +27,7 @@
   "homepage": "https://github.com/Legal-One/coding-challenge-frontend#readme",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
     "express": "^4.16.4",
     "uuid": "^8.3.2"
   },
