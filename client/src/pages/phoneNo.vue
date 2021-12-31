@@ -42,7 +42,7 @@
 <script>
 import { ref } from "vue";
 import { useRoute } from "vue-router";
-import ChartView from "@/components/chat.vue";
+import ChartView from "@/components/chart.vue";
 import Table from "@/components/table.vue";
 import { getPhoneNoCallLogs } from "@/services";
 

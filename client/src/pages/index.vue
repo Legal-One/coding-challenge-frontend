@@ -38,11 +38,12 @@
 
 <script>
 import { ref } from "vue";
-import ChartView from "@/components/chat.vue";
+import ChartView from "@/components/chart.vue";
 import Table from "@/components/table.vue";
 import { getCallLogs } from "@/services";
 
 export default {
+  name: 'Home',
   components: {
     ChartView,
     Table,
