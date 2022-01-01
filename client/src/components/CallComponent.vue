@@ -1,12 +1,12 @@
 <template>
     <div class="pl-2">
      <div v-if="loading" class="flex justify-center items-center"><LoaderComponent /></div>
-     <TableComponent v-else :columns="['Phone Number','Call Date and time','Resolution']" :list="list" :columnList="['number','dateTime','resolution.resolution']"/>
+     <TableComponent v-else :columns="['Agent Name','Call Date and time','Resolution']" :list="list" :columnList="['agent.firstName_link_agentIdentifier','dateTime','resolution.resolution']"/>
     </div>
 </template>
 
 <script>
-import { getAgentData } from '../service/baseService';
+import { getCallData } from '../service/baseService';
 import LoaderComponent from './LoaderComponent.vue';
 import TableComponent from './TableComponent.vue';
 
@@ -32,8 +32,8 @@ import TableComponent from './TableComponent.vue';
             this.error = this.post = null;
             this.loading = true;
             try {
-                let list = await getAgentData(this.$route.params.id);
-                this.list = list.data.payload.map((data)=>{
+                let list = await getCallData(this.$route.params.num.replace('+',''));
+                 this.list = list.data.payload?.map((data)=>{
                     let str=data.dateTime.split('T')
                     let time=new Date(data.dateTime).toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
                     return {...data,dateTime:str[0]+' '+time}

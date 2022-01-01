@@ -1,6 +1,6 @@
 <template>
     <div class="ml-2">
-     <TableComponent :columns="['Phone Number','Number of calls','Last call Detail']" :list="list"/>
+     <TableComponent :columns="['Phone Number','Number of calls','Last call Detail']" :list="list" :columnList="['number','callsCount','lastCallTime']"/>
     </div>
 </template>
 

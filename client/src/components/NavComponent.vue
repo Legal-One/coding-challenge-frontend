@@ -10,9 +10,9 @@
       <router-link to="/" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4 text-lg">
         General Report
       </router-link>
-      <router-link to="/" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4 text-lg">
+      <!-- <router-link to="/" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4 text-lg">
         Agent List
-      </router-link>
+      </router-link> -->
     </div>
 
   </div>
