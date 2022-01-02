@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<nav
+  class="flex items-start justify-start flex-wrap bg-teal-500 p-6"
+>
+  <div
+    class="block lg:hidden"
+  >
+    <button
+      class="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white"
+    >
+      <svg
+        class="fill-current h-3 w-3"
+        viewBox="0 0 20 20"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <title>
+          Menu
+        </title>
+        <path
+          d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"
+        />
+      </svg>
+    </button>
+  </div>
+  <div
+    class="w-full block justify-start lg:flex items-start lg:w-auto"
+  >
+    <div
+      class="text-sm lg:flex-grow"
+    >
+      <router-link
+        class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4 text-lg"
+        to="/"
+      >
+         General Report 
+      </router-link>
+      <!-- &lt;router-link to="/" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4 text-lg"&gt;
+        Agent List
+      &lt;/router-link&gt; -->
+    </div>
+  </div>
+</nav>
+`;
