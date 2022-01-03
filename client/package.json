@@ -27,7 +27,8 @@
   "dependencies": {
     "axios": "^0.24.0",
     "vue": "^3.2.25",
-    "vue-router": "^4.0.12"
+    "vue-router": "^4.0.12",
+    "vue3-jest": "^27.0.0-alpha.2"
   },
   "devDependencies": {
     "@babel/core": "^7.16.7",

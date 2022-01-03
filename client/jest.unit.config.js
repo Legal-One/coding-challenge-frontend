@@ -1,5 +1,8 @@
 module.exports = {
-  testEnvironment: "jsdom",
+  testEnvironment: 'jsdom',
+  moduleNameMapper: {
+    '^@/components/(.*)$': '<rootDir>/src/components/$1',
+  },
   moduleFileExtensions: [
     'js',
     'json',
@@ -7,7 +10,7 @@ module.exports = {
   ],
   transform: {
     '^.+\\.js$': 'babel-jest',
-    '^.+\\.vue$': '@vue/vue3-jest'
+    '^.+\\.vue$': 'vue3-jest'
   },
   globals: {
     'vue-jest': {
@@ -15,5 +18,10 @@ module.exports = {
         isCustomElement: (tag) => tag.startsWith('vaadin-'),
       },
     },
+    collectCoverage: true,
+collectCoverageFrom: [
+  'src/**/*.{js,vue}',
+  '!src/main.js', // No need to cover bootstrap file
+],
   }
 };

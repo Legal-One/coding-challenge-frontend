@@ -18,7 +18,6 @@ exports.getAgentById = (req, res) => {
     if (errLogs) {
       return res.status(500).json(formatResponse('Logs file read failure', errLogs));
     }
-    console.log(pathToFile.resolution);
     readJson(pathToFile.resolution, (errResolution, dataResolution) => {
       if (errResolution) {
         return res.status(500).json(formatResponse('Resolutions file read failure', errResolution));

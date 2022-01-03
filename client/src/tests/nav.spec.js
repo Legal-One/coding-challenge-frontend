@@ -7,6 +7,5 @@ it('renders correctly', () => {
 
 it('has a link to dashboard', () => {
     const wrapper = mount(NavComponent)
-    console.log(wrapper.get('router-link'));
      expect(wrapper.get('router-link').isVisible()).toBe(true)
 })

@@ -14,8 +14,7 @@ import TableComponent from './TableComponent.vue';
     data() {
         return {
             loading: true,
-            list: null,
-            error: null,
+            list: null
         };
     },
     created() {
@@ -33,7 +32,7 @@ import TableComponent from './TableComponent.vue';
             this.loading = true;
             try {
                 let list = await getAgentData(this.$route.params.id);
-                this.list = list.data.payload.map((data)=>{
+                this.list = list.data?.payload?.map((data)=>{
                     let str=data.dateTime.split('T')
                     let time=new Date(data.dateTime).toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
                     return {...data,dateTime:str[0]+' '+time}
@@ -42,7 +41,7 @@ import TableComponent from './TableComponent.vue';
             }
             catch (error) {
                 this.loading=false;
-                this.error = err.toString();
+                this.error = error.toString();
             }
         },
     },

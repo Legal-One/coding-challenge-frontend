@@ -42,7 +42,7 @@ import TableComponent from './TableComponent.vue';
             }
             catch (error) {
                 this.loading=false;
-                this.error = err.toString();
+                this.error = error.toString();
             }
         },
     },

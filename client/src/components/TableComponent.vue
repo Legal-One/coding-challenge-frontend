@@ -49,11 +49,6 @@
 
 <script>
 export default {
-    setup () {
-        
-
-        return {}
-    },
     props:['columns','list','columnList'],
     methods:{
       getNestedObject(data,object){
@@ -63,8 +58,8 @@ export default {
     },
     computed:{
       getColumnsHtml(){
-       return this.$props.list.map((_listData)=>{
-        return this.$props.columnList.map((colData)=>{
+       return this.$props.list?.map((_listData)=>{
+        return this.$props.columnList?.map((colData)=>{
             switch (colData) {
               case "lastCallTime":
                 return `

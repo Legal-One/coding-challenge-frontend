@@ -11,8 +11,13 @@ import TableComponent from './TableComponent.vue';
 
  const list=ref([])
  onMounted(async () => {
-      let data=await getDashboardData();
-      list.value=data.data.payload??[]
+     try {
+         let data=await getDashboardData();
+         list.value=data.data.payload??[]
+     } catch (error) {
+         
+     }
+      
 })
 </script>
 
