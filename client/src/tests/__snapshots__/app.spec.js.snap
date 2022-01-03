@@ -47,8 +47,6 @@ exports[`renders correctly 1`] = `
     </div>
   </nav>
   <router-view />
-  <!-- &lt;img alt="Vue logo" src="./assets/logo.png" /&gt;
-  &lt;HelloWorld msg="Hello Vue 3 + Vite" /&gt; -->
   
 </div>
 `;
